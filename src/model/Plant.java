@@ -8,7 +8,7 @@ public class Plant extends Entity {
     private final static int SPAWN_TIME = 70;
     private RandSpawnManager projectileManager;
 
-    private int health = 10;
+    private int health = 20;
 
     public Plant(int x, int y, GamePanel g) {
         super(x, y);
@@ -21,7 +21,8 @@ public class Plant extends Entity {
     public void draw(Graphics g) {
         g.setColor(Color.BLUE);
         g.fillRect(x, y, 48, 48);
-        g.setColor(Color.WHITE);
+        g.setColor(Color.white);
+        g.drawString(Integer.toString(health), x + 15, y + 24);
         projectileManager.drawEach(g);
     }
 
@@ -29,5 +30,13 @@ public class Plant extends Entity {
     public void update() {
         projectileManager.spawn(new Projectile(x, y + 24, g));
         projectileManager.updateEach();
+    }
+
+    public void decreaseHealth() {
+        this.health--;
+    }
+
+    public int getHealth() {
+        return health;
     }
 }

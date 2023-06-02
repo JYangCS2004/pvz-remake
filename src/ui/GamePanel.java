@@ -101,4 +101,5 @@ public class GamePanel extends JPanel implements Runnable {
     public RandSpawnManager getZombieSpawner() {
         return zombieSpawner;
     }
+    public SpawnManager getPlantManager() {return plantManager; }
 }

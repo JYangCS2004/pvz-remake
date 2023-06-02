@@ -30,7 +30,7 @@ public class RandSpawnManager extends SpawnManager {
     public void updateEach() {
         if (type == Type.ENEMY) {
             Random rand = new Random();
-            spawn(new Zombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize())));
+            spawn(new Zombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize()), gamePanel));
         } else if (type == Type.BULLET){
             for (int i : rowEntities.keySet()) {
                 if (rowEntities.get(i).size() != 0) {

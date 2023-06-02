@@ -10,13 +10,11 @@ import java.util.Map;
 
 public abstract class SpawnManager {
     protected GamePanel gamePanel;
-    // protected List<Entity> entities;
 
     protected Map<Integer, List<Entity>> rowEntities;
 
     public SpawnManager(GamePanel g) {
         this.gamePanel = g;
-        // entities = new ArrayList<>();
         rowEntities = new HashMap<>();
     }
 
