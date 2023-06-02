@@ -18,10 +18,6 @@ public class Zombie extends Entity {
         g.setColor(Color.white);
     }
 
-    public void update() {
-
-    }
-
     public void decreaseHealth() {
         health -= 1;
     }
