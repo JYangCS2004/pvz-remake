@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenWidth = screenColSize * tileSize;
 
     private Thread gameThread;
+    private Graphics graphics;
 
     private SpawnManager plantManager = new PlantManager(this);
     private RandSpawnManager zombieSpawner = new RandSpawnManager(100, this, RandSpawnManager.Type.ENEMY);
@@ -65,12 +66,13 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void getMouseTracker(Graphics g) {
-        Point mousePoint = MouseInfo.getPointerInfo().getLocation();
-        int closestEdgeX = mousePoint.x / tileSize;
-        int closestEdgeY = mousePoint.y / tileSize;
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(p, this);
+        int closestEdgeX = p.x / tileSize;
+        int closestEdgeY = p.y / tileSize;
 
-        g.drawRect(closestEdgeX * tileSize - this.getLocationOnScreen().x,
-                closestEdgeY * tileSize - this.getLocationOnScreen().y, tileSize, tileSize);
+        g.drawRect(closestEdgeX * tileSize,
+                closestEdgeY * tileSize, tileSize, tileSize);
     }
 
     public void paintComponent(Graphics g) {
@@ -78,6 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
 
         zombieSpawner.drawEach(g2);
         plantManager.drawEach(g2);
@@ -89,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int getScreenRowSize() {
         return screenRowSize;
     }
+    public int getScreenColSize() {return screenColSize; }
 
     public int getScreenWidth() {
         return screenWidth;

@@ -14,13 +14,15 @@ public class Plant extends Entity {
         super(x, y);
         super.g = g;
         speed = 0;
+        width = g.getTileSize();
+        height = g.getTileSize();
         projectileManager = new RandSpawnManager(SPAWN_TIME, g, RandSpawnManager.Type.BULLET);
     }
 
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.BLUE);
-        g.fillRect(x, y, 48, 48);
+        g.fillRoundRect(x, y, 48, 48, 35, 35);
         g.setColor(Color.white);
         g.drawString(Integer.toString(health), x + 15, y + 24);
         projectileManager.drawEach(g);
@@ -28,7 +30,25 @@ public class Plant extends Entity {
 
     @Override
     public void update() {
-        projectileManager.spawn(new Projectile(x, y + 24, g));
+        projectileManager.spawn(new Projectile(x, y + 15, g));
+
+        /*
+        List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
+        for (Entity entity : testable) {
+            Zombie z = (Zombie) entity;
+
+            Rectangle zBounds = z.getBounds();
+            Rectangle pBounds = getBounds();
+
+            if (pBounds.intersects(zBounds)) {
+                z.attack(this);
+
+                if (health == 0) {
+                    g.getPlantManager().getEntitiesByRow(y / g.getTileSize()).remove(this);
+                }
+            }
+        } */
+
         projectileManager.updateEach();
     }
 

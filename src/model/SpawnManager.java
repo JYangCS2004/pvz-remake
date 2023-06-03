@@ -3,15 +3,14 @@ package model;
 import ui.GamePanel;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public abstract class SpawnManager {
     protected GamePanel gamePanel;
 
-    protected Map<Integer, List<Entity>> rowEntities;
+    protected Map<Integer, Queue<Entity>> rowEntities;
 
     public SpawnManager(GamePanel g) {
         this.gamePanel = g;
@@ -22,23 +21,10 @@ public abstract class SpawnManager {
     // MODIFIES: this
     // EFFECTS: constructs a new projectile
     public void spawn(Entity p) {
-        int row = p.getY() / gamePanel.getTileSize();
-        if (!rowEntities.containsKey(row)) {
-            List<Entity> eList = new ArrayList<>();
-            eList.add(p);
-            rowEntities.put(row, eList);
-        } else {
-            rowEntities.get(row).add(p);
-        }
+
     }
 
-    public void removeByRow(Entity e, int row) {
-        if (rowEntities.containsKey(row)) {
-            rowEntities.get(row).remove(e);
-        }
-    }
-
-    public List<Entity> getEntitiesByRow(int row) {
+    public Queue<Entity> getEntitiesByRow(int row) {
         return rowEntities.get(row);
     }
 

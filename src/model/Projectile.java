@@ -4,7 +4,7 @@ import ui.GamePanel;
 
 import java.awt.*;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Queue;
 
 public class Projectile extends Entity {
     private final int size = 16;
@@ -13,6 +13,8 @@ public class Projectile extends Entity {
         super(x, y);
         super.g = g;
         speed = 5;
+        width = size;
+        height = size;
     }
 
     public void draw(Graphics g) {
@@ -22,17 +24,35 @@ public class Projectile extends Entity {
     }
 
     public boolean checkCollision() {
-        List<Entity> possibleCollisions = g.getZombieSpawner().getEntitiesByRow((y - 24) / g.getTileSize());
+        Queue<Entity> possibleCollisions = g.getZombieSpawner().getEntitiesByRow((y - 15) / g.getTileSize());
 
-        if (possibleCollisions == null) {
+        if (possibleCollisions == null || possibleCollisions.isEmpty()) {
             return false;
         }
+
+        /*
+        Zombie e = (Zombie) possibleCollisions.get(0);
+        Rectangle pBounds = this.getBounds();
+        Rectangle zBounds = e.getBounds();
+
+        if (pBounds.intersects(zBounds)) {
+            e.decreaseHealth();
+
+            if (e.getHealth() <= 0) {
+                possibleCollisions.remove(e);
+            }
+
+            return true;
+        } */
+
 
         Iterator<Entity> it = possibleCollisions.iterator();
         while (it.hasNext()) {
             Zombie e = (Zombie) it.next();
-            if (x >= e.getX() && x + size <= e.getX() + g.getTileSize() &&        // check x-bounds
-                y >= e.getY() && y + size <= e.getY() + g.getTileSize()) {        // check y-bounds
+            Rectangle pBounds = this.getBounds();
+            Rectangle zBounds = e.getBounds();
+
+            if (zBounds.intersects(pBounds)) {
                 e.decreaseHealth();
 
                 if (e.getHealth() <= 0) {
