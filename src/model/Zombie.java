@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Zombie extends Entity {
     private static final int SPEED = -1;
-    private int health = 35;
+    private int health = 25;
 
     private final int eatTime = 30;
     private int counter = eatTime;
@@ -90,7 +90,7 @@ public class Zombie extends Entity {
     }
 
     public void decreaseHealth() {
-        health -= 1;
+        health -= 2;
     }
 
     public int getHealth() {

@@ -31,29 +31,11 @@ public class Plant extends Entity {
     @Override
     public void update() {
         projectileManager.spawn(new Projectile(x, y + 15, g));
-
-        /*
-        List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
-        for (Entity entity : testable) {
-            Zombie z = (Zombie) entity;
-
-            Rectangle zBounds = z.getBounds();
-            Rectangle pBounds = getBounds();
-
-            if (pBounds.intersects(zBounds)) {
-                z.attack(this);
-
-                if (health == 0) {
-                    g.getPlantManager().getEntitiesByRow(y / g.getTileSize()).remove(this);
-                }
-            }
-        } */
-
         projectileManager.updateEach();
     }
 
     public void decreaseHealth() {
-        this.health--;
+        this.health -= 2;
     }
 
     public int getHealth() {

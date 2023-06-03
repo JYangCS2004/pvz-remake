@@ -19,7 +19,6 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenWidth = screenColSize * tileSize;
 
     private Thread gameThread;
-    private Graphics graphics;
 
     private SpawnManager plantManager = new PlantManager(this);
     private RandSpawnManager zombieSpawner = new RandSpawnManager(100, this, RandSpawnManager.Type.ENEMY);
@@ -71,8 +70,8 @@ public class GamePanel extends JPanel implements Runnable {
         int closestEdgeX = p.x / tileSize;
         int closestEdgeY = p.y / tileSize;
 
-        g.drawRect(closestEdgeX * tileSize,
-                closestEdgeY * tileSize, tileSize, tileSize);
+        g.drawRoundRect(closestEdgeX * tileSize,
+                closestEdgeY * tileSize, tileSize, tileSize, 10, 10);
     }
 
     public void paintComponent(Graphics g) {
