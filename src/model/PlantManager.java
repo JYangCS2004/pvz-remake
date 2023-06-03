@@ -27,16 +27,4 @@ public class PlantManager extends SpawnManager {
             }
         });
     }
-
-
-    public void spawn(Entity e) {
-        int row = e.getY() / gamePanel.getTileSize();
-        if (!rowEntities.containsKey(row)) {
-            Queue<Entity> eList = new PriorityQueue<>(new EntityComparator());
-            eList.add(e);
-            rowEntities.put(row, eList);
-        } else {
-            rowEntities.get(row).add(e);
-        }
-    }
 }

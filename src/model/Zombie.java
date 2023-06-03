@@ -3,7 +3,8 @@ package model;
 import ui.GamePanel;
 
 import java.awt.*;
-import java.util.Queue;
+import java.util.Iterator;
+import java.util.List;
 
 public class Zombie extends Entity {
     private static final int SPEED = -1;
@@ -11,6 +12,7 @@ public class Zombie extends Entity {
 
     private final int eatTime = 30;
     private int counter = eatTime;
+    private boolean isCollided = false;
 
     public Zombie(int x, int y, GamePanel g) {
         super(x, y);
@@ -29,16 +31,17 @@ public class Zombie extends Entity {
     }
 
     public void update() {
-        Queue<Entity> testable = g.getPlantManager().getEntitiesByRow(y / g.getTileSize());
-
-        if (testable == null) {
+        List<Entity> testable = g.getPlantManager().getEntitiesByRow(y / g.getTileSize());
+        isCollided = false;
+        if (testable == null || testable.isEmpty()) {
             super.update();
+            speed = SPEED;
             return;
         }
 
-        Entity e = testable.peek();
 
-        if (e != null) {
+
+        /*if (e != null) {
             Plant p = (Plant) e;
             if (p.getBounds().intersects(getBounds())) {
                 counter--;
@@ -57,9 +60,33 @@ public class Zombie extends Entity {
             }
         } else {
             speed = SPEED;
+        } */
+
+        Iterator<Entity> it = testable.iterator();
+
+        while (it.hasNext()) {
+            Plant p = (Plant) it.next();
+            if (p.getBounds().intersects(getBounds())) {
+                counter--;
+                speed = 0;
+                isCollided = true;
+                if (counter == 0) {
+                    p.decreaseHealth();
+                    counter = eatTime;
+                }
+
+                if (p.getHealth() == 0) {
+                    it.remove();
+                    speed = SPEED;
+                }
+            }
         }
 
-        super.update();
+        if (!isCollided) {
+            speed = SPEED;
+        }
+
+        x += speed;
     }
 
     public void decreaseHealth() {

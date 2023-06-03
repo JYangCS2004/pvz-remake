@@ -61,8 +61,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        plantManager.updateEach();
         zombieSpawner.updateEach();
+        plantManager.updateEach();
     }
 
     public void getMouseTracker(Graphics g) {

@@ -29,15 +29,7 @@ public class RandSpawnManager extends SpawnManager {
     public void spawn(Entity e) {
         counter--;
         if (counter == 0) {
-            int row = e.getY() / gamePanel.getTileSize();
-            if (!rowEntities.containsKey(row)) {
-                Queue<Entity> eList = new PriorityQueue<>(new EntityComparator());
-                eList.add(e);
-                rowEntities.put(row, eList);
-            } else {
-                rowEntities.get(row).add(e);
-            }
-
+            super.spawn(e);
             counter = spawnTime;
         }
     }
@@ -47,13 +39,16 @@ public class RandSpawnManager extends SpawnManager {
         if (type == Type.ENEMY) {
             Random rand = new Random();
             spawn(new Zombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize()), gamePanel));
-        } else if (type == Type.BULLET){
-            for (int i : rowEntities.keySet()) {
-                if (rowEntities.get(i).size() != 0) {
-                    Projectile p = (Projectile) rowEntities.get(i).peek();
 
-                    if (p != null && p.checkCollision()) {
-                        rowEntities.get(i).remove(p);
+        } else if (type == Type.BULLET){
+
+            for (int i : rowEntities.keySet()) {
+                Iterator<Entity> it = rowEntities.get(i).iterator();
+
+                while (it.hasNext()) {
+                    Projectile p = (Projectile) it.next();
+                    if (p.checkCollision()) {
+                        it.remove();
                     }
                 }
             }

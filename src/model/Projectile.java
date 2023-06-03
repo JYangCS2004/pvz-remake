@@ -4,7 +4,7 @@ import ui.GamePanel;
 
 import java.awt.*;
 import java.util.Iterator;
-import java.util.Queue;
+import java.util.List;
 
 public class Projectile extends Entity {
     private final int size = 16;
@@ -24,7 +24,7 @@ public class Projectile extends Entity {
     }
 
     public boolean checkCollision() {
-        Queue<Entity> possibleCollisions = g.getZombieSpawner().getEntitiesByRow((y - 15) / g.getTileSize());
+        List<Entity> possibleCollisions = g.getZombieSpawner().getEntitiesByRow((y - 15) / g.getTileSize());
 
         if (possibleCollisions == null || possibleCollisions.isEmpty()) {
             return false;
