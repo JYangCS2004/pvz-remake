@@ -49,15 +49,18 @@ public class MouseHandler extends MouseAdapter {
             int nearEdgeY = y / tile;
 
             //check if mouse is at shop interface
-            if(nearEdgeY == 0){
+            if (nearEdgeY == 0) {
                 pi.selected = nearEdgeX;
             }
             //spawn plant if not at interface
-            else{
-                pm.spawn(pi.plantPicker(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel()));
+            else {
+                Plant p = pi.plantPicker(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel());
+                if (!pm.containsSquare(nearEdgeX, nearEdgeY) && ss.getSunCount() >= p.getCost()) {
+                    pm.spawn(p);
+                    ss.deductSum(p.getCost());
+                    pm.storeSquare(nearEdgeX, nearEdgeY);
+                }
             }
-
-            //pm.spawn(new Peashooter(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel()));
         }
     }
 }

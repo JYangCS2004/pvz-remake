@@ -31,4 +31,8 @@ public class PlantManager extends SpawnManager {
     public GamePanel getGamePanel() {
         return gamePanel;
     }
+
+    public void freeSquare(int row, int col) {
+        plantedSpots[row][col] = false;
+    }
 }

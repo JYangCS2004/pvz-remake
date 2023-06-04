@@ -6,9 +6,10 @@ import java.awt.*;
 public abstract class Plant extends Entity {
 
     private int health;
+    private int cost;
     private String tag;
 
-    public Plant(int x, int y, int health, String tag, GamePanel g) {
+    public Plant(int x, int y, int health, String tag, GamePanel g, int cost) {
         super(x, y);
         super.g = g;
         this.health = health;
@@ -16,6 +17,7 @@ public abstract class Plant extends Entity {
         speed = 0;
         width = g.getTileSize();
         height = g.getTileSize();
+        this.cost = cost;
     }
 
     public void draw(Graphics g){
@@ -27,12 +29,19 @@ public abstract class Plant extends Entity {
                 x + this.g.getImageLibrary().getTextXFix(tag),
                 y + this.g.getImageLibrary().getTextYFix(tag));
     }
+
     @Override
     public abstract void update();
+
     public void decreaseHealth(){
         this.health--;
     }
+
     public int getHealth() {
         return this.health;
+    }
+
+    public int getCost() {
+        return cost;
     }
 }

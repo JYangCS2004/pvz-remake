@@ -30,4 +30,8 @@ public class SunSpawner extends RandSpawnManager {
     public int getSunCount(){
         return totalSunCount;
     }
+
+    public void deductSum(int amount) {
+        totalSunCount -= amount;
+    }
 }

@@ -11,10 +11,11 @@ public class Peashooter extends Plant {
 
     private final static int SPAWN_TIME = 70;
     private final RandSpawnManager projectileManager;
-    static final int health = 20;
-    static final String tag = "ps";
+    private static final int health = 20;
+    private static final int COST = 100;
+    private static final String tag = "ps";
     public Peashooter(int x, int y, GamePanel g){
-        super(x,y, health, tag, g);
+        super(x,y, health, tag, g, COST);
         this.projectileManager = new RandSpawnManager(SPAWN_TIME, g, RandSpawnManager.Type.BULLET);
     }
 

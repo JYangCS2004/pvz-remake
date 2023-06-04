@@ -32,6 +32,13 @@ public class ImageLibrary {
             e.printStackTrace();
         }
 
+        Image chomper;
+        try {
+            chomper = ImageIO.read(new File("src/Graphics/chomper2.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         //peashooter
         imageList.put("ps", peaShooter);
         xFix.put("ps", -20);
@@ -45,6 +52,9 @@ public class ImageLibrary {
         yFix.put("wn", 4);
         textXFix.put("wn", 20);
         textYFix.put("wn", 35);
+
+        // chomper
+        // imageList.put("ch", chomper);
     }
 
     public Image getImage(String key){

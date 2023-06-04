@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread gameThread;
 
     private final PlantManager plantManager = new PlantManager(this);
-    private final RandSpawnManager zombieSpawner = new RandSpawnManager(100, this, RandSpawnManager.Type.ENEMY);
+    private final RandSpawnManager zombieSpawner = new RandSpawnManager(150, this, RandSpawnManager.Type.ENEMY);
     private final SunSpawner sunSpawner = new SunSpawner(100, this);
     private final PlantInterface plantInterface = new PlantInterface(this);
     final ImageLibrary imageLibrary = new ImageLibrary();
@@ -111,6 +111,6 @@ public class GamePanel extends JPanel implements Runnable {
     public RandSpawnManager getZombieSpawner() {
         return zombieSpawner;
     }
-    public SpawnManager getPlantManager() {return plantManager; }
+    public PlantManager getPlantManager() {return plantManager; }
     public ImageLibrary getImageLibrary(){return imageLibrary;}
 }

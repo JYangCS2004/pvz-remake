@@ -54,6 +54,7 @@ public class Zombie extends Entity {
                 }
 
                 if (p.getHealth() == 0) {
+                    g.getPlantManager().freeSquare(p.x / g.getTileSize(), p.y / g.getTileSize());
                     it.remove();
                     speed = SPEED;
                 }
