@@ -1,10 +1,13 @@
-package model;
+package model.plants;
 
+import model.Plant;
+import model.Projectile;
+import model.RandSpawnManager;
 import ui.GamePanel;
 
 import java.awt.*;
 
-public class Peashooter extends Plant{
+public class Peashooter extends Plant {
 
     private final static int SPAWN_TIME = 70;
     private final RandSpawnManager projectileManager;

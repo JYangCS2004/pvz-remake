@@ -1,9 +1,9 @@
 package ui;
 
-import model.Peashooter;
+import model.plants.Peashooter;
 import model.Plant;
 import model.SunSpawner;
-import model.Walnut;
+import model.plants.Walnut;
 
 import java.awt.*;
 

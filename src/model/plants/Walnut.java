@@ -1,8 +1,9 @@
-package model;
+package model.plants;
 
+import model.Plant;
 import ui.GamePanel;
 
-public class Walnut extends Plant{
+public class Walnut extends Plant {
 
     static final int health = 50;
     static final String tag = "wn";
