@@ -5,9 +5,9 @@ import java.awt.*;
 
 public abstract class Plant extends Entity {
 
-    private int health;
+    protected int health;
     private int cost;
-    private String tag;
+    protected String tag;
 
     public Plant(int x, int y, int health, String tag, GamePanel g, int cost) {
         super(x, y);

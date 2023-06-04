@@ -1,5 +1,6 @@
 package ui;
 
+import model.plants.Chomper;
 import model.plants.Peashooter;
 import model.Plant;
 import model.SunSpawner;
@@ -9,9 +10,9 @@ import java.awt.*;
 
 public class PlantInterface {
 
-    protected GamePanel gamePanel;
+    private GamePanel gamePanel;
 
-    protected String[] plants = new String[9];
+    private String[] plants = new String[9];
 
     final Color interfaceColor = new Color(	0,128,0);
 
@@ -22,6 +23,7 @@ public class PlantInterface {
         //temp code until plant selection system is implemented
         plants[0] = "ps";
         plants[1] = "wn";
+        plants[2] = "ch";
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -34,7 +36,7 @@ public class PlantInterface {
         g.drawRoundRect(this.selected* gamePanel.getTileSize(),
                 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 10, 10);
         //so far using this bc only 2 plants
-        for(int i = 0; i < 2; i++){
+        for (int i = 0; i < 3; i++) {
             g.drawImage(gamePanel.getImageLibrary().getImage(plants[i]),
                     i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i]),
                     gamePanel.getImageLibrary().getYFix(plants[i]), null);
@@ -43,17 +45,14 @@ public class PlantInterface {
     }
 
     public Plant plantPicker(int x, int y, GamePanel g){
-        //add things later
         String plantType = this.plants[this.selected];
-        if(plantType.equals("ps")){
-            return new Peashooter(x, y, g);
-        }
-        else if(plantType.equals("wn")){
-            return new Walnut(x, y, g);
-        }
-        // for now since we only have two plant types in total
-        else{
-            return new Peashooter(x, y, g);
+        switch (plantType) {
+            case "wn":
+                return new Walnut(x, y, g);
+            case "ch":
+                return new Chomper(x, y, g);
+            default:
+                return new Peashooter(x, y, g);
         }
     }
 
