@@ -13,7 +13,7 @@ public class PlantManager extends SpawnManager {
                 int nearEdgeY = e.getPoint().y / g.getTileSize();
 
                 if (!plantedSpots[nearEdgeX][nearEdgeY]) {
-                    spawn(new Peashooter(g.getTileSize() * nearEdgeX, g.getTileSize() * nearEdgeY, g));
+                    spawn(new Walnut(g.getTileSize() * nearEdgeX, g.getTileSize() * nearEdgeY, g));
                     plantedSpots[nearEdgeX][nearEdgeY] = true;
                 }
             }
