@@ -18,10 +18,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
 
-    private PlantManager plantManager = new PlantManager(this);
-    private RandSpawnManager zombieSpawner = new RandSpawnManager(100, this, RandSpawnManager.Type.ENEMY);
-    private SunSpawner sunSpawner = new SunSpawner(100, this);
-    private PlantInterface plantInterface = new PlantInterface(this);
+    private final PlantManager plantManager = new PlantManager(this);
+    private final RandSpawnManager zombieSpawner = new RandSpawnManager(100, this, RandSpawnManager.Type.ENEMY);
+    private final SunSpawner sunSpawner = new SunSpawner(100, this);
+    private final PlantInterface plantInterface = new PlantInterface(this);
     final ImageLibrary imageLibrary = new ImageLibrary();
 
     public GamePanel() {

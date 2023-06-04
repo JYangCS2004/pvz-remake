@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Peashooter extends Plant{
 
     private final static int SPAWN_TIME = 70;
-    private RandSpawnManager projectileManager;
+    private final RandSpawnManager projectileManager;
     private int health = 20;
     private Image image;
     public Peashooter(int x, int y, GamePanel g){
