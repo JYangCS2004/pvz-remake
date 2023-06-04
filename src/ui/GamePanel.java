@@ -1,8 +1,6 @@
 package ui;
 
-import model.PlantManager;
-import model.RandSpawnManager;
-import model.SpawnManager;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,13 +18,16 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
 
-    private SpawnManager plantManager = new PlantManager(this);
+    private PlantManager plantManager = new PlantManager(this);
     private RandSpawnManager zombieSpawner = new RandSpawnManager(100, this, RandSpawnManager.Type.ENEMY);
+    private SunSpawner sunSpawner = new SunSpawner(100, this);
 
     public GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         setBackground(Color.black);
         setDoubleBuffered(true);
+
+        addMouseListener(new MouseHandler(plantManager, sunSpawner));
     }
 
     public void startGameThread() {
@@ -62,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         zombieSpawner.updateEach();
         plantManager.updateEach();
+        sunSpawner.updateEach();
     }
 
     public void getMouseTracker(Graphics g) {
@@ -85,6 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
         plantManager.drawEach(g2);
 
         getMouseTracker(g2);
+        sunSpawner.drawEach(g2);
         g2.dispose();
     }
 
