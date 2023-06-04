@@ -2,6 +2,7 @@ package model;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,9 +33,11 @@ public class ImageLibrary {
             e.printStackTrace();
         }
 
-        Image chomper;
+        BufferedImage chomper;
+        Image resized;
         try {
-            chomper = ImageIO.read(new File("src/Graphics/chomper2.png"));
+            chomper = ImageIO.read(new File("src/Graphics/transparent-chomper2.png"));
+            resized = chomper.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -54,7 +57,12 @@ public class ImageLibrary {
         textYFix.put("wn", 35);
 
         // chomper
-        // imageList.put("ch", chomper);
+        imageList.put("ch", resized);
+        xFix.put("ch", -15);
+        yFix.put("ch", -15);
+        textXFix.put("ch", 15);
+        textYFix.put("ch", 35);
+
     }
 
     public Image getImage(String key){
