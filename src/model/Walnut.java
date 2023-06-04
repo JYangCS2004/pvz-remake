@@ -30,6 +30,7 @@ public class Walnut extends Plant{
         g.setColor(Color.white);
         g.drawString(Integer.toString(health), x + 20, y + 35);
     }
+
     @Override
     public void update() {}
 
