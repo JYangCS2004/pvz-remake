@@ -1,6 +1,10 @@
-package model;
+package ui;
 
-import ui.GamePanel;
+import model.Peashooter;
+import model.Plant;
+import model.SunSpawner;
+import model.Walnut;
+
 import java.awt.*;
 
 public class PlantInterface {

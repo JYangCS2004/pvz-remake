@@ -9,14 +9,13 @@ import java.util.Map;
 
 public class ImageLibrary {
 
-    protected Map<String, Image> imageList;
-    protected Map<String, Integer> xFix;
-    protected Map<String, Integer> yFix;
-    public ImageLibrary(){
-        imageList = new HashMap<>();
-        xFix = new HashMap<>();
-        yFix = new HashMap<>();
+    protected Map<String, Image> imageList= new HashMap<>();
+    protected Map<String, Integer> xFix= new HashMap<>();
+    protected Map<String, Integer> yFix= new HashMap<>();
+    protected Map<String, Integer> textXFix = new HashMap<>();
+    protected Map<String, Integer> textYFix = new HashMap<>();
 
+    public ImageLibrary(){
         Image walnut = null;
         try{
             walnut = ImageIO.read(new File("src/Graphics/Walnut.png"));
@@ -37,11 +36,15 @@ public class ImageLibrary {
         imageList.put("ps", peaShooter);
         xFix.put("ps", -20);
         yFix.put("ps", 0);
+        textXFix.put("ps", 15);
+        textYFix.put("ps", 24);
 
         //walnut
         imageList.put("wn", walnut);
         xFix.put("wn", 7);
         yFix.put("wn", 4);
+        textXFix.put("wn", 20);
+        textYFix.put("wn", 35);
     }
 
     public Image getImage(String key){
@@ -55,4 +58,9 @@ public class ImageLibrary {
     public int getYFix(String key){
         return this.yFix.get(key);
     }
+
+    public int getTextXFix(String key){return this.textXFix.get(key);}
+
+    public int getTextYFix(String key){return this.textYFix.get(key);}
+
 }
