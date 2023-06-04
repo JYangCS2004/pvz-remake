@@ -90,7 +90,7 @@ public class Zombie extends Entity {
     }
 
     public void decreaseHealth() {
-        health -= 2;
+        health -= 1;
     }
 
     public int getHealth() {
