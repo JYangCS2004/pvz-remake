@@ -32,6 +32,11 @@ public class Walnut extends Plant{
     }
 
     @Override
+    public void drawWithoutText(Graphics g){
+        g.drawImage(image, x+7, y+4, null);
+    }
+
+    @Override
     public void update() {}
 
     @Override

@@ -21,13 +21,16 @@ public class GamePanel extends JPanel implements Runnable {
     private PlantManager plantManager = new PlantManager(this);
     private RandSpawnManager zombieSpawner = new RandSpawnManager(100, this, RandSpawnManager.Type.ENEMY);
     private SunSpawner sunSpawner = new SunSpawner(100, this);
+    private PlantInterface plantInterface = new PlantInterface(this);
+    final ImageLibrary imageLibrary = new ImageLibrary();
 
     public GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
-        setBackground(Color.black);
+        //lime green
+        setBackground(new Color(50,205,50));
         setDoubleBuffered(true);
 
-        addMouseListener(new MouseHandler(plantManager, sunSpawner));
+        addMouseListener(new MouseHandler(plantManager, sunSpawner, plantInterface));
     }
 
     public void startGameThread() {
@@ -85,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         zombieSpawner.drawEach(g2);
         plantManager.drawEach(g2);
+        plantInterface.draw(g2, sunSpawner);
 
         getMouseTracker(g2);
         sunSpawner.drawEach(g2);
@@ -108,4 +112,5 @@ public class GamePanel extends JPanel implements Runnable {
         return zombieSpawner;
     }
     public SpawnManager getPlantManager() {return plantManager; }
+    public ImageLibrary getImageLibrary(){return imageLibrary;}
 }

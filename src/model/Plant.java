@@ -1,6 +1,7 @@
 package model;
 
 import ui.GamePanel;
+import java.awt.*;
 
 public abstract class Plant extends Entity {
 
@@ -12,6 +13,7 @@ public abstract class Plant extends Entity {
         height = g.getTileSize();
     }
 
+    public abstract void drawWithoutText(Graphics g);
     @Override
     public abstract void update();
     public abstract void decreaseHealth();

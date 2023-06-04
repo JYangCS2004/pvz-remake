@@ -33,6 +33,11 @@ public class Peashooter extends Plant{
         g.drawString(Integer.toString(health), x + 15, y + 24);
         projectileManager.drawEach(g);
     }
+
+    @Override
+    public void drawWithoutText(Graphics g){
+        g.drawImage(image, x-20, y, null);
+    }
     @Override
     public void update() {
         projectileManager.spawn(new Projectile(x, y + 15, g));

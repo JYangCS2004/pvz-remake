@@ -10,9 +10,15 @@ import java.util.List;
 public class MouseHandler extends MouseAdapter {
     PlantManager pm;
     SunSpawner ss;
-    public MouseHandler(PlantManager pm, SunSpawner ss) {
+
+    PlantInterface pi;
+
+
+
+    public MouseHandler(PlantManager pm, SunSpawner ss, PlantInterface pi) {
         this.pm = pm;
         this.ss = ss;
+        this.pi = pi;
     }
 
     @Override
@@ -40,7 +46,16 @@ public class MouseHandler extends MouseAdapter {
             int nearEdgeX = x / tile;
             int nearEdgeY = y / tile;
 
-            pm.spawn(new Peashooter(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel()));
+            //check if mouse is at shop interface
+            if(nearEdgeY == 0){
+                pi.selected = nearEdgeX;
+            }
+            //spawn plant if not at interface
+            else{
+                pm.spawn(pi.plantPicker(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel()));
+            }
+
+            //pm.spawn(new Peashooter(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel()));
         }
     }
 }
