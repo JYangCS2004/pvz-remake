@@ -5,17 +5,14 @@ import ui.GamePanel;
 import java.util.*;
 
 public class RandSpawnManager extends SpawnManager {
-    public enum Type {BULLET, ENEMY}
+    public enum Type {BULLET, ENEMY, SUN}
     private final int spawnTime;
     private int counter;
-    private final Type type;
+    private Type type;
 
-    private static class EntityComparator implements Comparator<Entity> {
-
-        @Override
-        public int compare(Entity o1, Entity o2) {
-            return Integer.compare(o2.x, o1.x);
-        }
+    public RandSpawnManager(int spawnTime, GamePanel g) {
+        super(g);
+        this.spawnTime = spawnTime;
     }
 
     public RandSpawnManager(int spawnTime, GamePanel g, Type t) {
@@ -40,7 +37,7 @@ public class RandSpawnManager extends SpawnManager {
             Random rand = new Random();
             spawn(new Zombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize()), gamePanel));
 
-        } else if (type == Type.BULLET){
+        } else if (type == Type.BULLET) {
 
             for (int i : rowEntities.keySet()) {
                 Iterator<Entity> it = rowEntities.get(i).iterator();
