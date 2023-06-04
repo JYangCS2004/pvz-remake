@@ -40,28 +40,6 @@ public class Zombie extends Entity {
         }
 
 
-
-        /*if (e != null) {
-            Plant p = (Plant) e;
-            if (p.getBounds().intersects(getBounds())) {
-                counter--;
-                speed = 0;
-                if (counter == 0) {
-                    p.decreaseHealth();
-                    counter = eatTime;
-                }
-
-                if (p.getHealth() == 0) {
-                    testable.remove(p);
-                    speed = SPEED;
-                }
-            } else {
-                speed = SPEED;
-            }
-        } else {
-            speed = SPEED;
-        } */
-
         Iterator<Entity> it = testable.iterator();
 
         while (it.hasNext()) {
