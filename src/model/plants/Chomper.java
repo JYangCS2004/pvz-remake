@@ -1,26 +1,42 @@
 package model.plants;
 
-import model.Entity;
 import model.Plant;
+import model.RandSpawnManager;
+import model.projectiles.ChomperProjectile;
 import ui.GamePanel;
 
 import java.awt.*;
-import java.util.Iterator;
-import java.util.List;
 
 public class Chomper extends Plant {
-    private final int eatingTime = 200;
-    private static int health = 40;
-    private static int COST = 150;
-    private static String TAG = "ch";
+    private final int eatingtime = 500;
+    final static int SPAWN_TIME = 5;
+    final static int HEALTH = 40;
+    final static int COST = 150;
+    final static String TAG = "ch";
     private int counter = 0;
 
+    private final RandSpawnManager projectileManager;
+
     public Chomper(int x, int y, GamePanel g) {
-        super(x, y, health, TAG, g, COST);
+        super(x, y, HEALTH, TAG, g, COST);
+        this.projectileManager = new RandSpawnManager(SPAWN_TIME, g, RandSpawnManager.Type.BULLET);
     }
 
     @Override
     public void update() {
+        if(projectileManager.isCollided()){
+            counter = eatingtime;
+        }
+
+        if (counter <= 0) {
+            projectileManager.spawn(new ChomperProjectile(x, y + 15, g));
+        }
+        else{
+            counter--;
+        }
+        projectileManager.updateEach();
+
+        /*
         if (counter == 0) {
             List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
             if (testable != null) {
@@ -29,7 +45,7 @@ public class Chomper extends Plant {
                 while (it.hasNext()) {
                     Entity e = it.next();
                     if (e.getBounds().intersects(getBounds())) {
-                        counter = eatingTime;
+                        counter = eatingtime;
                         it.remove();
                         break;
                     }
@@ -38,6 +54,8 @@ public class Chomper extends Plant {
         } else {
             counter--;
         }
+
+         */
     }
 
     @Override

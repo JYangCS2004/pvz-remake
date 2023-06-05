@@ -44,7 +44,7 @@ public class RandSpawnManager extends SpawnManager {
 
                 while (it.hasNext()) {
                     Projectile p = (Projectile) it.next();
-                    if (p.checkCollision()) {
+                    if (p.expired()) {
                         it.remove();
                     }
                 }
@@ -53,4 +53,19 @@ public class RandSpawnManager extends SpawnManager {
 
         super.updateEach();
     }
+
+    public boolean isCollided(){
+        for (int i : rowEntities.keySet()) {
+            Iterator<Entity> it = rowEntities.get(i).iterator();
+
+            while (it.hasNext()) {
+                Projectile p = (Projectile) it.next();
+                if (p.checkCollision()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
