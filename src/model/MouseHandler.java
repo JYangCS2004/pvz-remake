@@ -16,7 +16,6 @@ public class MouseHandler extends MouseAdapter {
     PlantInterface pi;
 
 
-
     public MouseHandler(PlantManager pm, SunSpawner ss, PlantInterface pi) {
         this.pm = pm;
         this.ss = ss;
