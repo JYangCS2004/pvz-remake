@@ -15,16 +15,16 @@ public class SunSpawner extends RandSpawnManager {
     @Override
     public void updateEach() {
         Random rand = new Random();
-        spawn(new Sun(48 * rand.nextInt(gamePanel.getScreenRowSize()), 0));
+        spawn(new Sun(48 * rand.nextInt(gamePanel.getScreenRowSize()), 0, 1));
         super.updateEach();
     }
 
     public List<Entity> getSuns() {
-        return rowEntities.get(0);
+        return allEntities;
     }
 
     public void incrementSun() {
-        totalSunCount += 50;
+        totalSunCount += 25;
     }
 
     public int getSunCount(){

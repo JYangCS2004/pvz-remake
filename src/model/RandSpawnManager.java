@@ -33,6 +33,9 @@ public class RandSpawnManager extends SpawnManager {
             counter = spawnTime;
         }
     }
+    public void forceSpawn(Entity e){
+        super.spawn(e);
+    }
 
     @Override
     public void updateEach() {

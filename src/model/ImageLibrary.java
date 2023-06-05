@@ -42,6 +42,15 @@ public class ImageLibrary {
             throw new RuntimeException(e);
         }
 
+        BufferedImage sunflower;
+        Image resizedSunflower;
+        try {
+            sunflower = ImageIO.read(new File("src/Graphics/Sunflower.png"));
+            resizedSunflower = sunflower.getScaledInstance(65, 53, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         //peashooter
         imageList.put("ps", peaShooter);
         xFix.put("ps", -20);
@@ -62,6 +71,12 @@ public class ImageLibrary {
         yFix.put("ch", -15);
         textXFix.put("ch", 15);
         textYFix.put("ch", 35);
+
+        imageList.put("sf", resizedSunflower);
+        xFix.put("sf", -8);
+        yFix.put("sf", -5);
+        textXFix.put("sf", 15);
+        textYFix.put("sf", 35);
 
     }
 

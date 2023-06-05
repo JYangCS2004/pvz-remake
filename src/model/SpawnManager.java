@@ -13,9 +13,12 @@ public abstract class SpawnManager {
 
     protected Map<Integer, List<Entity>> rowEntities;
 
+    protected List<Entity> allEntities;
+
     public SpawnManager(GamePanel g) {
         this.gamePanel = g;
         rowEntities = new HashMap<>();
+        allEntities = new ArrayList<>();
     }
 
     // REQUIRES: x >= 0, y >= 0
@@ -30,6 +33,7 @@ public abstract class SpawnManager {
         } else {
             rowEntities.get(row).add(e);
         }
+        allEntities.add(e);
     }
 
     public List<Entity> getEntitiesByRow(int row) {
@@ -46,6 +50,11 @@ public abstract class SpawnManager {
     public void drawEach(Graphics g) {
         for (int i : rowEntities.keySet()) {
             rowEntities.get(i).forEach((entity -> entity.draw(g)));
+        }
+    }
+    public void drawEach2(Graphics g){
+        for (Entity e : allEntities) {
+            e.draw(g);
         }
     }
 }

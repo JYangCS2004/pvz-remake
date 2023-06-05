@@ -91,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable {
         plantInterface.draw(g2, sunSpawner);
 
         getMouseTracker(g2);
-        sunSpawner.drawEach(g2);
+        sunSpawner.drawEach2(g2);
         g2.dispose();
     }
 
@@ -111,6 +111,8 @@ public class GamePanel extends JPanel implements Runnable {
     public RandSpawnManager getZombieSpawner() {
         return zombieSpawner;
     }
+
+    public RandSpawnManager getSunSpawner(){return sunSpawner;}
     public PlantManager getPlantManager() {return plantManager; }
     public ImageLibrary getImageLibrary(){return imageLibrary;}
 }
