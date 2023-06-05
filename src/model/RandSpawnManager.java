@@ -1,5 +1,6 @@
 package model;
 
+import model.zombies.DefaultZombie;
 import ui.GamePanel;
 
 import java.awt.*;
@@ -37,7 +38,7 @@ public class RandSpawnManager extends SpawnManager {
     public void updateEach() {
         if (type == Type.ENEMY) {
             Random rand = new Random();
-            spawn(new Zombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize()), gamePanel));
+            spawn(new DefaultZombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize()), gamePanel));
 
         } else if (type == Type.BULLET) {
 

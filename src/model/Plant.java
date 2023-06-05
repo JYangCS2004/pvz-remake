@@ -34,7 +34,7 @@ public abstract class Plant extends Entity {
     public abstract void update();
 
     public void decreaseHealth(){
-        this.health--;
+        this.health-= 1;
     }
 
     public int getHealth() {
