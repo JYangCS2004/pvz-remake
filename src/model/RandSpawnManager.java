@@ -2,7 +2,9 @@ package model;
 
 import ui.GamePanel;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class RandSpawnManager extends SpawnManager {
     public enum Type {BULLET, ENEMY, SUN}
@@ -44,7 +46,7 @@ public class RandSpawnManager extends SpawnManager {
 
                 while (it.hasNext()) {
                     Projectile p = (Projectile) it.next();
-                    if (p.expired()) {
+                    if (p.expired() || checkCollision(p)) {
                         it.remove();
                     }
                 }
@@ -60,9 +62,36 @@ public class RandSpawnManager extends SpawnManager {
 
             while (it.hasNext()) {
                 Projectile p = (Projectile) it.next();
-                if (p.checkCollision()) {
+                if (checkCollision(p)) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkCollision(Projectile p) {
+
+        List<Entity> possibleCollisions = gamePanel.getZombieSpawner().getEntitiesByRow((p.y - 15) / gamePanel.getTileSize());
+
+        if (possibleCollisions == null || possibleCollisions.isEmpty()) {
+            return false;
+        }
+
+        Iterator<Entity> it = possibleCollisions.iterator();
+        while (it.hasNext()) {
+            Zombie e = (Zombie) it.next();
+            Rectangle pBounds = p.getBounds();
+            Rectangle zBounds = e.getBounds();
+
+            if (zBounds.intersects(pBounds)) {
+                e.decreaseHealth(p.damage);
+
+                if (e.getHealth() <= 0) {
+                    it.remove();
+                }
+
+                return true;
             }
         }
         return false;
