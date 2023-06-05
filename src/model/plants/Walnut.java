@@ -5,12 +5,12 @@ import ui.GamePanel;
 
 public class Walnut extends Plant {
 
-    static final int health = 50;
+    static final int HEALTH= 50;
     static final int COST = 50;
-    static final String tag = "wn";
+    static final String TAG = "wn";
 
     public Walnut(int x, int y, GamePanel g){
-        super(x,y, health, tag, g, COST);
+        super(x,y, HEALTH, TAG, g, COST);
     }
 
     @Override

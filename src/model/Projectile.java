@@ -6,24 +6,23 @@ import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 
-public class Projectile extends Entity {
-    private final int size = 16;
+public abstract class Projectile extends Entity {
 
-    public Projectile(int x, int y, GamePanel g) {
+    protected int damage;
+    protected int lifetime;
+
+    public Projectile(int x, int y, int width, int height, int speed, int damage, int lifetime, GamePanel g) {
         super(x, y);
         super.g = g;
-        speed = 5;
-        width = size;
-        height = size;
-    }
-
-    public void draw(Graphics g) {
-        g.setColor(Color.RED);
-        g.fillOval(x, y, size, size);
-        g.setColor(Color.WHITE);
+        super.width = width;
+        super.height = height;
+        super.speed = speed;
+        this.damage = damage;
+        this.lifetime = lifetime;
     }
 
     public boolean checkCollision() {
+
         List<Entity> possibleCollisions = g.getZombieSpawner().getEntitiesByRow((y - 15) / g.getTileSize());
 
         if (possibleCollisions == null || possibleCollisions.isEmpty()) {
@@ -53,7 +52,7 @@ public class Projectile extends Entity {
             Rectangle zBounds = e.getBounds();
 
             if (zBounds.intersects(pBounds)) {
-                e.decreaseHealth();
+                e.decreaseHealth(damage);
 
                 if (e.getHealth() <= 0) {
                     it.remove();
@@ -66,8 +65,14 @@ public class Projectile extends Entity {
         return false;
     }
 
+    public boolean expired(){
+        return (lifetime <= 0) || checkCollision();
+    }
+
+
     public void update() {
         super.update();
+        lifetime--;
         checkCollision();
     }
 }

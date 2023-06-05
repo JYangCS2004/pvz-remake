@@ -68,8 +68,8 @@ public class Zombie extends Entity {
         x += speed;
     }
 
-    public void decreaseHealth() {
-        health -= 1;
+    public void decreaseHealth(int damage) {
+        health -= damage;
     }
 
     public int getHealth() {
