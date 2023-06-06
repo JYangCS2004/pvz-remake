@@ -1,5 +1,6 @@
 package ui;
 
+import model.plants.CabbagePult;
 import model.plants.Chomper;
 import model.plants.Peashooter;
 import model.Plant;
@@ -24,6 +25,7 @@ public class PlantInterface {
         plants[0] = "ps";
         plants[1] = "wn";
         plants[2] = "ch";
+        plants[3] = "cp";
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -36,7 +38,7 @@ public class PlantInterface {
         g.drawRoundRect(this.selected* gamePanel.getTileSize(),
                 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 10, 10);
         //so far using this bc only 2 plants
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             g.drawImage(gamePanel.getImageLibrary().getImage(plants[i]),
                     i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i]),
                     gamePanel.getImageLibrary().getYFix(plants[i]), null);
@@ -51,6 +53,8 @@ public class PlantInterface {
                 return new Walnut(x, y, g);
             case "ch":
                 return new Chomper(x, y, g);
+            case "cp":
+                return new CabbagePult(x, y, g);
             default:
                 return new Peashooter(x, y, g);
         }

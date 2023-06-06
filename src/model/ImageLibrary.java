@@ -42,6 +42,16 @@ public class ImageLibrary {
             throw new RuntimeException(e);
         }
 
+        BufferedImage image;
+        Image cabbage;
+        try {
+            chomper = ImageIO.read(new File("src/Graphics/cabbage.png"));
+            cabbage = chomper.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         //peashooter
         imageList.put("ps", peaShooter);
         xFix.put("ps", -20);
@@ -62,6 +72,13 @@ public class ImageLibrary {
         yFix.put("ch", -15);
         textXFix.put("ch", 15);
         textYFix.put("ch", 35);
+
+        // cabbage
+        imageList.put("cp", cabbage);
+        xFix.put("cp", -15);
+        yFix.put("cp", -15);
+        textXFix.put("cp", 15);
+        textYFix.put("cp", 35);
 
     }
 

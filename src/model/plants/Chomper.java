@@ -34,6 +34,7 @@ public class Chomper extends Plant {
         else{
             counter--;
         }
+
         projectileManager.updateEach();
 
         /*

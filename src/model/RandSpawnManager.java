@@ -12,11 +12,6 @@ public class RandSpawnManager extends SpawnManager {
     private int counter;
     private Type type;
 
-    public RandSpawnManager(int spawnTime, GamePanel g) {
-        super(g);
-        this.spawnTime = spawnTime;
-    }
-
     public RandSpawnManager(int spawnTime, GamePanel g, Type t) {
         super(g);
         this.spawnTime = spawnTime;
@@ -58,10 +53,9 @@ public class RandSpawnManager extends SpawnManager {
 
     public boolean isCollided(){
         for (int i : rowEntities.keySet()) {
-            Iterator<Entity> it = rowEntities.get(i).iterator();
 
-            while (it.hasNext()) {
-                Projectile p = (Projectile) it.next();
+            for (Entity entity : rowEntities.get(i)) {
+                Projectile p = (Projectile) entity;
                 if (checkCollision(p)) {
                     return true;
                 }
