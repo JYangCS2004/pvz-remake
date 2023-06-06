@@ -16,12 +16,12 @@ public class CabbagePult extends Plant {
 
     public CabbagePult(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, COST);
-        spawnManager = new RandSpawnManager(10, g, RandSpawnManager.Type.BULLET);
+        spawnManager = new RandSpawnManager(100, g, RandSpawnManager.Type.BULLET);
     }
 
     @Override
     public void update() {
-        PultProjectile p = new PultProjectile(x, y, g);
+        PultProjectile p = new PultProjectile(x, y+20, g);
 
         if (p.getTarget() != null) {
             spawnManager.spawn(p);

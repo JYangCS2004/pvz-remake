@@ -32,6 +32,10 @@ public abstract class Entity {
         return y;
     }
 
+    public int getSpeed(){
+        return speed;
+    }
+
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
