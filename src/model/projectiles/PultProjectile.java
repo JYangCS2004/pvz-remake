@@ -7,6 +7,7 @@ import ui.GamePanel;
 import java.awt.*;
 import java.util.List;
 
+
 public class PultProjectile extends Projectile {
 
     private static int WIDTH = 16;
