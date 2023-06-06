@@ -2,6 +2,7 @@ package model.projectiles;
 
 import model.Entity;
 import model.Projectile;
+import model.Zombie;
 import ui.GamePanel;
 
 import java.awt.*;
@@ -10,33 +11,25 @@ import java.util.List;
 
 public class PultProjectile extends Projectile {
 
-    private static int WIDTH = 16;
-    private static int HEIGHT = 16;
-    private static int DAMAGE = 2;
-    private int minDistance;
-    private int maxHeight;
-    private double initialAngle;
-
-    private int time;
-    private int counter = 0;
+    final static int WIDTH = 16;
+    final static int HEIGHT = 16;
+    final static int DAMAGE = 2;
 
     //private double acceleration = 1;
     static final double ACCELERATION = 0.24;
     //private double velocityY;
     private double velocityY = 12;
-    private double velocityX;
+    final double velocityX;
     private int initialPos;
-    private Entity target = null;
+    private Zombie target = null;
 
     private double x;
     private double y;
 
     public PultProjectile(int x, int y, GamePanel g) {
-        super(x, y, WIDTH, HEIGHT, 20, DAMAGE, 105, g);
+        super(x, y, WIDTH, HEIGHT, 20, DAMAGE, 100, g);
         this.x = (double) x;
         this.y = (double) y;
-        time = 0;
-        maxHeight = 50;
         initialPos = y;
 
         List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
@@ -84,19 +77,20 @@ public class PultProjectile extends Projectile {
         int distance = 10000;
         int miniDist = distance;
         for (Entity e : testable) {
+            Zombie z = (Zombie) e;
             distance = e.getX() - super.x + 100*e.getSpeed() + g.getTileSize()/2;
             if(distance < 20){
                 distance = 80;
             }
             if (distance >= 0 && distance < miniDist) {
                 miniDist = distance ;
-                target = e;
+                target = z;
             }
         }
         return miniDist;
     }
 
-    public Entity getTarget() {
+    public Zombie getTarget() {
         return target;
     }
 

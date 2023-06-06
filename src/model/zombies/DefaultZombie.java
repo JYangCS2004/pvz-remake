@@ -20,6 +20,6 @@ public class DefaultZombie extends Zombie {
     @Override
     public int getSpeed(){
         // return applyStatusEffect(SPEED);
-        return SPEED;
+        return super.curSpeed;
     }
 }
