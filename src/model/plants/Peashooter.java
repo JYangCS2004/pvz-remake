@@ -29,7 +29,7 @@ public class Peashooter extends Plant {
 
     @Override
     public void update() {
-        projectileManager.spawn(new PeashooterProjectile(x, y + 15, g));
+        projectileManager.spawn(new PeashooterProjectile(x+20, y +15, g));
         projectileManager.updateEach();
     }
 }

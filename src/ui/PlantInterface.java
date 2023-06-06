@@ -1,10 +1,10 @@
 package ui;
 
-import model.plants.CabbagePult;
 import model.plants.Chomper;
 import model.plants.Peashooter;
 import model.Plant;
 import model.SunSpawner;
+import model.plants.Sunflower;
 import model.plants.Walnut;
 
 import java.awt.*;
@@ -25,7 +25,7 @@ public class PlantInterface {
         plants[0] = "ps";
         plants[1] = "wn";
         plants[2] = "ch";
-        plants[3] = "cp";
+        plants[3] = "sf";
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -49,12 +49,12 @@ public class PlantInterface {
     public Plant plantPicker(int x, int y, GamePanel g){
         String plantType = this.plants[this.selected];
         switch (plantType) {
+            case "sf":
+                return new Sunflower(x, y, g);
             case "wn":
                 return new Walnut(x, y, g);
             case "ch":
                 return new Chomper(x, y, g);
-            case "cp":
-                return new CabbagePult(x, y, g);
             default:
                 return new Peashooter(x, y, g);
         }

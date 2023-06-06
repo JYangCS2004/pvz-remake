@@ -42,15 +42,14 @@ public class ImageLibrary {
             throw new RuntimeException(e);
         }
 
-        BufferedImage image;
-        Image cabbage;
+        BufferedImage sunflower;
+        Image resizedSunflower;
         try {
-            chomper = ImageIO.read(new File("src/Graphics/cabbage.png"));
-            cabbage = chomper.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+            sunflower = ImageIO.read(new File("src/Graphics/Sunflower.png"));
+            resizedSunflower = sunflower.getScaledInstance(65, 53, Image.SCALE_SMOOTH);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
 
         //peashooter
         imageList.put("ps", peaShooter);
@@ -73,12 +72,11 @@ public class ImageLibrary {
         textXFix.put("ch", 15);
         textYFix.put("ch", 35);
 
-        // cabbage
-        imageList.put("cp", cabbage);
-        xFix.put("cp", -15);
-        yFix.put("cp", -15);
-        textXFix.put("cp", 15);
-        textYFix.put("cp", 35);
+        imageList.put("sf", resizedSunflower);
+        xFix.put("sf", -8);
+        yFix.put("sf", -5);
+        textXFix.put("sf", 15);
+        textYFix.put("sf", 35);
 
     }
 

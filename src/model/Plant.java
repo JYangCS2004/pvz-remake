@@ -6,7 +6,7 @@ import java.awt.*;
 public abstract class Plant extends Entity {
 
     protected int health;
-    private int cost;
+    private final int cost;
     protected String tag;
 
     public Plant(int x, int y, int health, String tag, GamePanel g, int cost) {
@@ -34,7 +34,7 @@ public abstract class Plant extends Entity {
     public abstract void update();
 
     public void decreaseHealth(){
-        this.health--;
+        this.health-= 1;
     }
 
     public int getHealth() {

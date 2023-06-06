@@ -6,20 +6,27 @@ import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 
-public class Zombie extends Entity {
-    private static final int SPEED = -1;
-    private int health = 25;
+public abstract class Zombie extends Entity {
+    protected int curSpeed;
+    private int health;
 
-    private final int eatTime = 30;
-    private int counter = eatTime;
+    private final int eatTime;
+
+    private int damage;
+    private int counter;
     private boolean isCollided = false;
 
-    public Zombie(int x, int y, GamePanel g) {
+    public Zombie(int x, int y, int speed, int damage, int health, int eatTime,
+                  int width, int height, GamePanel g) {
         super(x, y);
         super.g = g;
-        speed = SPEED;
-        super.width = g.getTileSize();
-        super.height = g.getTileSize();
+        this.curSpeed = speed;
+        this.damage = damage;
+        this.health = health;
+        this.eatTime = eatTime;
+        this.counter = 5;
+        super.width = width;
+        super.height = height;
     }
 
     @Override
@@ -34,11 +41,9 @@ public class Zombie extends Entity {
         List<Entity> testable = g.getPlantManager().getEntitiesByRow(y / g.getTileSize());
         isCollided = false;
         if (testable == null || testable.isEmpty()) {
-            super.update();
-            speed = SPEED;
+            x += getSpeed();
             return;
         }
-
 
         Iterator<Entity> it = testable.iterator();
 
@@ -46,7 +51,7 @@ public class Zombie extends Entity {
             Plant p = (Plant) it.next();
             if (p.getBounds().intersects(getBounds())) {
                 counter--;
-                speed = 0;
+                curSpeed = 0;
                 isCollided = true;
                 if (counter == 0) {
                     p.decreaseHealth();
@@ -56,16 +61,16 @@ public class Zombie extends Entity {
                 if (p.getHealth() == 0) {
                     g.getPlantManager().freeSquare(p.x / g.getTileSize(), p.y / g.getTileSize());
                     it.remove();
-                    speed = SPEED;
+                    curSpeed = getSpeed();
                 }
             }
         }
 
         if (!isCollided) {
-            speed = SPEED;
+            curSpeed = getSpeed();
         }
 
-        x += speed;
+        x += curSpeed;
     }
 
     public void decreaseHealth(int damage) {
@@ -75,4 +80,5 @@ public class Zombie extends Entity {
     public int getHealth() {
         return health;
     }
+    public abstract int getSpeed();
 }

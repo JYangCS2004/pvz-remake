@@ -5,20 +5,25 @@ import java.awt.*;
 public class Sun extends Entity {
     boolean hasClicked = false;
 
-    public Sun(int x, int y) {
+    public Sun(int x, int y, int speed) {
         super(x, y);
-        super.speed = 1;
+        super.speed = speed;
         width = 30;
         height = 30;
     }
 
     @Override
     public void draw(Graphics g) {
-        if (!hasClicked) {
+        g.setColor(Color.yellow);
+        g.fillRoundRect(x, y, width, height, 25, 25);
+        g.setColor(Color.white);
+        /*if (!hasClicked) {
             g.setColor(Color.yellow);
             g.fillRoundRect(x, y, width, height, 25, 25);
             g.setColor(Color.white);
         }
+
+         */
     }
 
     @Override
