@@ -25,7 +25,7 @@ public abstract class SpawnManager {
     // MODIFIES: this
     // EFFECTS: constructs a new projectile
     public void spawn(Entity e) {
-        int row = e.getY() / gamePanel.getTileSize();
+        int row = (int)e.getY() / gamePanel.getTileSize();
         if (!rowEntities.containsKey(row)) {
             List<Entity> eList = new ArrayList<>();
             eList.add(e);

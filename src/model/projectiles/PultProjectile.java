@@ -28,19 +28,22 @@ public class PultProjectile extends Projectile {
     private int initialPos;
     private Entity target = null;
 
+    private double x;
+    private double y;
+
     public PultProjectile(int x, int y, GamePanel g) {
         super(x, y, WIDTH, HEIGHT, 20, DAMAGE, 105, g);
+        this.x = (double) x;
+        this.y = (double) y;
         time = 0;
         maxHeight = 50;
         initialPos = y;
 
         List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
 
-        int minDist = Integer.MAX_VALUE;
-
-        int dist = getMinDistance(testable, minDist);
+        int dist = getMinDistance(testable);
         //double speed = minDist;
-        double speed = dist/100;
+        double speed = dist/(double)100;
         //velocityY = speed * Math.sin(Math.PI / 2 - initialAngle);
         //velocityX = speed * Math.cos(initialAngle);
         velocityX = speed;
@@ -49,8 +52,7 @@ public class PultProjectile extends Projectile {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.blue);
-        g.fillOval(x, y, width, height);
-        System.out.println(x + " " + y);
+        g.fillOval((int)this.x, (int)this.y, width, height);
         g.setColor(Color.white);
     }
 
@@ -62,7 +64,7 @@ public class PultProjectile extends Projectile {
         velocityY -= ACCELERATION;
     }
 
-    private int getMinDistance(List<Entity> testable, int minDist) {
+    private int getMinDistance(List<Entity> testable) {
         /*
         for (Entity e : testable) {
             int distance = e.getX() - super.x;
@@ -82,7 +84,10 @@ public class PultProjectile extends Projectile {
         int distance = 10000;
         int miniDist = distance;
         for (Entity e : testable) {
-            distance = e.getX() - super.x + 100*e.getSpeed();
+            distance = e.getX() - super.x + 100*e.getSpeed() + g.getTileSize()/2;
+            if(distance < 20){
+                distance = 80;
+            }
             if (distance >= 0 && distance < miniDist) {
                 miniDist = distance ;
                 target = e;
