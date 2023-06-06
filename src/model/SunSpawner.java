@@ -24,7 +24,9 @@ public class SunSpawner extends RandSpawnManager {
     }
 
     public void incrementSun() {
-        totalSunCount += 25;
+        totalSunCount += 50;
+        //for testing
+        //totalSunCount += 500;
     }
 
     public int getSunCount(){

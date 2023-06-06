@@ -1,11 +1,8 @@
 package ui;
 
-import model.plants.Chomper;
-import model.plants.Peashooter;
+import model.plants.*;
 import model.Plant;
 import model.SunSpawner;
-import model.plants.Sunflower;
-import model.plants.Walnut;
 
 import java.awt.*;
 
@@ -26,6 +23,7 @@ public class PlantInterface {
         plants[1] = "wn";
         plants[2] = "ch";
         plants[3] = "sf";
+        plants[4] = "cp";
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -38,7 +36,7 @@ public class PlantInterface {
         g.drawRoundRect(this.selected* gamePanel.getTileSize(),
                 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 10, 10);
         //so far using this bc only 2 plants
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             g.drawImage(gamePanel.getImageLibrary().getImage(plants[i]),
                     i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i]),
                     gamePanel.getImageLibrary().getYFix(plants[i]), null);
@@ -49,6 +47,8 @@ public class PlantInterface {
     public Plant plantPicker(int x, int y, GamePanel g){
         String plantType = this.plants[this.selected];
         switch (plantType) {
+            case "cp":
+                return new CabbagePult(x, y, g);
             case "sf":
                 return new Sunflower(x, y, g);
             case "wn":

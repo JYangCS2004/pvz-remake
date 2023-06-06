@@ -5,11 +5,12 @@ import ui.PlantInterface;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Area;
 import java.util.Iterator;
 import java.util.List;
 
-public class MouseHandler extends MouseAdapter {
+public class MouseHandler extends MouseAdapter implements MouseMotionListener {
     PlantManager pm;
     SunSpawner ss;
 
@@ -20,6 +21,7 @@ public class MouseHandler extends MouseAdapter {
         this.pm = pm;
         this.ss = ss;
         this.pi = pi;
+        pm.getGamePanel().addMouseMotionListener(this);
     }
 
     @Override
@@ -59,6 +61,24 @@ public class MouseHandler extends MouseAdapter {
                     ss.deductSum(p.getCost());
                     pm.storeSquare(nearEdgeX, nearEdgeY);
                 }
+            }
+        }
+    }
+    @Override
+    public void mouseMoved(MouseEvent e){
+        Point mouse = e.getPoint();
+        int x = mouse.x;
+        int y = mouse.y;
+
+        List<Entity> sunList = ss.getSuns();
+        Iterator<Entity> it = sunList.iterator();
+
+        while (it.hasNext()) {
+            Sun s = (Sun) it.next();
+            if (new Area(s.getBounds()).contains(x, y)) {
+                ss.incrementSun();
+                it.remove();
+                return;
             }
         }
     }

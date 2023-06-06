@@ -51,6 +51,15 @@ public class ImageLibrary {
             throw new RuntimeException(e);
         }
 
+        BufferedImage cabbagepult;
+        Image resizedCabbagePult;
+        try {
+            cabbagepult = ImageIO.read(new File("src/Graphics/cabbage.png"));
+            resizedCabbagePult = cabbagepult.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         //peashooter
         imageList.put("ps", peaShooter);
         xFix.put("ps", -20);
@@ -72,11 +81,19 @@ public class ImageLibrary {
         textXFix.put("ch", 15);
         textYFix.put("ch", 35);
 
+        //sunflower
         imageList.put("sf", resizedSunflower);
         xFix.put("sf", -8);
         yFix.put("sf", -5);
         textXFix.put("sf", 15);
         textYFix.put("sf", 35);
+
+        //cabbagepult
+        imageList.put("cp", resizedCabbagePult);
+        xFix.put("cp", -5);
+        yFix.put("cp", 0);
+        textXFix.put("cp", 15);
+        textYFix.put("cp", 35);
 
     }
 

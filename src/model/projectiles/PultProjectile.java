@@ -81,4 +81,13 @@ public class PultProjectile extends Projectile {
     public Entity getTarget() {
         return target;
     }
+
+    /*
+    new arc formula:
+    -(4h/y^2)x(x-y)
+    where h = CONSTANT
+    such that distance =
+    use
+    org.apache.commons.math4.legacy.analysis.integration.simpsonintegrator
+     */
 }
