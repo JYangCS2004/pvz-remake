@@ -1,5 +1,7 @@
-package model;
+package model.spawnManagers;
 
+import model.Entity;
+import model.SpawnManager;
 import ui.GamePanel;
 
 public class PlantManager extends SpawnManager {
@@ -18,6 +20,10 @@ public class PlantManager extends SpawnManager {
                 }
             }
         }); */
+    }
+
+    public void remove(Entity e) {
+        entities.remove(e);
     }
 
     public boolean containsSquare(int row, int col) {

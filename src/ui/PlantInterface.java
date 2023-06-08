@@ -2,7 +2,7 @@ package ui;
 
 import model.plants.*;
 import model.Plant;
-import model.SunSpawner;
+import model.spawnManagers.SunSpawner;
 
 import java.awt.*;
 

@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import model.spawnManagers.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +20,10 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread gameThread;
 
     private final PlantManager plantManager = new PlantManager(this);
-    private final RandSpawnManager zombieSpawner = new RandSpawnManager(150, this, RandSpawnManager.Type.ENEMY);
+    private final RandSpawnManager zombieSpawner = new ZombieManager(150, this);
     private final SunSpawner sunSpawner = new SunSpawner(100, this);
+    private final BulletManager shooterManager = new BulletManager(this);
+    private final PultManager lobberManager = new PultManager(this);
     private final PlantInterface plantInterface = new PlantInterface(this);
     final ImageLibrary imageLibrary = new ImageLibrary();
 
@@ -66,6 +69,10 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         zombieSpawner.updateEach();
         plantManager.updateEach();
+
+        shooterManager.updateEach();
+        lobberManager.updateEach();
+
         sunSpawner.updateEach();
     }
 
@@ -90,8 +97,11 @@ public class GamePanel extends JPanel implements Runnable {
         plantManager.drawEach(g2);
         plantInterface.draw(g2, sunSpawner);
 
+        shooterManager.drawEach(g2);
+        lobberManager.drawEach(g2);
+
         getMouseTracker(g2);
-        sunSpawner.drawEach2(g2);
+        sunSpawner.drawEach(g2);
         g2.dispose();
     }
 
@@ -114,5 +124,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     public RandSpawnManager getSunSpawner(){return sunSpawner;}
     public PlantManager getPlantManager() {return plantManager; }
+
+    public PultManager getLobberManager() {
+        return lobberManager;
+    }
+
+    public BulletManager getShooterManager() {
+        return shooterManager;
+    }
     public ImageLibrary getImageLibrary(){return imageLibrary;}
 }

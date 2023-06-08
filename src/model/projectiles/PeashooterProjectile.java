@@ -14,8 +14,9 @@ public class PeashooterProjectile extends Projectile {
     static final int lifetime = 320;
     static final Color  color = new Color(0, 100, 0);
 
-    public PeashooterProjectile(int x, int y, GamePanel g){
+    public PeashooterProjectile(int x, int y, GamePanel g, int row){
         super(x, y, width, height, speed, damage, lifetime, g);
+        super.row = row;
     }
 
     @Override

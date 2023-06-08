@@ -21,6 +21,9 @@ public abstract class Projectile extends Entity {
         return lifetime <= 0;
     }
 
+    public int getDamage() {
+        return damage;
+    }
 
     public void update() {
         super.update();

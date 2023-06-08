@@ -3,11 +3,11 @@ package model;
 import ui.GamePanel;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class Zombie extends Entity {
     protected int curSpeed;
+    private int SPEED = -1;
     private int health;
 
     private final int eatTime;
@@ -27,6 +27,8 @@ public abstract class Zombie extends Entity {
         this.counter = 5;
         super.width = width;
         super.height = height;
+
+        super.row = y / g.getTileSize();
     }
 
     @Override
@@ -38,17 +40,16 @@ public abstract class Zombie extends Entity {
     }
 
     public void update() {
-        List<Entity> testable = g.getPlantManager().getEntitiesByRow(y / g.getTileSize());
+        List<Entity> testable = g.getPlantManager().getEntitiesByRow(row);
+
         isCollided = false;
         if (testable == null || testable.isEmpty()) {
             x += getSpeed();
             return;
         }
 
-        Iterator<Entity> it = testable.iterator();
-
-        while (it.hasNext()) {
-            Plant p = (Plant) it.next();
+        for (Entity entity : testable) {
+            Plant p = (Plant) entity;
             if (p.getBounds().intersects(getBounds())) {
                 counter--;
                 curSpeed = 0;
@@ -58,9 +59,9 @@ public abstract class Zombie extends Entity {
                     counter = eatTime;
                 }
 
-                if (p.getHealth() == 0) {
+                if (p.getHealth() <= 0) {
                     g.getPlantManager().freeSquare(p.x / g.getTileSize(), p.y / g.getTileSize());
-                    it.remove();
+                    g.getPlantManager().remove(p);
                     curSpeed = getSpeed();
                 }
             }

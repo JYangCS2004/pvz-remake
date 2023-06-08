@@ -1,5 +1,7 @@
 package model;
 
+import model.spawnManagers.PlantManager;
+import model.spawnManagers.SunSpawner;
 import ui.PlantInterface;
 
 import java.awt.*;

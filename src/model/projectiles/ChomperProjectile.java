@@ -19,10 +19,7 @@ public class ChomperProjectile extends Projectile {
     }
 
     @Override
-    public void draw(Graphics g){
-        g.setColor(color);
-        g.fillOval(x, y, width, height);
-        g.setColor(Color.WHITE);
-    }
+    public void draw(Graphics g) {
 
+    }
 }

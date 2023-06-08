@@ -1,8 +1,8 @@
 package model.plants;
 
 import model.Plant;
-import model.RandSpawnManager;
 import model.projectiles.ChomperProjectile;
+import model.spawnManagers.BulletManager;
 import ui.GamePanel;
 
 import java.awt.*;
@@ -15,27 +15,27 @@ public class Chomper extends Plant {
     final static String TAG = "ch";
     private int counter = 0;
 
-    private final RandSpawnManager projectileManager;
+    private final BulletManager projectileManager;
 
     public Chomper(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, COST);
-        this.projectileManager = new RandSpawnManager(SPAWN_TIME, g, RandSpawnManager.Type.BULLET);
+        this.projectileManager = g.getShooterManager();
     }
 
     @Override
     public void update() {
-        if(projectileManager.isCollided()){
+        /* if(projectileManager.checkEach()){
             counter = eatingtime;
-        }
+            System.out.println("ate!");
+        } */
 
         if (counter <= 0) {
             projectileManager.spawn(new ChomperProjectile(x, y + 15, g));
+            counter = eatingtime;
         }
         else{
             counter--;
         }
-
-        projectileManager.updateEach();
 
         /*
         if (counter == 0) {

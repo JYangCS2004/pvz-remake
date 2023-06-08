@@ -3,8 +3,6 @@ package model;
 import java.awt.*;
 
 public class Sun extends Entity {
-    boolean hasClicked = false;
-
     public Sun(int x, int y, int speed) {
         super(x, y);
         super.speed = speed;

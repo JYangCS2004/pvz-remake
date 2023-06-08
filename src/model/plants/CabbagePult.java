@@ -1,38 +1,48 @@
 package model.plants;
 
+import model.Entity;
 import model.Plant;
-import model.RandSpawnManager;
 import model.projectiles.PultProjectile;
+import model.spawnManagers.PultManager;
 import ui.GamePanel;
 
 import java.awt.*;
+import java.util.List;
 
 public class CabbagePult extends Plant {
     private static int COST = 100;
     private static String TAG = "cp";
     private static int HEALTH = 30;
 
-    private RandSpawnManager spawnManager;
+    private PultManager spawnManager;
+
+    private static int SPAWN_TIME = 30;
+    private int counter = SPAWN_TIME;
 
     public CabbagePult(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, COST);
-        spawnManager = new RandSpawnManager(100, g, RandSpawnManager.Type.BULLET);
+        spawnManager = g.getLobberManager();
     }
 
     @Override
     public void update() {
-        PultProjectile p = new PultProjectile(x, y+20, g);
+        PultProjectile p = new PultProjectile(x, y+20, g, y / g.getTileSize());
+        List<Entity> test = g.getZombieSpawner().getEntitiesByRow(row);
 
-        if (p.getTarget() != null) {
-            spawnManager.spawn(p);
+        counter--;
+
+        if (!test.isEmpty()) {
+            if (counter == 0) {
+                spawnManager.spawn(p);
+                counter = SPAWN_TIME;
+            }
+        } else {
+            counter = SPAWN_TIME;
         }
-
-        spawnManager.updateEach();
     }
 
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        spawnManager.drawEach(g);
     }
 }

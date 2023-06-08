@@ -26,11 +26,12 @@ public class PultProjectile extends Projectile {
     private double x;
     private double y;
 
-    public PultProjectile(int x, int y, GamePanel g) {
+    public PultProjectile(int x, int y, GamePanel g, int row) {
         super(x, y, WIDTH, HEIGHT, 20, DAMAGE, 100, g);
         this.x = (double) x;
         this.y = (double) y;
         initialPos = y;
+        super.row = row;
 
         List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
 

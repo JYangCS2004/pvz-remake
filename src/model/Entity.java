@@ -12,6 +12,8 @@ public abstract class Entity {
 
     protected int width;
     protected int height;
+
+    protected int row;
     
     public Entity(int x, int y) {
         this.x = x;
@@ -38,5 +40,13 @@ public abstract class Entity {
 
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public boolean collidesWith(Entity e) {
+        return this.getBounds().intersects(e.getBounds());
     }
 }

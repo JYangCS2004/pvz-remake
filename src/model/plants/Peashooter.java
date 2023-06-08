@@ -1,22 +1,26 @@
 package model.plants;
 
+import model.Entity;
 import model.Plant;
-import model.RandSpawnManager;
 import model.projectiles.PeashooterProjectile;
+import model.spawnManagers.ProjectileManager;
 import ui.GamePanel;
 
 import java.awt.*;
+import java.util.List;
 
 public class Peashooter extends Plant {
 
     private final static int SPAWN_TIME = 70;
-    private final RandSpawnManager projectileManager;
+    private int counter = SPAWN_TIME;
+    private final ProjectileManager projectileManager;
     private static final int HEALTH = 20;
     private static final int COST = 100;
     private static final String TAG = "ps";
     public Peashooter(int x, int y, GamePanel g){
         super(x,y, HEALTH, TAG, g, COST);
-        this.projectileManager = new RandSpawnManager(SPAWN_TIME, g, RandSpawnManager.Type.BULLET);
+        this.projectileManager = g.getShooterManager();
+        row = y / g.getTileSize();
     }
 
     @Override
@@ -24,12 +28,20 @@ public class Peashooter extends Plant {
         //g.setColor(Color.GREEN);
         //g.fillRoundRect(x, y, 48, 48, 35, 35);
         super.draw(g);
-        projectileManager.drawEach(g);
     }
 
     @Override
     public void update() {
-        projectileManager.spawn(new PeashooterProjectile(x+20, y +15, g));
-        projectileManager.updateEach();
+        List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(row);
+
+        if (!testable.isEmpty()) {
+            counter--;
+            if (counter == 0) {
+                counter = SPAWN_TIME;
+                projectileManager.spawn(new PeashooterProjectile(x+20, y +15, g, y / g.getTileSize()));
+            }
+        } else {
+            counter = SPAWN_TIME;
+        }
     }
 }

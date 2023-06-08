@@ -18,6 +18,8 @@ public abstract class Plant extends Entity {
         width = g.getTileSize();
         height = g.getTileSize();
         this.cost = cost;
+
+        super.row = y / g.getTileSize();
     }
 
     public void draw(Graphics g){
