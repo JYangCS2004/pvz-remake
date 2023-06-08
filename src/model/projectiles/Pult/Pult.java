@@ -9,6 +9,4 @@ public abstract class Pult extends Projectile {
         super(x,y,width,height,speed,damage,lifetime, owner, g);
         super.row = row;
     }
-
-
 }

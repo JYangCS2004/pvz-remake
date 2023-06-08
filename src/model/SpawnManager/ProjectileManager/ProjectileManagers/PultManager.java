@@ -16,19 +16,17 @@ public class PultManager extends ProjectileManager {
     public boolean checkCollision(Projectile p) {
 
         List<Entity> possibleCollisions = gamePanel.getZombieSpawner().getEntitiesByRow(p.getRow());
-
         if (possibleCollisions.isEmpty()) {
             return false;
         }
 
         for (Entity possibleCollision : possibleCollisions) {
             Zombie e = (Zombie) possibleCollision;
-
             if (e.getBounds().intersects(p.getBounds())) {
                 e.decreaseHealth(p.getDamage());
 
                 if (e.getHealth() <= 0) {
-                    possibleCollisions.remove(e);
+                    gamePanel.getZombieSpawner().removeZombie(e);
                 }
 
                 return true;

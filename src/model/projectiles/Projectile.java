@@ -33,7 +33,6 @@ public abstract class Projectile extends Entity {
         super.update();
         lifetime--;
     }
-
     public Entity getOwner(){
         return owner;
     }

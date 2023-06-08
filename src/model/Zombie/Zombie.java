@@ -23,6 +23,7 @@ public abstract class Zombie extends Entity {
         super(x, y);
         super.g = g;
         this.curSpeed = speed;
+        this.SPEED = speed;
         this.damage = damage;
         this.health = health;
         this.eatTime = eatTime;
@@ -70,7 +71,7 @@ public abstract class Zombie extends Entity {
         }
 
         if (!isCollided) {
-            curSpeed = getSpeed();
+            curSpeed = SPEED;
         }
 
         x += curSpeed;
@@ -83,5 +84,12 @@ public abstract class Zombie extends Entity {
     public int getHealth() {
         return health;
     }
-    public abstract int getSpeed();
+    public int getSpeed(){
+        return curSpeed;
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
 }

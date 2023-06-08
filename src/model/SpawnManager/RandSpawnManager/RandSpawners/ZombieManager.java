@@ -20,12 +20,7 @@ public class ZombieManager extends RandSpawnManager {
 
         for (Entity e : entities) {
             Zombie z = (Zombie)e;
-            if(z.getHealth() <= 0){
-                entities.remove(e);
-            }
-            else{
-                e.update();
-            }
+            e.update();
         }
     }
     public void removeZombie(Zombie e){

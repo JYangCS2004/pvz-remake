@@ -9,16 +9,16 @@ import java.awt.*;
 import java.util.List;
 
 
-public class PultProjectile extends Pult {
+public class CabbageProjectile extends Pult {
 
     final static int WIDTH = 16;
     final static int HEIGHT = 16;
     final static int DAMAGE = 2;
 
     //private double acceleration = 1;
-    static final double ACCELERATION = 0.24;
+    static final double ACCELERATION = 0.12;
     //private double velocityY;
-    private double velocityY = 12;
+    private double velocityY = 6;
     final double velocityX;
     private int initialPos;
     private Zombie target = null;
@@ -26,7 +26,7 @@ public class PultProjectile extends Pult {
     private double x;
     private double y;
 
-    public PultProjectile(int x, int y, Entity owner, GamePanel g, int row) {
+    public CabbageProjectile(int x, int y, Entity owner, GamePanel g, int row) {
         super(x, y, WIDTH, HEIGHT, 20, DAMAGE, 100, row, owner, g);
         this.x = (double) x;
         this.y = (double) y;
@@ -44,7 +44,7 @@ public class PultProjectile extends Pult {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.blue);
+        g.setColor(Color.green);
         g.fillOval((int)this.x, (int)this.y, width, height);
         g.setColor(Color.white);
     }
@@ -105,4 +105,8 @@ public class PultProjectile extends Pult {
     f(x) = integral(0, b) sqrt(1 -(4hx)/b^2 - (4h(x-b))/b^2)
     where h = height and b = distance to enemy
      */
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle((int)this.x, (int)this.y, width, height);
+    }
 }

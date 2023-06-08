@@ -40,6 +40,7 @@ public class BulletManager extends ProjectileManager {
 
             if (e.getBounds().intersects(p.getBounds())) {
                 e.decreaseHealth(p.getDamage());
+                // currently assumes all projectiles are from plant
                 ((Plant) p.getOwner()).setTimer();
                 if (e.getHealth() <= 0) {
                     gamePanel.getZombieSpawner().removeZombie(e);

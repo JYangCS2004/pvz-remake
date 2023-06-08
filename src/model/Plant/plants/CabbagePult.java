@@ -2,7 +2,7 @@ package model.Plant.plants;
 
 import model.Entity;
 import model.Plant.Plant;
-import model.projectiles.Pult.PultProjectiles.PultProjectile;
+import model.projectiles.Pult.PultProjectiles.CabbageProjectile;
 import model.SpawnManager.ProjectileManager.ProjectileManagers.PultManager;
 import ui.GamePanel;
 
@@ -16,8 +16,8 @@ public class CabbagePult extends Plant {
 
     private PultManager spawnManager;
 
-    private static int SPAWN_TIME = 30;
-    private int counter = SPAWN_TIME;
+    private static int SPAWN_TIME = 100;
+    private int counter = 0;
 
     public CabbagePult(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, COST);
@@ -26,18 +26,16 @@ public class CabbagePult extends Plant {
 
     @Override
     public void update() {
-        PultProjectile p = new PultProjectile(x, y+20, this, g, y / g.getTileSize());
+        CabbageProjectile p = new CabbageProjectile(x, y+20, this, g, y / g.getTileSize());
         List<Entity> test = g.getZombieSpawner().getEntitiesByRow(row);
 
         counter--;
 
         if (!test.isEmpty()) {
-            if (counter == 0) {
+            if (counter <= 0) {
                 spawnManager.spawn(p);
                 counter = SPAWN_TIME;
             }
-        } else {
-            counter = SPAWN_TIME;
         }
     }
 
