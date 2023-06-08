@@ -69,6 +69,17 @@ public class ImageLibrary {
             throw new RuntimeException(e);
         }
 
+        BufferedImage fumeShroom;
+        Image resizedShroom;
+
+        try {
+            fumeShroom = ImageIO.read(new File("src/Graphics/fumeShroom2.png"));
+            resizedShroom = fumeShroom.getScaledInstance(48, 48, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         //peashooter
         imageList.put("ps", peaShooter);
         xFix.put("ps", -20);
@@ -110,6 +121,13 @@ public class ImageLibrary {
         yFix.put("ja", 0);
         textXFix.put("ja", 15);
         textYFix.put("ja", 35);
+
+        //fumeShroom
+        imageList.put("fs", resizedShroom);
+        xFix.put("fs", 2);
+        yFix.put("fs", 0);
+        textXFix.put("fs", 15);
+        textYFix.put("fs", 35);
 
     }
 

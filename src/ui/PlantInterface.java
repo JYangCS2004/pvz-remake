@@ -25,6 +25,7 @@ public class PlantInterface {
         plants[3] = "sf";
         plants[4] = "cp";
         plants[5] = "ja";
+        plants[6] = "fs";
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -37,7 +38,7 @@ public class PlantInterface {
         g.drawRoundRect(this.selected* gamePanel.getTileSize(),
                 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 10, 10);
         //so far using this bc only 2 plants
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             g.drawImage(gamePanel.getImageLibrary().getImage(plants[i]),
                     i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i]),
                     gamePanel.getImageLibrary().getYFix(plants[i]), null);
@@ -58,6 +59,8 @@ public class PlantInterface {
                 return new Walnut(x, y, g);
             case "ch":
                 return new Chomper(x, y, g);
+            case "fs":
+                return new FumeShroom(x, y, g);
             default:
                 return new Peashooter(x, y, g);
         }
