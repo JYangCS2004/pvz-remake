@@ -1,7 +1,12 @@
 package ui;
 
 import model.*;
-import model.spawnManagers.*;
+import model.SpawnManager.SpawnManagers.PlantManager;
+import model.SpawnManager.ProjectileManager.ProjectileManagers.BulletManager;
+import model.SpawnManager.ProjectileManager.ProjectileManagers.PultManager;
+import model.SpawnManager.RandSpawnManager.RandSpawnManager;
+import model.SpawnManager.RandSpawnManager.RandSpawners.SunSpawner;
+import model.SpawnManager.RandSpawnManager.RandSpawners.ZombieManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread gameThread;
 
     private final PlantManager plantManager = new PlantManager(this);
-    private final RandSpawnManager zombieSpawner = new ZombieManager(150, this);
+    private final ZombieManager zombieSpawner = new ZombieManager(150, this);
     private final SunSpawner sunSpawner = new SunSpawner(100, this);
     private final BulletManager shooterManager = new BulletManager(this);
     private final PultManager lobberManager = new PultManager(this);
@@ -118,7 +123,7 @@ public class GamePanel extends JPanel implements Runnable {
         return tileSize;
     }
 
-    public RandSpawnManager getZombieSpawner() {
+    public ZombieManager getZombieSpawner() {
         return zombieSpawner;
     }
 

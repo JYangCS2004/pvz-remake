@@ -1,8 +1,8 @@
 package ui;
 
-import model.plants.*;
-import model.Plant;
-import model.spawnManagers.SunSpawner;
+import model.Plant.plants.*;
+import model.Plant.Plant;
+import model.SpawnManager.RandSpawnManager.RandSpawners.SunSpawner;
 
 import java.awt.*;
 
