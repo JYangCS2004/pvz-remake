@@ -1,0 +1,20 @@
+package model.spawnManagers;
+
+import model.RandSpawnManager;
+import model.zombies.DefaultZombie;
+import ui.GamePanel;
+
+import java.util.Random;
+
+public class ZombieManager extends RandSpawnManager {
+    public ZombieManager(int spawnTime, GamePanel g) {
+        super(spawnTime, g);
+    }
+
+    @Override
+    public void updateEach() {
+        Random rand = new Random();
+        spawn(new DefaultZombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize()), gamePanel));
+        super.updateEach();
+    }
+}
