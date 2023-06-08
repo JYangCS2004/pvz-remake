@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import model.SpawnManager.ProjectileManager.ProjectileManagers.BeamManager;
 import model.SpawnManager.SpawnManagers.PlantManager;
 import model.SpawnManager.ProjectileManager.ProjectileManagers.BulletManager;
 import model.SpawnManager.ProjectileManager.ProjectileManagers.PultManager;
@@ -29,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final SunSpawner sunSpawner = new SunSpawner(100, this);
     private final BulletManager shooterManager = new BulletManager(this);
     private final PultManager lobberManager = new PultManager(this);
+    private final BeamManager AOEManager = new BeamManager(this);
     private final PlantInterface plantInterface = new PlantInterface(this);
     final ImageLibrary imageLibrary = new ImageLibrary();
 
@@ -77,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         shooterManager.updateEach();
         lobberManager.updateEach();
+        AOEManager.updateEach();
 
         sunSpawner.updateEach();
     }
@@ -104,6 +107,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         shooterManager.drawEach(g2);
         lobberManager.drawEach(g2);
+        AOEManager.drawEach(g2);
 
         getMouseTracker(g2);
         sunSpawner.drawEach(g2);
@@ -128,14 +132,18 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public RandSpawnManager getSunSpawner(){return sunSpawner;}
+
     public PlantManager getPlantManager() {return plantManager; }
 
     public PultManager getLobberManager() {
         return lobberManager;
     }
 
+    public BeamManager getAOEManager(){return AOEManager;}
+
     public BulletManager getShooterManager() {
         return shooterManager;
     }
+
     public ImageLibrary getImageLibrary(){return imageLibrary;}
 }

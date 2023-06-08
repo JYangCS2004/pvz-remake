@@ -60,6 +60,15 @@ public class ImageLibrary {
             throw new RuntimeException(e);
         }
 
+        BufferedImage jalapeno;
+        Image resizedJalapeno;
+        try {
+            jalapeno = ImageIO.read(new File("src/Graphics/Jalapeno.png"));
+            resizedJalapeno = jalapeno.getScaledInstance(28, 49, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         //peashooter
         imageList.put("ps", peaShooter);
         xFix.put("ps", -20);
@@ -94,6 +103,13 @@ public class ImageLibrary {
         yFix.put("cp", 0);
         textXFix.put("cp", 15);
         textYFix.put("cp", 35);
+
+        //Jalapeno
+        imageList.put("ja", resizedJalapeno);
+        xFix.put("ja", 10);
+        yFix.put("ja", 0);
+        textXFix.put("ja", 15);
+        textYFix.put("ja", 35);
 
     }
 

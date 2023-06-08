@@ -6,17 +6,23 @@ import model.Zombie.Zombie;
 import model.Zombie.zombies.DefaultZombie;
 import ui.GamePanel;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ZombieManager extends RandSpawnManager {
+
+    private ArrayList<Zombie> removeQueue = new ArrayList<>();
     public ZombieManager(int spawnTime, GamePanel g) {
         super(spawnTime, g);
     }
-
     @Override
     public void updateEach() {
         Random rand = new Random();
         spawn(new DefaultZombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize()), gamePanel));
+
+        for(Zombie e: removeQueue){
+            entities.remove(e);
+        }
 
         for (Entity e : entities) {
             Zombie z = (Zombie)e;
@@ -24,6 +30,6 @@ public class ZombieManager extends RandSpawnManager {
         }
     }
     public void removeZombie(Zombie e){
-        entities.remove(e);
+        removeQueue.add(e);
     }
 }

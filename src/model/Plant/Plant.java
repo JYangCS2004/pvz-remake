@@ -33,6 +33,13 @@ public abstract class Plant extends Entity {
                 y + this.g.getImageLibrary().getTextYFix(tag));
     }
 
+    public void drawWithoutText(Graphics g){
+        g.drawImage(this.g.getImageLibrary().getImage(tag),
+                x + this.g.getImageLibrary().getXFix(tag),
+                y + this.g.getImageLibrary().getYFix(tag), null);
+        g.setColor(Color.white);
+    }
+
     @Override
     public abstract void update();
 
