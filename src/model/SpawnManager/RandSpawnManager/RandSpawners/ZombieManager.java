@@ -23,6 +23,7 @@ public class ZombieManager extends RandSpawnManager {
         for(Zombie e: removeQueue){
             entities.remove(e);
         }
+        removeQueue = new ArrayList<>();
 
         for (Entity e : entities) {
             e.update();

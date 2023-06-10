@@ -37,6 +37,7 @@ public class EffectManager {
         for(StatusEffect e: removeQueue){
             effects.remove(e);
         }
+        removeQueue = new ArrayList<>();
         for(StatusEffect e: effects){
             e.update();
         }

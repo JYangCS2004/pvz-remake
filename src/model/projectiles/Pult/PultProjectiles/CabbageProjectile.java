@@ -44,8 +44,10 @@ public class CabbageProjectile extends Pult {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.green);
-        g.fillOval((int)this.x, (int)this.y, width, height);
+        g.drawImage(this.g.getImageLibrary().getImage("src/Graphics/CabbageProjectile.png", 16, 16),
+                (int)x, (int)y, null);
+        //g.setColor(Color.green);
+        //g.fillOval((int)this.x, (int)this.y, width, height);
         g.setColor(Color.white);
     }
 

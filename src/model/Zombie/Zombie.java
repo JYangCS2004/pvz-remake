@@ -51,6 +51,10 @@ public abstract class Zombie extends Entity {
 
     public void update() {
         effectManager.updateAll();
+        if(x <= -g.getTileSize()){
+            g.getZombieSpawner().removeZombie(this);
+            return;
+        }
         List<Entity> testable = g.getPlantManager().getEntitiesByRow(row);
 
         boolean isCollided = false;
