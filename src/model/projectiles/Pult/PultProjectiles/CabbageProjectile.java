@@ -78,7 +78,7 @@ public class CabbageProjectile extends Pult {
         int miniDist = distance;
         for (Entity e : testable) {
             Zombie z = (Zombie) e;
-            distance = e.getX() - super.x + 100*e.getSpeed() + g.getTileSize()/2;
+            distance = e.getX() - super.x + (int)((double)100*e.getSpeed()) + g.getTileSize()/2;
             if(distance < 20){
                 distance = 80;
             }

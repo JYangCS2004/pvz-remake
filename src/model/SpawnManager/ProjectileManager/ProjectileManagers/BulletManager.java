@@ -40,6 +40,10 @@ public class BulletManager extends ProjectileManager {
 
             if (e.getBounds().intersects(p.getBounds())) {
                 e.decreaseHealth(p.getDamage());
+                //only added status effect on bullet manager so far
+                for(String s: p.getOnHitEffects()){
+                    e.getEffectManager().add(e.getEffectManager().select(e, s, gamePanel));
+                }
                 // currently assumes all projectiles are from plant
                 ((Plant) p.getOwner()).setTimer();
                 if (e.getHealth() <= 0) {

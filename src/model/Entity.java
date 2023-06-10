@@ -34,7 +34,7 @@ public abstract class Entity {
         return y;
     }
 
-    public int getSpeed(){
+    public double getSpeed(){
         return speed;
     }
 

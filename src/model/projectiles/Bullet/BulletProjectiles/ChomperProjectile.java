@@ -13,7 +13,7 @@ public class ChomperProjectile extends Bullet {
     static final int height = 16;
     static final int speed = 85/3;
     static final int damage = 50;
-    static final int lifetime = 3;
+    static final int lifetime = 4;
     static final Color color = new Color(0, 100, 0);
 
     public ChomperProjectile(int x, int y, Entity owner, GamePanel g){

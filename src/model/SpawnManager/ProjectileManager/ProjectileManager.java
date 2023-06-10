@@ -16,7 +16,7 @@ public abstract class ProjectileManager extends SpawnManager {
         Iterator<Entity> it = entities.iterator();
         while (it.hasNext()) {
             Projectile p = (Projectile) it.next();
-            if (checkCollision(p) || p.expired()) {
+            if (p.expired() || checkCollision(p)) {
                 it.remove();
             }
         }
