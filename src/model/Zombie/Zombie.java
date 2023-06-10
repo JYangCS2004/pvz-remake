@@ -10,15 +10,15 @@ import java.util.List;
 
 public abstract class Zombie extends Entity {
     protected double curSpeed;
-    private double defaultSpeed;
+    private final double defaultSpeed;
     private int health;
 
     private final int eatTime;
 
-    private int damage;
+    private final int damage;
     private int counter;
     private double buffer = 0;
-    private EffectManager effectManager;
+    private final EffectManager effectManager;
     private double multiplier = 1;
 
 
@@ -105,9 +105,5 @@ public abstract class Zombie extends Entity {
     }
     public EffectManager getEffectManager(){
         return effectManager;
-    }
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
     }
 }

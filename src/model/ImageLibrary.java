@@ -16,6 +16,9 @@ public class ImageLibrary {
     protected Map<String, Integer> textXFix = new HashMap<>();
     protected Map<String, Integer> textYFix = new HashMap<>();
 
+    //some static images
+    public static Image cabbage = getImage("src/Graphics/CabbageProjectile.png", 16, 16);
+
     public ImageLibrary(){
         //peashooter
         imageList.put("ps", getImage("src/Graphics/Peashooter.png", 87, 40));
@@ -74,7 +77,7 @@ public class ImageLibrary {
         textYFix.put("ips", 24);
     }
 
-    public Image getImage(String path, int xScale, int yScale){
+    public static Image getImage(String path, int xScale, int yScale){
         BufferedImage tempImage;
         Image finalImage;
 

@@ -13,7 +13,7 @@ public class FumeShroom extends Plant {
     private final static int COST = 125;
     private final static int HEALTH = 20;
 
-    private BeamManager beamManager;
+    private final BeamManager beamManager;
 
     private int counter = 0;
     private final static int SPAWN_TIME = 75;

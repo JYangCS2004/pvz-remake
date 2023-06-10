@@ -2,14 +2,13 @@ package model.StatusEffect.Effects;
 
 import model.StatusEffect.StatusEffect;
 import model.Zombie.Zombie;
-import ui.GamePanel;
 
 public class ChillEffect extends StatusEffect {
     static final int LIFE_TIME = 100;
     static final String TAG = "CHILL";
 
-    public ChillEffect(Zombie host, GamePanel g){
-        super(host, LIFE_TIME, TAG, g);
+    public ChillEffect(Zombie host){
+        super(host, LIFE_TIME, TAG);
     }
 
     public void update(){
@@ -20,7 +19,4 @@ public class ChillEffect extends StatusEffect {
         lifetime--;
     }
 
-    public int getLifeTime(){
-        return LIFE_TIME;
-    }
 }

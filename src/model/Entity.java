@@ -45,8 +45,4 @@ public abstract class Entity {
     public int getRow() {
         return row;
     }
-
-    public boolean collidesWith(Entity e) {
-        return this.getBounds().intersects(e.getBounds());
-    }
 }

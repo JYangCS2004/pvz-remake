@@ -61,10 +61,10 @@ public class EffectManager {
         return false;
     }
 
-    public StatusEffect select(Zombie z, String tag, GamePanel g){
+    public StatusEffect select(Zombie z, String tag){
         switch (tag){
             default:
-                return new ChillEffect(z, g);
+                return new ChillEffect(z);
         }
     }
 

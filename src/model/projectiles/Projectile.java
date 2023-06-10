@@ -3,7 +3,6 @@ package model.projectiles;
 import model.Entity;
 import ui.GamePanel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Projectile extends Entity {
@@ -13,7 +12,7 @@ public abstract class Projectile extends Entity {
 
     protected Entity owner;
 
-    protected List<String> onHitEffects = new ArrayList<>();
+    protected List<String> onHitEffects;
 
     public Projectile(int x, int y, int width, int height, int speed,
                       int damage, int lifetime, Entity owner, List<String> onHitEffects,
@@ -45,8 +44,6 @@ public abstract class Projectile extends Entity {
     public Entity getOwner(){
         return owner;
     }
-    public int getLifetime(){
-        return lifetime;}
 
     public List<String> getOnHitEffects(){
         return onHitEffects;

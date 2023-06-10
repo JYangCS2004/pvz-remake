@@ -8,9 +8,9 @@ import java.awt.*;
 
 public class PlantInterface {
 
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
-    private String[] plants = new String[9];
+    private final String[] plants = new String[9];
 
     final Color interfaceColor = new Color(	0,128,0);
 
