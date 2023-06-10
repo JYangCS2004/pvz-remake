@@ -10,7 +10,8 @@ public class PlantInterface {
 
     private GamePanel gamePanel;
 
-    private String[] plants = new String[9];
+    // private String[] plants = new String[9];
+    private Card[] plants = new Card[9];
 
     final Color interfaceColor = new Color(	0,128,0);
 
@@ -19,13 +20,13 @@ public class PlantInterface {
     public PlantInterface(GamePanel g){
         this.gamePanel = g;
         //temp code until plant selection system is implemented
-        plants[0] = "ps";
-        plants[1] = "wn";
-        plants[2] = "ch";
-        plants[3] = "sf";
-        plants[4] = "cp";
-        plants[5] = "ja";
-        plants[6] = "fs";
+        plants[0] = new Card("ps", 5, g);
+        plants[1] = new Card("wn", 2, g);
+        plants[2] = new Card("ch", 30, g);
+        plants[3] = new Card("sf", 40, g);
+        plants[4] = new Card("cp", 40, g);
+        plants[5] = new Card("ja", 30, g);
+        plants[6] = new Card("fs", 48, g);
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -39,31 +40,48 @@ public class PlantInterface {
                 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 10, 10);
         //so far using this bc only 2 plants
         for (int i = 0; i < 7; i++) {
-            g.drawImage(gamePanel.getImageLibrary().getImage(plants[i]),
-                    i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i]),
-                    gamePanel.getImageLibrary().getYFix(plants[i]), null);
+            g.drawImage(gamePanel.getImageLibrary().getImage(plants[i].getTag()),
+                    i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i].getTag()),
+                    gamePanel.getImageLibrary().getYFix(plants[i].getTag()), null);
+            plants[i].draw(g, i);
         }
 
     }
 
     public Plant plantPicker(int x, int y, GamePanel g){
-        String plantType = this.plants[this.selected];
+        Card card = this.plants[this.selected];
+
+        if (!card.isCanPlant()) {
+            return null;
+        }
+
+        String plantType = card.getTag();
         switch (plantType) {
             case "ja":
-                return new Jalapeno(x, y, g);
+                return plantChecker(new Jalapeno(x, y, g), card);
             case "cp":
-                return new CabbagePult(x, y, g);
+                return plantChecker(new CabbagePult(x, y, g), card);
             case "sf":
-                return new Sunflower(x, y, g);
+                return plantChecker(new Sunflower(x, y, g), card);
             case "wn":
-                return new Walnut(x, y, g);
+                return plantChecker(new Walnut(x, y, g), card);
             case "ch":
-                return new Chomper(x, y, g);
+                return plantChecker(new Chomper(x, y, g), card);
             case "fs":
-                return new FumeShroom(x, y, g);
+                return plantChecker(new FumeShroom(x, y, g), card);
             default:
-                return new Peashooter(x, y, g);
+                return plantChecker(new Peashooter(x, y, g), card);
         }
+    }
+
+    private Plant plantChecker(Plant p, Card c) {
+        if (((SunSpawner) gamePanel.getSunSpawner()).getSunCount() >= p.getCost() && c.canPlant) {
+            c.canPlant = false;
+            c.resetHeight();
+            return p;
+        }
+
+        return null;
     }
 
 

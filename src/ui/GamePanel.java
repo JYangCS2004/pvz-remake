@@ -14,14 +14,14 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     private final int FPS = 60;
-    final int originalTileSize = 16;
-    final int scale = 3;
+    private final int originalTileSize = 16;
+    private final int scale = 3;
 
-    final int tileSize = originalTileSize * scale;
-    final int screenColSize = 16;
-    final int screenRowSize = 12;
-    final int screenHeight = screenRowSize * tileSize;
-    final int screenWidth = screenColSize * tileSize;
+    private final int tileSize = originalTileSize * scale;
+    private final int screenColSize = 16;
+    private final int screenRowSize = 12;
+    private final int screenHeight = screenRowSize * tileSize;
+    private final int screenWidth = screenColSize * tileSize;
 
     private Thread gameThread;
 

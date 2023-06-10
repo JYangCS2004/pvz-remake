@@ -59,7 +59,8 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
             //spawn plant if not at interface
             else {
                 Plant p = pi.plantPicker(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel());
-                if (!pm.containsSquare(nearEdgeX, nearEdgeY) && ss.getSunCount() >= p.getCost()) {
+
+                if (!pm.containsSquare(nearEdgeX, nearEdgeY) && p != null) {
                     pm.spawn(p);
                     ss.deductSum(p.getCost());
                     pm.storeSquare(nearEdgeX, nearEdgeY);
@@ -67,6 +68,7 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
             }
         }
     }
+
     @Override
     public void mouseMoved(MouseEvent e){
         Point mouse = e.getPoint();
