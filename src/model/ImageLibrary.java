@@ -16,119 +16,78 @@ public class ImageLibrary {
     protected Map<String, Integer> textXFix = new HashMap<>();
     protected Map<String, Integer> textYFix = new HashMap<>();
 
+    //some static images
+    public static Image cabbage = getImage("src/Graphics/CabbageProjectile.png", 16, 16);
+
     public ImageLibrary(){
-        Image walnut = null;
-        try{
-            walnut = ImageIO.read(new File("src/Graphics/Walnut.png"));
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-
-        Image peaShooter = null;
-        try{
-            peaShooter = ImageIO.read(new File("src/Graphics/Peashooter.png"));
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-
-        BufferedImage chomper;
-        Image resized;
-        try {
-            chomper = ImageIO.read(new File("src/Graphics/transparent-chomper2.png"));
-            resized = chomper.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        BufferedImage sunflower;
-        Image resizedSunflower;
-        try {
-            sunflower = ImageIO.read(new File("src/Graphics/Sunflower.png"));
-            resizedSunflower = sunflower.getScaledInstance(65, 53, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        BufferedImage cabbagepult;
-        Image resizedCabbagePult;
-        try {
-            cabbagepult = ImageIO.read(new File("src/Graphics/cabbage.png"));
-            resizedCabbagePult = cabbagepult.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        BufferedImage jalapeno;
-        Image resizedJalapeno;
-        try {
-            jalapeno = ImageIO.read(new File("src/Graphics/Jalapeno.png"));
-            resizedJalapeno = jalapeno.getScaledInstance(28, 49, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        BufferedImage fumeShroom;
-        Image resizedShroom;
-
-        try {
-            fumeShroom = ImageIO.read(new File("src/Graphics/fumeShroom2.png"));
-            resizedShroom = fumeShroom.getScaledInstance(48, 48, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
         //peashooter
-        imageList.put("ps", peaShooter);
+        imageList.put("ps", getImage("src/Graphics/Peashooter.png", 87, 40));
         xFix.put("ps", -20);
         yFix.put("ps", 0);
         textXFix.put("ps", 15);
         textYFix.put("ps", 24);
 
         //walnut
-        imageList.put("wn", walnut);
+        imageList.put("wn", getImage("src/Graphics/Walnut.png", 33, 40));
         xFix.put("wn", 7);
         yFix.put("wn", 4);
         textXFix.put("wn", 20);
         textYFix.put("wn", 35);
 
         // chomper
-        imageList.put("ch", resized);
+        imageList.put("ch", getImage("src/Graphics/transparent-chomper2.png", 80,80));
         xFix.put("ch", -15);
         yFix.put("ch", -15);
         textXFix.put("ch", 15);
         textYFix.put("ch", 35);
 
         //sunflower
-        imageList.put("sf", resizedSunflower);
+        imageList.put("sf", getImage("src/Graphics/Sunflower.png", 65, 53));
         xFix.put("sf", -8);
         yFix.put("sf", -5);
         textXFix.put("sf", 15);
         textYFix.put("sf", 35);
 
         //cabbagepult
-        imageList.put("cp", resizedCabbagePult);
+        imageList.put("cp", getImage("src/Graphics/cabbage.png", 50, 50));
         xFix.put("cp", -5);
         yFix.put("cp", 0);
         textXFix.put("cp", 15);
         textYFix.put("cp", 35);
 
         //Jalapeno
-        imageList.put("ja", resizedJalapeno);
+        imageList.put("ja", getImage("src/Graphics/Jalapeno.png", 28, 49));
         xFix.put("ja", 10);
         yFix.put("ja", 0);
         textXFix.put("ja", 15);
         textYFix.put("ja", 35);
 
         //fumeShroom
-        imageList.put("fs", resizedShroom);
+        imageList.put("fs", getImage("src/Graphics/fumeShroom2.png", 48, 48));
         xFix.put("fs", 2);
         yFix.put("fs", 0);
         textXFix.put("fs", 15);
         textYFix.put("fs", 35);
 
+        //ice pea shooter
+        imageList.put("ips", getImage("src/Graphics/IcePeaShooter.png", 48, 46));
+        xFix.put("ips", 0);
+        yFix.put("ips", 0);
+        textXFix.put("ips", 15);
+        textYFix.put("ips", 24);
+    }
+
+    public static Image getImage(String path, int xScale, int yScale){
+        BufferedImage tempImage;
+        Image finalImage;
+
+        try {
+            tempImage = ImageIO.read(new File(path));
+            finalImage = tempImage.getScaledInstance(xScale, yScale, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return finalImage;
     }
 
     public Image getImage(String key){

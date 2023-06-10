@@ -1,5 +1,6 @@
 package model.Zombie;
 
+import model.EffectManager;
 import model.Entity;
 import model.Plant.Plant;
 import ui.GamePanel;
@@ -8,16 +9,20 @@ import java.awt.*;
 import java.util.List;
 
 public abstract class Zombie extends Entity {
-    protected int curSpeed;
-    private int defaultSpeed;
+    protected double curSpeed;
+    private final double defaultSpeed;
     private int health;
 
     private final int eatTime;
 
-    private int damage;
+    private final int damage;
     private int counter;
+    private double buffer = 0;
+    private final EffectManager effectManager;
+    private double multiplier = 1;
 
-    public Zombie(int x, int y, int speed, int damage, int health, int eatTime,
+
+    public Zombie(int x, int y, double speed, int damage, int health, int eatTime,
                   int width, int height, GamePanel g) {
         super(x, y);
         super.g = g;
@@ -29,12 +34,15 @@ public abstract class Zombie extends Entity {
         this.counter = 5;
         super.width = width;
         super.height = height;
-
         super.row = y / g.getTileSize();
+        this.effectManager = new EffectManager(g);
     }
 
     @Override
     public void draw(Graphics g) {
+        if(effectManager.contains("CHILL")){
+            g.setColor(Color.blue);
+        }
         g.fillRoundRect(x, y, 48, 48, 25, 25);
         g.setColor(Color.black);
         g.drawString(Integer.toString(health), x + 15, y + 24);
@@ -42,6 +50,11 @@ public abstract class Zombie extends Entity {
     }
 
     public void update() {
+        effectManager.updateAll();
+        if(x <= -g.getTileSize()){
+            g.getZombieSpawner().removeZombie(this);
+            return;
+        }
         List<Entity> testable = g.getPlantManager().getEntitiesByRow(row);
 
         boolean isCollided = false;
@@ -66,11 +79,14 @@ public abstract class Zombie extends Entity {
         }
 
         if (!isCollided) {
-            curSpeed = defaultSpeed;
+            curSpeed = (defaultSpeed*multiplier);
             // System.out.println("resume");
         }
-
-        x += curSpeed;
+        buffer += curSpeed;
+        if(Math.abs(buffer) >= 1){
+            x += buffer;
+            buffer = 0;
+        }
     }
 
     public void decreaseHealth(int damage) {
@@ -80,12 +96,14 @@ public abstract class Zombie extends Entity {
     public int getHealth() {
         return health;
     }
-    public int getSpeed(){
+    @Override
+    public double getSpeed(){
         return curSpeed;
     }
-
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+    public void editSpeed(double percentage){
+        multiplier = percentage;
+    }
+    public EffectManager getEffectManager(){
+        return effectManager;
     }
 }

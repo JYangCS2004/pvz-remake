@@ -12,7 +12,7 @@ public class Jalapeno extends Plant {
     final static int COST = 125;
     final static String TAG = "ja";
     private final BeamManager projectileManager;
-    private int counter = 25;
+    private int counter = 10;
 
     public Jalapeno(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, COST);

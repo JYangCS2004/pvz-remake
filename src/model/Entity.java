@@ -34,7 +34,7 @@ public abstract class Entity {
         return y;
     }
 
-    public int getSpeed(){
+    public double getSpeed(){
         return speed;
     }
 
@@ -44,9 +44,5 @@ public abstract class Entity {
 
     public int getRow() {
         return row;
-    }
-
-    public boolean collidesWith(Entity e) {
-        return this.getBounds().intersects(e.getBounds());
     }
 }

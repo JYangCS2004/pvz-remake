@@ -7,24 +7,11 @@ import model.Zombie.Zombie;
 import model.projectiles.Projectile;
 import ui.GamePanel;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class BulletManager extends ProjectileManager {
     public BulletManager(GamePanel g) {
         super(g);
-    }
-
-    public boolean isCollided(){
-        Iterator<Entity> it = entities.iterator();
-        while (it.hasNext()) {
-            Projectile p = (Projectile) it.next();
-            if (checkCollision(p)) {
-                System.out.println("called");
-                return true;
-            }
-        }
-        return false;
     }
 
     public boolean checkCollision(Projectile p) {
@@ -40,6 +27,10 @@ public class BulletManager extends ProjectileManager {
 
             if (e.getBounds().intersects(p.getBounds())) {
                 e.decreaseHealth(p.getDamage());
+                //only added status effect on bullet manager so far
+                for(String s: p.getOnHitEffects()){
+                    e.getEffectManager().add(e.getEffectManager().select(e, s));
+                }
                 // currently assumes all projectiles are from plant
                 ((Plant) p.getOwner()).setTimer();
                 if (e.getHealth() <= 0) {

@@ -3,6 +3,8 @@ package model.projectiles;
 import model.Entity;
 import ui.GamePanel;
 
+import java.util.List;
+
 public abstract class Projectile extends Entity {
 
     protected int damage;
@@ -10,7 +12,11 @@ public abstract class Projectile extends Entity {
 
     protected Entity owner;
 
-    public Projectile(int x, int y, int width, int height, int speed, int damage, int lifetime, Entity owner, GamePanel g) {
+    protected List<String> onHitEffects;
+
+    public Projectile(int x, int y, int width, int height, int speed,
+                      int damage, int lifetime, Entity owner, List<String> onHitEffects,
+                      GamePanel g) {
         super(x, y);
         super.g = g;
         super.width = width;
@@ -19,7 +25,9 @@ public abstract class Projectile extends Entity {
         this.damage = damage;
         this.lifetime = lifetime;
         this.owner = owner;
+        this.onHitEffects = onHitEffects;
     }
+
 
     public boolean expired(){
         return lifetime <= 0;
@@ -35,5 +43,9 @@ public abstract class Projectile extends Entity {
     }
     public Entity getOwner(){
         return owner;
+    }
+
+    public List<String> getOnHitEffects(){
+        return onHitEffects;
     }
 }

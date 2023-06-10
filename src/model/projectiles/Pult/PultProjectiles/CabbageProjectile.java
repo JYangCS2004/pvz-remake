@@ -20,7 +20,6 @@ public class CabbageProjectile extends Pult {
     //private double velocityY;
     private double velocityY = 6;
     final double velocityX;
-    private int initialPos;
     private Zombie target = null;
 
     private double x;
@@ -28,9 +27,8 @@ public class CabbageProjectile extends Pult {
 
     public CabbageProjectile(int x, int y, Entity owner, GamePanel g, int row) {
         super(x, y, WIDTH, HEIGHT, 20, DAMAGE, 100, row, owner, g);
-        this.x = (double) x;
-        this.y = (double) y;
-        initialPos = y;
+        this.x =  x;
+        this.y =  y;
 
         List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
 
@@ -44,8 +42,10 @@ public class CabbageProjectile extends Pult {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.green);
-        g.fillOval((int)this.x, (int)this.y, width, height);
+        g.drawImage(this.g.getImageLibrary().cabbage,
+                (int)x, (int)y, null);
+        //g.setColor(Color.green);
+        //g.fillOval((int)this.x, (int)this.y, width, height);
         g.setColor(Color.white);
     }
 
@@ -78,20 +78,16 @@ public class CabbageProjectile extends Pult {
         int miniDist = distance;
         for (Entity e : testable) {
             Zombie z = (Zombie) e;
-            distance = e.getX() - super.x + 100*e.getSpeed() + g.getTileSize()/2;
+            distance = e.getX() - super.x + (int)((double)100*e.getSpeed()) + g.getTileSize()/2;
             if(distance < 20){
                 distance = 80;
             }
-            if (distance >= 0 && distance < miniDist) {
+            if (distance < miniDist) {
                 miniDist = distance ;
                 target = z;
             }
         }
         return miniDist;
-    }
-
-    public Zombie getTarget() {
-        return target;
     }
 
     /*

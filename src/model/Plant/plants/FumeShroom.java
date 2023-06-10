@@ -10,13 +10,13 @@ import java.util.List;
 
 public class FumeShroom extends Plant {
     private final static String TAG = "fs";
-    private final static int COST = 150;
-    private final static int HEALTH = 40;
+    private final static int COST = 125;
+    private final static int HEALTH = 20;
 
-    private BeamManager beamManager;
+    private final BeamManager beamManager;
 
     private int counter = 0;
-    private final static int SPAWN_TIME = 50;
+    private final static int SPAWN_TIME = 75;
 
 
     public FumeShroom(int x, int y, GamePanel g) {
@@ -42,7 +42,7 @@ public class FumeShroom extends Plant {
 
     private boolean checkInRange(List<Entity> test) {
         for (Entity e : test) {
-            if (e.getX() <= x + g.getTileSize() * 4) {
+            if (e.getX() <= x + g.getTileSize() * 4.5) {
                 return true;
             }
         }

@@ -6,7 +6,7 @@ import ui.GamePanel;
 
 import java.awt.*;
 
-public class PeashooterProjectile extends Bullet {
+public class Pea extends Bullet {
 
     static final int width = 16;
     static final int height = 16;
@@ -15,7 +15,7 @@ public class PeashooterProjectile extends Bullet {
     static final int lifetime = 320;
     static final Color  color = new Color(0, 100, 0);
 
-    public PeashooterProjectile(int x, int y, Entity owner, GamePanel g){
+    public Pea(int x, int y, Entity owner, GamePanel g){
         super(x, y, width, height, speed, damage, lifetime, owner, g);
     }
 

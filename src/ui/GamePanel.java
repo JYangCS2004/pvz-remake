@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread gameThread;
 
     private final PlantManager plantManager = new PlantManager(this);
-    private final ZombieManager zombieSpawner = new ZombieManager(150, this);
+    private final ZombieManager zombieSpawner = new ZombieManager(150,this);
     private final SunSpawner sunSpawner = new SunSpawner(100, this);
     private final BulletManager shooterManager = new BulletManager(this);
     private final PultManager lobberManager = new PultManager(this);
