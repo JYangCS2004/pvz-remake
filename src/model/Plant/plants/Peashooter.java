@@ -2,11 +2,10 @@ package model.Plant.plants;
 
 import model.Entity;
 import model.Plant.Plant;
-import model.projectiles.Bullet.BulletProjectiles.PeashooterProjectile;
 import model.SpawnManager.ProjectileManager.ProjectileManager;
+import model.projectiles.Bullet.BulletProjectiles.PeashooterProjectile;
 import ui.GamePanel;
 
-import java.awt.*;
 import java.util.List;
 
 public class Peashooter extends Plant {
@@ -24,17 +23,9 @@ public class Peashooter extends Plant {
     }
 
     @Override
-    public void draw(Graphics g) {
-        //g.setColor(Color.GREEN);
-        //g.fillRoundRect(x, y, 48, 48, 35, 35);
-        super.draw(g);
-    }
-
-    @Override
     public void update() {
-        List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(row);
 
-        if (!testable.isEmpty()) {
+        if (canShoot()) {
             counter--;
             if (counter == 0) {
                 counter = SPAWN_TIME;
@@ -43,5 +34,11 @@ public class Peashooter extends Plant {
         } else {
             counter = SPAWN_TIME;
         }
+    }
+
+    private boolean canShoot() {
+        List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(row);
+        testable.removeIf(e -> e.getX() < x);
+        return testable.size() != 0;
     }
 }

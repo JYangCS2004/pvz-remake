@@ -67,11 +67,6 @@ public class Chomper extends Plant {
     }
 
     @Override
-    public void decreaseHealth() {
-        super.health--;
-    }
-
-    @Override
     public void setTimer(){
         eat_counter = EATING_TIME;
     }

@@ -2,11 +2,10 @@ package model.Plant.plants;
 
 import model.Entity;
 import model.Plant.Plant;
-import model.projectiles.Pult.PultProjectiles.CabbageProjectile;
 import model.SpawnManager.ProjectileManager.ProjectileManagers.PultManager;
+import model.projectiles.Pult.PultProjectiles.CabbageProjectile;
 import ui.GamePanel;
 
-import java.awt.*;
 import java.util.List;
 
 public class CabbagePult extends Plant {
@@ -27,11 +26,9 @@ public class CabbagePult extends Plant {
     @Override
     public void update() {
         CabbageProjectile p = new CabbageProjectile(x, y+20, this, g, y / g.getTileSize());
-        List<Entity> test = g.getZombieSpawner().getEntitiesByRow(row);
 
         counter--;
-
-        if (!test.isEmpty()) {
+        if (canShoot()) {
             if (counter <= 0) {
                 spawnManager.spawn(p);
                 counter = SPAWN_TIME;
@@ -39,8 +36,11 @@ public class CabbagePult extends Plant {
         }
     }
 
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
+    private boolean canShoot() {
+        List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(row);
+        testable.removeIf(e -> e.getX() < x);
+        return testable.size() != 0;
     }
+
+
 }

@@ -25,7 +25,6 @@ public class ZombieManager extends RandSpawnManager {
         }
 
         for (Entity e : entities) {
-            Zombie z = (Zombie)e;
             e.update();
         }
     }

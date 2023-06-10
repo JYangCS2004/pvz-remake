@@ -43,7 +43,7 @@ public abstract class Plant extends Entity {
     @Override
     public abstract void update();
 
-    public void decreaseHealth(){
+    public void decreaseHealth(int damage){
         this.health-= 1;
     }
 

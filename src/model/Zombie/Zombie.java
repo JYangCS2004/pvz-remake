@@ -9,21 +9,20 @@ import java.util.List;
 
 public abstract class Zombie extends Entity {
     protected int curSpeed;
-    private int SPEED = -1;
+    private int defaultSpeed;
     private int health;
 
     private final int eatTime;
 
     private int damage;
     private int counter;
-    private boolean isCollided = false;
 
     public Zombie(int x, int y, int speed, int damage, int health, int eatTime,
                   int width, int height, GamePanel g) {
         super(x, y);
         super.g = g;
         this.curSpeed = speed;
-        this.SPEED = speed;
+        this.defaultSpeed = speed;
         this.damage = damage;
         this.health = health;
         this.eatTime = eatTime;
@@ -45,11 +44,7 @@ public abstract class Zombie extends Entity {
     public void update() {
         List<Entity> testable = g.getPlantManager().getEntitiesByRow(row);
 
-        isCollided = false;
-        if (testable == null || testable.isEmpty()) {
-            x += getSpeed();
-            return;
-        }
+        boolean isCollided = false;
 
         for (Entity entity : testable) {
             Plant p = (Plant) entity;
@@ -58,12 +53,12 @@ public abstract class Zombie extends Entity {
                 curSpeed = 0;
                 isCollided = true;
                 if (counter == 0) {
-                    p.decreaseHealth();
+                    p.decreaseHealth(damage);
                     counter = eatTime;
                 }
 
                 if (p.getHealth() <= 0) {
-                    g.getPlantManager().freeSquare(p. getX()/ g.getTileSize(), p.getY() / g.getTileSize());
+                    g.getPlantManager().freeSquare(p.getX()/ g.getTileSize(), p.getY() / g.getTileSize());
                     g.getPlantManager().remove(p);
                     curSpeed = getSpeed();
                 }
@@ -71,7 +66,8 @@ public abstract class Zombie extends Entity {
         }
 
         if (!isCollided) {
-            curSpeed = SPEED;
+            curSpeed = defaultSpeed;
+            // System.out.println("resume");
         }
 
         x += curSpeed;
