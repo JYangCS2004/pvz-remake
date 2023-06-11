@@ -39,30 +39,30 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         int nearEdgeX = x / tile;
         int nearEdgeY = y / tile;
 
+        if (hasShovel) {
+            Plant p = null;
+            for (Entity entity : pm.getEntities()) {
+                if (nearEdgeX * tile == entity.getX() && nearEdgeY * tile == entity.getY()) {
+                    p = (Plant) entity;
+                }
+            }
+
+            if (p != null) {
+                ss.incrementSun(p.getCost() / 2);
+                pm.remove(p);
+            }
+
+            // hasShovel = false;
+        }
+
         //check if mouse is at shop interface
         if (nearEdgeY == 0) {
             hasShovel = (nearEdgeX == 13);
             pi.selected = nearEdgeX;
         }
+
         //spawn plant if not at interface
         else {
-            if (hasShovel) {
-                Plant p = null;
-                for (Entity entity : pm.getEntities()) {
-                    if (nearEdgeX * tile == entity.getX() && nearEdgeY * tile == entity.getY()) {
-                        p = (Plant) entity;
-                    }
-                }
-
-                if (p != null) {
-                    ss.incrementSun(p.getCost() / 2);
-                    pm.remove(p);
-                }
-
-                hasShovel = false;
-                return;
-            }
-
             Plant p = pi.plantPicker(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel());
 
             if (p != null) {

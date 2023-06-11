@@ -66,6 +66,11 @@ public class PlantInterface {
     }
 
     public Plant plantPicker(int x, int y, GamePanel g){
+
+        if (selected == 13) {
+            return null;
+        }
+
         Card card = this.plants[this.selected];
 
         if (!card.isCanPlant()) {
