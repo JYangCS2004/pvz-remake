@@ -36,7 +36,8 @@ public class BeamManager extends ProjectileManager {
             }
         }
         if(((Beam) p).getBoom()){
-            gamePanel.getPlantManager().remove(p.getOwner());
+            Entity owner = p.getOwner();
+            gamePanel.getPlantManager().remove(owner);
         }
         return false;
     }

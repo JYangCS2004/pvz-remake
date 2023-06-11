@@ -1,10 +1,13 @@
 package ui;
 
-import model.Plant.plants.*;
 import model.Plant.Plant;
+import model.Plant.plants.*;
 import model.SpawnManager.RandSpawnManager.RandSpawners.SunSpawner;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class PlantInterface {
 
@@ -47,9 +50,19 @@ public class PlantInterface {
             g.drawRoundRect(i * gamePanel.getTileSize(), 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 5, 5);
         }
 
+        try {
+            g.drawImage(ImageIO.read(new File("src/Graphics/Shovel2.png")).getScaledInstance(45, 45, Image.SCALE_SMOOTH),
+                    13 * gamePanel.getTileSize(), 0, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         g.setColor(Color.black);
+
         g.drawRoundRect(this.selected* gamePanel.getTileSize(),
                 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 10, 10);
+        g.setColor(Color.white);
+
     }
 
     public Plant plantPicker(int x, int y, GamePanel g){
@@ -83,7 +96,8 @@ public class PlantInterface {
     }
 
     private Plant plantChecker(Plant p, Card c) {
-        if (((SunSpawner) gamePanel.getSunSpawner()).getSunCount() >= p.getCost() && c.canPlant) {
+        if (((SunSpawner) gamePanel.getSunSpawner()).getSunCount() >= p.getCost() && c.canPlant
+        && !gamePanel.getPlantManager().containsSquare(p)) {
             c.canPlant = false;
             c.resetHeight();
             return p;

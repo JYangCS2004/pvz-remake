@@ -24,21 +24,23 @@ public class PlantManager extends SpawnManager {
 
     public void remove(Entity e) {
         entities.remove(e);
+        freeSquare(e.getX() / gamePanel.getTileSize(), e.getY() / gamePanel.getTileSize());
     }
 
-    public boolean containsSquare(int row, int col) {
-        return plantedSpots[row][col];
+    public boolean containsSquare(Entity e) {
+        return plantedSpots[e.getX() / gamePanel.getTileSize()][e.getY() / gamePanel.getTileSize()];
     }
 
-    public void storeSquare(int row, int col) {
-        plantedSpots[row][col] = true;
+    public void spawn(Entity e) {
+        super.spawn(e);
+        plantedSpots[e.getX() / gamePanel.getTileSize()][e.getY() / gamePanel.getTileSize()] = true;
     }
 
     public GamePanel getGamePanel() {
         return gamePanel;
     }
 
-    public void freeSquare(int row, int col) {
+    private void freeSquare(int row, int col) {
         plantedSpots[row][col] = false;
     }
 }
