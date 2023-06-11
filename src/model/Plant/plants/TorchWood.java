@@ -46,6 +46,7 @@ public class TorchWood extends Plant {
                     g.getShooterManager().remove(b);
                     newBullets.add(newOne);
                 }
+
             }
         }
 
