@@ -17,6 +17,7 @@ public class FirePea extends Bullet {
     public FirePea(int x, int y, Entity owner, GamePanel g) {
         super(x, y, width, height, speed, damage, lifetime, owner, g);
         onHitEffects.add("UNCHILL");
+        onHitEffects.add("FIRE");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package model;
 
 import model.StatusEffect.Effects.ChillEffect;
+import model.StatusEffect.Effects.FireSplashEffect;
 import model.StatusEffect.Effects.UndoChillEffect;
 import model.StatusEffect.Effects.StunEffect;
 import model.StatusEffect.StatusEffect;
@@ -70,6 +71,8 @@ public class EffectManager {
 
     public StatusEffect select(Zombie z, String tag){
         switch (tag){
+            case "FIRE":
+                return new FireSplashEffect(z);
             case "UNCHILL":
                 return new UndoChillEffect(z);
             case "STUN":
