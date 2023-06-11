@@ -3,6 +3,7 @@ package model.Plant.plants;
 import model.Entity;
 import model.Plant.Plant;
 import model.projectiles.Bullet.Bullet;
+import model.projectiles.Bullet.BulletProjectiles.ChomperProjectile;
 import model.projectiles.Bullet.BulletProjectiles.FirePea;
 import model.projectiles.Bullet.BulletProjectiles.IcePea;
 import model.projectiles.Bullet.BulletProjectiles.Pea;
@@ -27,6 +28,10 @@ public class TorchWood extends Plant {
 
         for (Entity e : testable) {
             Bullet b = (Bullet) e;
+            if (b instanceof ChomperProjectile) {
+                continue;
+            }
+
             if (e.getBounds().intersects(getBounds())) {
                 if (b.getHitting() == null || !b.getHitting().equals(this)) {
                     Bullet newOne;
