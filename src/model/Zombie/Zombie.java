@@ -79,7 +79,6 @@ public abstract class Zombie extends Entity {
                 }
 
                 if (p.getHealth() <= 0) {
-                    g.getPlantManager().freeSquare(p.getX()/ g.getTileSize(), p.getY() / g.getTileSize());
                     g.getPlantManager().remove(p);
                     curSpeed = getSpeed();
                 }

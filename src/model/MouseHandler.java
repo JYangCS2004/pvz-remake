@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MouseHandler extends MouseAdapter implements MouseMotionListener {
+    private boolean hasShovel;
     PlantManager pm;
     SunSpawner ss;
 
@@ -25,6 +26,7 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         this.ss = ss;
         this.pi = pi;
         pm.getGamePanel().addMouseMotionListener(this);
+        hasShovel = false;
     }
 
     @Override
@@ -32,45 +34,47 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         Point mouse = e.getPoint();
         int x = mouse.x;
         int y = mouse.y;
-        boolean foundSun = false;
 
-        List<Entity> sunList = ss.getSuns();
-        Iterator<Entity> it = sunList.iterator();
+        int tile = pm.getGamePanel().getTileSize();
+        int nearEdgeX = x / tile;
+        int nearEdgeY = y / tile;
 
-        while (it.hasNext()) {
-            Sun s = (Sun) it.next();
-            if (new Area(s.getBounds()).contains(x, y)) {
-                foundSun = true;
-                ss.incrementSun();
-                it.remove();
-                break;
+        if (hasShovel) {
+            Plant p = null;
+            for (Entity entity : pm.getEntities()) {
+                if (nearEdgeX * tile == entity.getX() && nearEdgeY * tile == entity.getY()) {
+                    p = (Plant) entity;
+                }
             }
+
+            if (p != null) {
+                ss.incrementSun(p.getCost() / 2);
+                pm.remove(p);
+            }
+
+            // hasShovel = false;
         }
 
-        if (!foundSun) {
-            int tile = pm.getGamePanel().getTileSize();
-            int nearEdgeX = x / tile;
-            int nearEdgeY = y / tile;
+        //check if mouse is at shop interface
+        if (nearEdgeY == 0) {
+            hasShovel = (nearEdgeX == 13);
+            pi.selected = nearEdgeX;
+        }
 
-            //check if mouse is at shop interface
-            if (nearEdgeY == 0) {
-                pi.selected = nearEdgeX;
-            }
-            //spawn plant if not at interface
-            else {
-                Plant p = pi.plantPicker(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel());
+        //spawn plant if not at interface
+        else {
+            Plant p = pi.plantPicker(nearEdgeX * tile, nearEdgeY * tile, pm.getGamePanel());
 
-                if (!pm.containsSquare(nearEdgeX, nearEdgeY) && p != null) {
-                    pm.spawn(p);
-                    ss.deductSum(p.getCost());
-                    pm.storeSquare(nearEdgeX, nearEdgeY);
-                }
+            if (p != null) {
+                pm.spawn(p);
+                ss.deductSum(p.getCost());
             }
         }
     }
 
+
     @Override
-    public void mouseMoved(MouseEvent e){
+    public void mouseMoved(MouseEvent e) {
         Point mouse = e.getPoint();
         int x = mouse.x;
         int y = mouse.y;
@@ -81,7 +85,7 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         while (it.hasNext()) {
             Sun s = (Sun) it.next();
             if (new Area(s.getBounds()).contains(x, y)) {
-                ss.incrementSun();
+                ss.incrementSun(SunSpawner.DEFAULT);
                 it.remove();
                 return;
             }

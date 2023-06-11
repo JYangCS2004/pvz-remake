@@ -38,6 +38,7 @@ public abstract class SpawnManager {
         entities.add(e);
     }
 
+
     public List<Entity> getEntitiesByRow(int row) {
         List<Entity> rowEntities = new ArrayList<>();
 
@@ -59,7 +60,7 @@ public abstract class SpawnManager {
 
     public void updateEach() {
         for (Entity e : entities) {
-            e.update();;
+            e.update();
         }
     }
 

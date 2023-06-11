@@ -82,6 +82,13 @@ public class ImageLibrary {
         yFix.put("kp", 0);
         textXFix.put("kp", 15);
         textYFix.put("kp", 35);
+
+        // Torchwood
+        imageList.put("tw", getImage("src/Graphics/torchwoods.png", 48, 48));
+        xFix.put("tw", 2);
+        yFix.put("tw", 0);
+        textXFix.put("tw", 15);
+        textYFix.put("tw", 35);
     }
 
     public static Image getImage(String path, int xScale, int yScale){
