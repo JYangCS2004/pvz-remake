@@ -1,7 +1,7 @@
 package model;
 
 import model.StatusEffect.Effects.ChillEffect;
-import model.StatusEffect.Effects.FrozenEffect;
+import model.StatusEffect.Effects.StunEffect;
 import model.StatusEffect.StatusEffect;
 import model.Zombie.Zombie;
 import ui.GamePanel;
@@ -64,8 +64,8 @@ public class EffectManager {
 
     public StatusEffect select(Zombie z, String tag){
         switch (tag){
-            case "FREEZE":
-                return new FrozenEffect(z);
+            case "STUN":
+                return new StunEffect(z);
             default:
                 return new ChillEffect(z);
         }

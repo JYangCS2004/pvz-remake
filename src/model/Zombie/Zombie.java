@@ -40,7 +40,10 @@ public abstract class Zombie extends Entity {
 
     @Override
     public void draw(Graphics g) {
-        if(effectManager.contains("CHILL")){
+        if(effectManager.contains("STUN")){
+            g.setColor(Color.yellow);
+        }
+        else if(effectManager.contains("CHILL")){
             g.setColor(Color.blue);
         }
         g.fillRoundRect(x, y, 48, 48, 25, 25);

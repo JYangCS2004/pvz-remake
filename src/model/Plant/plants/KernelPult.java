@@ -16,7 +16,7 @@ public class KernelPult extends Plant {
     private static final int COST = 100;
 
     private int counter = 0;
-    private static final int SPAWN_TIME = 100;
+    private static final int SPAWN_TIME = 140;
 
     private PultManager spawnManager;
 

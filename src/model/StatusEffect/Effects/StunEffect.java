@@ -4,11 +4,11 @@ import model.Entity;
 import model.StatusEffect.StatusEffect;
 import model.Zombie.Zombie;
 
-public class FrozenEffect extends StatusEffect {
-    private static final int LIFETIME = 50;
-    private static final String TAG = "FREEZE";
+public class StunEffect extends StatusEffect {
+    private static final int LIFETIME = 140;
+    private static final String TAG = "STUN";
 
-    public FrozenEffect(Entity host) {
+    public StunEffect(Entity host) {
         super(host, LIFETIME, TAG);
     }
 

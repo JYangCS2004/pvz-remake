@@ -15,7 +15,7 @@ public class CabbagePult extends Plant {
 
     private PultManager spawnManager;
 
-    private static int SPAWN_TIME = 100;
+    private static int SPAWN_TIME = 120;
     private int counter = 0;
 
     public CabbagePult(int x, int y, GamePanel g) {

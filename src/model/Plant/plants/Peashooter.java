@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Peashooter extends Plant {
 
-    private final static int SPAWN_TIME = 70;
+    private final static int SPAWN_TIME = 60;
     private int counter = SPAWN_TIME;
     private final ProjectileManager projectileManager;
     private static final int HEALTH = 20;

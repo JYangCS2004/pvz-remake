@@ -21,14 +21,14 @@ public class PlantInterface {
         this.gamePanel = g;
         //temp code until plant selection system is implemented
         plants[0] = new Card("ps", 5, g);
-        plants[1] = new Card("wn", 2, g);
-        plants[2] = new Card("ch", 30, g);
-        plants[3] = new Card("sf", 40, g);
-        plants[4] = new Card("cp", 10, g);
+        plants[1] = new Card("wn", 15, g);
+        plants[2] = new Card("ch", 15, g);
+        plants[3] = new Card("sf", 5, g);
+        plants[4] = new Card("cp", 5, g);
         plants[5] = new Card("ja", 30, g);
-        plants[6] = new Card("fs", 48, g);
-        plants[7] = new Card("ips", 0, g);
-        plants[8] = new Card("kp", 0, g);
+        plants[6] = new Card("fs", 10, g);
+        plants[7] = new Card("ips", 15, g);
+        plants[8] = new Card("kp", 5, g);
     }
 
     public void draw(Graphics g, SunSpawner ss){

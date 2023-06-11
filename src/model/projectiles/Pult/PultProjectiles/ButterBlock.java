@@ -13,7 +13,7 @@ public class ButterBlock extends Pult {
 
     public ButterBlock(int x, int y, Entity owner, GamePanel g, int row) {
         super(x, y, WIDTH, HEIGHT, DAMAGE, row, owner, g);
-        onHitEffects.add("FREEZE");
+        onHitEffects.add("STUN");
     }
 
     @Override
