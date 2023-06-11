@@ -25,6 +25,10 @@ public class PultManager extends ProjectileManager {
             if (e.getBounds().intersects(p.getBounds())) {
                 e.decreaseHealth(p.getDamage());
 
+                for(String s: p.getOnHitEffects()){
+                    e.getEffectManager().add(e.getEffectManager().select(e, s));
+                }
+
                 if (e.getHealth() <= 0) {
                     gamePanel.getZombieSpawner().removeZombie(e);
                 }

@@ -1,12 +1,10 @@
 package model.projectiles.Pult.PultProjectiles;
 
 import model.Entity;
-import model.Zombie.Zombie;
 import model.projectiles.Pult.Pult;
 import ui.GamePanel;
 
 import java.awt.*;
-import java.util.List;
 
 
 public class CabbageProjectile extends Pult {
@@ -15,49 +13,22 @@ public class CabbageProjectile extends Pult {
     final static int HEIGHT = 16;
     final static int DAMAGE = 2;
 
-    //private double acceleration = 1;
-    static final double ACCELERATION = 0.12;
-    //private double velocityY;
-    private double velocityY = 6;
-    final double velocityX;
-    private Zombie target = null;
 
-    private double x;
-    private double y;
 
     public CabbageProjectile(int x, int y, Entity owner, GamePanel g, int row) {
-        super(x, y, WIDTH, HEIGHT, 20, DAMAGE, 100, row, owner, g);
-        this.x =  x;
-        this.y =  y;
-
-        List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
-
-        int dist = getMinDistance(testable);
-        //double speed = minDist;
-        double speed = dist/(double)100;
-        //velocityY = speed * Math.sin(Math.PI / 2 - initialAngle);
-        //velocityX = speed * Math.cos(initialAngle);
-        velocityX = speed;
+        super(x, y, WIDTH, HEIGHT, DAMAGE, row, owner, g);
     }
 
     @Override
     public void draw(Graphics g) {
         g.drawImage(this.g.getImageLibrary().cabbage,
-                (int)x, (int)y, null);
+                (int)super.x, (int)super.y, null);
         //g.setColor(Color.green);
         //g.fillOval((int)this.x, (int)this.y, width, height);
         g.setColor(Color.white);
     }
 
-    @Override
-    public void update() {
-        super.lifetime--;
-        y -= velocityY;
-        x += velocityX;
-        velocityY -= ACCELERATION;
-    }
-
-    private int getMinDistance(List<Entity> testable) {
+    /*private int getMinDistance(List<Entity> testable) {
         /*
         for (Entity e : testable) {
             int distance = e.getX() - super.x;
@@ -74,7 +45,7 @@ public class CabbageProjectile extends Pult {
 
         initialAngle = Math.atan(4.0 * maxHeight / minDistance);
          */
-        int distance = 10000;
+        /*int distance = 10000;
         int miniDist = distance;
         for (Entity e : testable) {
             Zombie z = (Zombie) e;
@@ -88,7 +59,7 @@ public class CabbageProjectile extends Pult {
             }
         }
         return miniDist;
-    }
+    } */
 
     /*
     new arc formula:
@@ -101,8 +72,5 @@ public class CabbageProjectile extends Pult {
     f(x) = integral(0, b) sqrt(1 -(4hx)/b^2 - (4h(x-b))/b^2)
     where h = height and b = distance to enemy
      */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle((int)this.x, (int)this.y, width, height);
-    }
+
 }

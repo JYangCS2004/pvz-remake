@@ -24,10 +24,11 @@ public class PlantInterface {
         plants[1] = new Card("wn", 2, g);
         plants[2] = new Card("ch", 30, g);
         plants[3] = new Card("sf", 40, g);
-        plants[4] = new Card("cp", 40, g);
+        plants[4] = new Card("cp", 10, g);
         plants[5] = new Card("ja", 30, g);
         plants[6] = new Card("fs", 48, g);
         plants[7] = new Card("ips", 0, g);
+        plants[8] = new Card("kp", 0, g);
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -36,17 +37,19 @@ public class PlantInterface {
         g.setColor(Color.white);
         g.drawString(Integer.toString(ss.getSunCount()),
                 gamePanel.getScreenWidth()- gamePanel.getTileSize(), gamePanel.getTileSize()/2);
-        g.setColor(Color.black);
-        g.drawRoundRect(this.selected* gamePanel.getTileSize(),
-                0, gamePanel.getTileSize(), gamePanel.getTileSize(), 10, 10);
         //so far using this bc only 2 plants
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 9; i++) {
             g.drawImage(gamePanel.getImageLibrary().getImage(plants[i].getTag()),
                     i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i].getTag()),
                     gamePanel.getImageLibrary().getYFix(plants[i].getTag()), null);
             plants[i].draw(g, i);
+            g.setColor(Color.white);
+            g.drawRoundRect(i * gamePanel.getTileSize(), 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 5, 5);
         }
 
+        g.setColor(Color.black);
+        g.drawRoundRect(this.selected* gamePanel.getTileSize(),
+                0, gamePanel.getTileSize(), gamePanel.getTileSize(), 10, 10);
     }
 
     public Plant plantPicker(int x, int y, GamePanel g){
@@ -58,6 +61,8 @@ public class PlantInterface {
 
         String plantType = card.getTag();
         switch (plantType) {
+            case "kp":
+                return plantChecker(new KernelPult(x, y, g), card);
             case "ips":
                 return plantChecker(new IcePeaShooter(x, y, g), card);
             case "ja":

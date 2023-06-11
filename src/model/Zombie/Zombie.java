@@ -50,7 +50,12 @@ public abstract class Zombie extends Entity {
     }
 
     public void update() {
-        effectManager.updateAll();
+        if (effectManager.numOfEffects() == 0) {
+            multiplier = 1;
+        } else {
+            effectManager.updateAll();
+        }
+
         if(x <= -g.getTileSize()){
             g.getZombieSpawner().removeZombie(this);
             return;
@@ -96,13 +101,16 @@ public abstract class Zombie extends Entity {
     public int getHealth() {
         return health;
     }
+
     @Override
     public double getSpeed(){
         return curSpeed;
     }
+
     public void editSpeed(double percentage){
-        multiplier = percentage;
+        multiplier = Math.min(percentage, multiplier);
     }
+
     public EffectManager getEffectManager(){
         return effectManager;
     }

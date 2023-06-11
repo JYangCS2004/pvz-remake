@@ -75,6 +75,13 @@ public class ImageLibrary {
         yFix.put("ips", 0);
         textXFix.put("ips", 15);
         textYFix.put("ips", 24);
+
+        //kernel
+        imageList.put("kp", getImage("src/Graphics/kernel.png", 48, 48));
+        xFix.put("kp", 2);
+        yFix.put("kp", 0);
+        textXFix.put("kp", 15);
+        textYFix.put("kp", 35);
     }
 
     public static Image getImage(String path, int xScale, int yScale){

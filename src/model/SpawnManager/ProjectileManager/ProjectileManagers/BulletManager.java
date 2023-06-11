@@ -31,6 +31,7 @@ public class BulletManager extends ProjectileManager {
                 for(String s: p.getOnHitEffects()){
                     e.getEffectManager().add(e.getEffectManager().select(e, s));
                 }
+
                 // currently assumes all projectiles are from plant
                 ((Plant) p.getOwner()).setTimer();
                 if (e.getHealth() <= 0) {
