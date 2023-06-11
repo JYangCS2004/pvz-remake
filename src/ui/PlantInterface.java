@@ -14,7 +14,7 @@ public class PlantInterface {
     private GamePanel gamePanel;
 
     // private String[] plants = new String[9];
-    private Card[] plants = new Card[9];
+    private Card[] plants = new Card[10];
 
     final Color interfaceColor = new Color(	0,128,0);
 
@@ -30,8 +30,9 @@ public class PlantInterface {
         plants[4] = new Card("cp", 5, g);
         plants[5] = new Card("ja", 30, g);
         plants[6] = new Card("fs", 10, g);
-        plants[7] = new Card("ips", 15, g);
+        plants[7] = new Card("ips", 0, g);
         plants[8] = new Card("kp", 5, g);
+        plants[9] = new Card("tw", 5, g);
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -41,7 +42,7 @@ public class PlantInterface {
         g.drawString(Integer.toString(ss.getSunCount()),
                 gamePanel.getScreenWidth()- gamePanel.getTileSize(), gamePanel.getTileSize()/2);
         //so far using this bc only 2 plants
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10; i++) {
             g.drawImage(gamePanel.getImageLibrary().getImage(plants[i].getTag()),
                     i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i].getTag()),
                     gamePanel.getImageLibrary().getYFix(plants[i].getTag()), null);
@@ -79,6 +80,8 @@ public class PlantInterface {
 
         String plantType = card.getTag();
         switch (plantType) {
+            case "tw":
+                return plantChecker(new TorchWood(x, y, g), card);
             case "kp":
                 return plantChecker(new KernelPult(x, y, g), card);
             case "ips":

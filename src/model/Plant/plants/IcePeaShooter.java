@@ -14,7 +14,8 @@ public class IcePeaShooter extends Plant {
     private int counter = SPAWN_TIME;
     private final ProjectileManager projectileManager;
     private static final int HEALTH = 20;
-    private static final int COST = 150;
+    // private static final int COST = 150;
+    private static final int COST = 1;
     private static final String TAG = "ips";
     public IcePeaShooter(int x, int y, GamePanel g){
         super(x,y, HEALTH, TAG, g, COST);

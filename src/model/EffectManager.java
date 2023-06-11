@@ -1,6 +1,7 @@
 package model;
 
 import model.StatusEffect.Effects.ChillEffect;
+import model.StatusEffect.Effects.UndoChillEffect;
 import model.StatusEffect.Effects.StunEffect;
 import model.StatusEffect.StatusEffect;
 import model.Zombie.Zombie;
@@ -21,6 +22,11 @@ public class EffectManager {
     }
 
     public void add(StatusEffect e){
+
+        if (e.getTag().equals("UNCHILL")) {
+            removeByTag("CHILL");
+        }
+
         removeByTag(e.getTag());
         effects.add(e);
     }
@@ -64,6 +70,8 @@ public class EffectManager {
 
     public StatusEffect select(Zombie z, String tag){
         switch (tag){
+            case "UNCHILL":
+                return new UndoChillEffect(z);
             case "STUN":
                 return new StunEffect(z);
             default:
