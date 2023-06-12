@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 public class KernelPult extends Plant {
-    private static final int HEALTH = 40;
+    private static final int HEALTH = 10;
     private static final String TAG = "kp";
     private static final int COST = 100;
 

@@ -11,7 +11,7 @@ import java.util.List;
 public class FumeShroom extends Plant {
     private final static String TAG = "fs";
     private final static int COST = 125;
-    private final static int HEALTH = 20;
+    private final static int HEALTH = 15;
 
     private final BeamManager beamManager;
 

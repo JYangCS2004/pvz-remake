@@ -10,7 +10,7 @@ import java.awt.*;
 public class Chomper extends Plant {
     static final int EATING_TIME = 500;
     final static int SPAWN_TIME = 5;
-    final static int HEALTH = 40;
+    final static int HEALTH = 20;
     final static int COST = 150;
     final static String TAG = "ch";
     private int eat_counter = 0;

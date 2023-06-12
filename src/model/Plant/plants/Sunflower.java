@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Sunflower extends Plant {
 
-    static final int HEALTH= 20;
+    static final int HEALTH= 10;
     static final int COST = 50;
     static final String TAG = "sf";
     static final int COOL_DOWN = 250;

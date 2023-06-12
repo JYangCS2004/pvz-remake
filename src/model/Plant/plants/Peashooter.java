@@ -13,7 +13,7 @@ public class Peashooter extends Plant {
     private final static int SPAWN_TIME = 60;
     private int counter = SPAWN_TIME;
     private final ProjectileManager projectileManager;
-    private static final int HEALTH = 20;
+    private static final int HEALTH = 10;
     private static final int COST = 100;
     private static final String TAG = "ps";
     public Peashooter(int x, int y, GamePanel g){

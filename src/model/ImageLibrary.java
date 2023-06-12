@@ -89,6 +89,20 @@ public class ImageLibrary {
         yFix.put("tw", 0);
         textXFix.put("tw", 15);
         textYFix.put("tw", 35);
+
+        //potatomine unarmed
+        imageList.put("upm", getImage("src/Graphics/UnarmedPotatoMine.png", 78, 63));
+        xFix.put("upm", -16);
+        yFix.put("upm", 0);
+        textXFix.put("upm", 15);
+        textYFix.put("upm", 35);
+
+        //potatomine armed
+        imageList.put("pm", getImage("src/Graphics/PotatoMine.png", 49, 39));
+        xFix.put("pm", 0);
+        yFix.put("pm", 10);
+        textXFix.put("pm", 15);
+        textYFix.put("pm", 35);
     }
 
     public static Image getImage(String path, int xScale, int yScale){

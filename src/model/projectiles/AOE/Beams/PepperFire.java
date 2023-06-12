@@ -9,9 +9,10 @@ public class PepperFire extends Beam {
 
     //for now until effect is implemented
     //then its 0 and applies insta-kill
-    static final int DAMAGE = 50;
+    static final int DAMAGE = 0;
     public PepperFire(int y, Entity owner, GamePanel g){
         super(0, y, g.getScreenWidth(), g.getTileSize(), DAMAGE, owner, true, g);
+        this.onHitEffects.add("KILL");
     }
 
     public void draw(Graphics g){

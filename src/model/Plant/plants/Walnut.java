@@ -5,7 +5,7 @@ import ui.GamePanel;
 
 public class Walnut extends Plant {
 
-    static final int HEALTH= 50;
+    static final int HEALTH= 60;
     static final int COST = 50;
     static final String TAG = "wn";
 

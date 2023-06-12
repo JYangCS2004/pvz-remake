@@ -20,6 +20,7 @@ public abstract class Zombie extends Entity {
     private double buffer = 0;
     private final EffectManager effectManager;
     private double multiplier = 1;
+    protected int killBlock = 0;
 
 
     public Zombie(int x, int y, double speed, int damage, int health, int eatTime,
@@ -48,7 +49,7 @@ public abstract class Zombie extends Entity {
         }
         g.fillRoundRect(x, y, 48, 48, 25, 25);
         g.setColor(Color.black);
-        g.drawString(Integer.toString(health), x + 15, y + 24);
+        g.drawString(Integer.toString(health), x + 10, y + 24);
         g.setColor(Color.white);
     }
 
@@ -115,5 +116,14 @@ public abstract class Zombie extends Entity {
 
     public EffectManager getEffectManager(){
         return effectManager;
+    }
+
+    public void kill(){
+        if(killBlock == 0){
+            g.getZombieSpawner().removeZombie(this);
+            return;
+        }
+        killBlock--;
+        this.health -= 1800;
     }
 }

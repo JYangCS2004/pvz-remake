@@ -14,7 +14,7 @@ public class PlantInterface {
     private GamePanel gamePanel;
 
     // private String[] plants = new String[9];
-    private Card[] plants = new Card[10];
+    private Card[] plants = new Card[11];
 
     final Color interfaceColor = new Color(	0,128,0);
 
@@ -33,6 +33,7 @@ public class PlantInterface {
         plants[7] = new Card("ips", 0, g);
         plants[8] = new Card("kp", 5, g);
         plants[9] = new Card("tw", 5, g);
+        plants[10] = new Card("pm", 50, g);
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -42,7 +43,7 @@ public class PlantInterface {
         g.drawString(Integer.toString(ss.getSunCount()),
                 gamePanel.getScreenWidth()- gamePanel.getTileSize(), gamePanel.getTileSize()/2);
         //so far using this bc only 2 plants
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 11; i++) {
             g.drawImage(gamePanel.getImageLibrary().getImage(plants[i].getTag()),
                     i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i].getTag()),
                     gamePanel.getImageLibrary().getYFix(plants[i].getTag()), null);
@@ -80,6 +81,8 @@ public class PlantInterface {
 
         String plantType = card.getTag();
         switch (plantType) {
+            case "pm":
+                return plantChecker(new PotatoMine(x, y, g), card);
             case "tw":
                 return plantChecker(new TorchWood(x, y, g), card);
             case "kp":

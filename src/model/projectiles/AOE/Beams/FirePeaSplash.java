@@ -7,7 +7,7 @@ import ui.GamePanel;
 import java.awt.*;
 
 public class FirePeaSplash extends Beam {
-    private final static int DAMAGE = 1;
+    private final static int DAMAGE = 7;
 
     public FirePeaSplash(int x, int y, GamePanel g) {
         super(x, y+24, g.getTileSize(), g.getTileSize()/4, DAMAGE, new Peashooter(-200, -200, g), false, g);

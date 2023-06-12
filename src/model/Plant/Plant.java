@@ -40,6 +40,23 @@ public abstract class Plant extends Entity {
         g.setColor(Color.white);
     }
 
+    public void draw(Graphics g, String tag){
+        g.drawImage(this.g.getImageLibrary().getImage(tag),
+                x + this.g.getImageLibrary().getXFix(tag),
+                y + this.g.getImageLibrary().getYFix(tag), null);
+        g.setColor(Color.white);
+        g.drawString(Integer.toString(health),
+                x + this.g.getImageLibrary().getTextXFix(tag),
+                y + this.g.getImageLibrary().getTextYFix(tag));
+    }
+
+    public void drawWithoutText(Graphics g, String tag){
+        g.drawImage(this.g.getImageLibrary().getImage(tag),
+                x + this.g.getImageLibrary().getXFix(tag),
+                y + this.g.getImageLibrary().getYFix(tag), null);
+        g.setColor(Color.white);
+    }
+
     @Override
     public abstract void update();
 
