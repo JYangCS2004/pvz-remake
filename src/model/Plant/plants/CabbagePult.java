@@ -11,7 +11,7 @@ import java.util.List;
 public class CabbagePult extends Plant {
     private static int COST = 100;
     private static String TAG = "cp";
-    private static int HEALTH = 30;
+    private static int HEALTH = 10;
 
     private PultManager spawnManager;
 

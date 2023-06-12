@@ -28,6 +28,9 @@ public class BeamManager extends ProjectileManager {
 
             if (e.getBounds().intersects(p.getBounds())) {
                 e.decreaseHealth(p.getDamage());
+                for(String s: p.getOnHitEffects()){
+                    e.getEffectManager().add(e.getEffectManager().select(e, s));
+                }
                 // currently assumes all projectiles are from plant
                 ((Plant) p.getOwner()).setTimer();
                 if (e.getHealth() <= 0) {

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TorchWood extends Plant {
-    private static final int COST = 0;
-    private static final int HEALTH = 50;
+    private static final int COST = 150;
+    private static final int HEALTH = 10;
     private static final String TAG = "tw";
 
     public TorchWood(int x, int y, GamePanel g) {

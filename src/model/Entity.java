@@ -45,4 +45,8 @@ public abstract class Entity {
     public int getRow() {
         return row;
     }
+
+    public GamePanel getGamePanel(){
+        return g;
+    }
 }

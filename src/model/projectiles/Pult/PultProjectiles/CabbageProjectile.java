@@ -11,7 +11,7 @@ public class CabbageProjectile extends Pult {
 
     final static int WIDTH = 16;
     final static int HEIGHT = 16;
-    final static int DAMAGE = 2;
+    final static int DAMAGE = 20;
 
 
 

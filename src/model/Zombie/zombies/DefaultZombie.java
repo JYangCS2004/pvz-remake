@@ -7,7 +7,7 @@ public class DefaultZombie extends Zombie {
 
     static final double SPEED = -1;
     static final int DAMAGE = 2;
-    static final int HEALTH = 10;
+    static final int HEALTH = 100;
     static final int EAT_TIME = 30;
     static final int HEIGHT = 48;
     static final int WIDTH = 48;
