@@ -72,7 +72,7 @@ public abstract class Zombie extends Entity {
         for (Entity entity : testable) {
             Plant p = (Plant) entity;
             if (p.getBounds().intersects(getBounds())) {
-                counter--;
+                updateCounter();
                 curSpeed = 0;
                 isCollided = true;
                 if (counter == 0) {
@@ -100,6 +100,12 @@ public abstract class Zombie extends Entity {
 
     public void decreaseHealth(Projectile p) {
         health -= p.getDamage();
+    }
+
+    public void updateCounter(){
+        if(!effectManager.contains("STUN")){
+            counter--;
+        }
     }
 
     public int getHealth() {
