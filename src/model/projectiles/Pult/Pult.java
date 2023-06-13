@@ -36,6 +36,7 @@ public abstract class Pult extends Projectile {
         //velocityY = speed * Math.sin(Math.PI / 2 - initialAngle);
         //velocityX = speed * Math.cos(initialAngle);
         velocityX = dist/(double)100;
+        onHitEffects.add("PIERCING");
     }
 
 

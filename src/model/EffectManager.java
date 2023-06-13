@@ -68,6 +68,8 @@ public class EffectManager {
 
     public StatusEffect select(Zombie z, String tag){
         switch (tag){
+            case "PIERCING":
+                return new NothingEffect(z);
             case "KILL":
                 return new KillEffect(z);
             case "FIRE":
@@ -85,4 +87,7 @@ public class EffectManager {
         return effects.size();
     }
 
+    public List<StatusEffect> getEffects(){
+        return effects;
+    }
 }

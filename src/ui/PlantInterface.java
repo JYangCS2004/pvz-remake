@@ -30,7 +30,7 @@ public class PlantInterface {
         plants[4] = new Card("cp", 5, g);
         plants[5] = new Card("ja", 30, g);
         plants[6] = new Card("fs", 10, g);
-        plants[7] = new Card("ips", 0, g);
+        plants[7] = new Card("ips", 10, g);
         plants[8] = new Card("kp", 5, g);
         plants[9] = new Card("tw", 5, g);
         plants[10] = new Card("pm", 50, g);

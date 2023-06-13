@@ -16,7 +16,7 @@ public class FumeShroom extends Plant {
     private final BeamManager beamManager;
 
     private int counter = 0;
-    private final static int SPAWN_TIME = 70;
+    private final static int SPAWN_TIME = 60;
 
 
     public FumeShroom(int x, int y, GamePanel g) {

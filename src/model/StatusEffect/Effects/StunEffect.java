@@ -5,7 +5,7 @@ import model.StatusEffect.StatusEffect;
 import model.Zombie.Zombie;
 
 public class StunEffect extends StatusEffect {
-    private static final int LIFETIME = 140;
+    private static final int LIFETIME = 120;
     private static final String TAG = "STUN";
 
     public StunEffect(Entity host) {

@@ -103,6 +103,10 @@ public class ImageLibrary {
         yFix.put("pm", 10);
         textXFix.put("pm", 15);
         textYFix.put("pm", 35);
+
+        //zombies
+        //screendoor zombie
+        imageList.put("sdz", getImage("src/Graphics/ScreenDoorZombie.png", 58, 46));
     }
 
     public static Image getImage(String path, int xScale, int yScale){
