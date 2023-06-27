@@ -1,5 +1,8 @@
 package model;
 
+import ui.Card;
+import ui.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,17 +18,19 @@ public class ImageLibrary {
     protected Map<String, Integer> yFix= new HashMap<>();
     protected Map<String, Integer> textXFix = new HashMap<>();
     protected Map<String, Integer> textYFix = new HashMap<>();
+    private Map<String, Card> tagToCard = new HashMap<>();
 
     //some static images
     public static Image cabbage = getImage("src/Graphics/CabbageProjectile.png", 16, 16);
 
-    public ImageLibrary(){
+    public ImageLibrary(GamePanel g){
         //peashooter
         imageList.put("ps", getImage("src/Graphics/Peashooter.png", 87, 40));
         xFix.put("ps", -20);
         yFix.put("ps", 0);
         textXFix.put("ps", 15);
         textYFix.put("ps", 24);
+        tagToCard.put("ps", new Card("ps", 5, g));
 
         //walnut
         imageList.put("wn", getImage("src/Graphics/Walnut.png", 33, 40));
@@ -33,6 +38,7 @@ public class ImageLibrary {
         yFix.put("wn", 4);
         textXFix.put("wn", 20);
         textYFix.put("wn", 35);
+        tagToCard.put("wn", new Card("wn", 15, g));
 
         // chomper
         imageList.put("ch", getImage("src/Graphics/transparent-chomper2.png", 80,80));
@@ -40,6 +46,7 @@ public class ImageLibrary {
         yFix.put("ch", -15);
         textXFix.put("ch", 15);
         textYFix.put("ch", 35);
+        tagToCard.put("ch", new Card("ch", 15, g));
 
         //sunflower
         imageList.put("sf", getImage("src/Graphics/Sunflower.png", 65, 53));
@@ -47,6 +54,7 @@ public class ImageLibrary {
         yFix.put("sf", -5);
         textXFix.put("sf", 15);
         textYFix.put("sf", 35);
+        tagToCard.put("sf", new Card("sf", 5, g));
 
         //cabbagepult
         imageList.put("cp", getImage("src/Graphics/cabbage.png", 50, 50));
@@ -54,6 +62,7 @@ public class ImageLibrary {
         yFix.put("cp", 0);
         textXFix.put("cp", 15);
         textYFix.put("cp", 35);
+        tagToCard.put("cp", new Card("cp", 5, g));
 
         //Jalapeno
         imageList.put("ja", getImage("src/Graphics/Jalapeno.png", 28, 49));
@@ -61,6 +70,7 @@ public class ImageLibrary {
         yFix.put("ja", 0);
         textXFix.put("ja", 15);
         textYFix.put("ja", 35);
+        tagToCard.put("ja", new Card("ja", 30, g));
 
         //fumeShroom
         imageList.put("fs", getImage("src/Graphics/fumeShroom2.png", 48, 48));
@@ -68,6 +78,7 @@ public class ImageLibrary {
         yFix.put("fs", 0);
         textXFix.put("fs", 15);
         textYFix.put("fs", 35);
+        tagToCard.put("fs", new Card("fs", 10, g));
 
         //ice pea shooter
         imageList.put("ips", getImage("src/Graphics/IcePeaShooter.png", 48, 46));
@@ -75,6 +86,7 @@ public class ImageLibrary {
         yFix.put("ips", 0);
         textXFix.put("ips", 15);
         textYFix.put("ips", 24);
+        tagToCard.put("ips", new Card("ips", 0, g));
 
         //kernel
         imageList.put("kp", getImage("src/Graphics/kernel.png", 48, 48));
@@ -82,6 +94,7 @@ public class ImageLibrary {
         yFix.put("kp", 0);
         textXFix.put("kp", 15);
         textYFix.put("kp", 35);
+        tagToCard.put("kp", new Card("kp", 5, g));
 
         // Torchwood
         imageList.put("tw", getImage("src/Graphics/torchwoods.png", 48, 48));
@@ -89,6 +102,7 @@ public class ImageLibrary {
         yFix.put("tw", 0);
         textXFix.put("tw", 15);
         textYFix.put("tw", 35);
+        tagToCard.put("tw", new Card("tw", 5, g));
 
         //potatomine unarmed
         imageList.put("upm", getImage("src/Graphics/UnarmedPotatoMine.png", 78, 63));
@@ -103,6 +117,7 @@ public class ImageLibrary {
         yFix.put("pm", 10);
         textXFix.put("pm", 15);
         textYFix.put("pm", 35);
+        tagToCard.put("pm", new Card("pm", 50, g));
     }
 
     public static Image getImage(String path, int xScale, int yScale){
@@ -134,4 +149,15 @@ public class ImageLibrary {
 
     public int getTextYFix(String key){return this.textYFix.get(key);}
 
+    public Card getCard(String key) {
+        return this.tagToCard.get(key);
+    }
+
+    public Map<String, Image> getImageList() {
+        return imageList;
+    }
+
+    public Map<String, Card> getTagToCard() {
+        return tagToCard;
+    }
 }

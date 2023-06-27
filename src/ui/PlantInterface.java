@@ -8,13 +8,16 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlantInterface {
 
     private GamePanel gamePanel;
 
     // private String[] plants = new String[9];
-    private Card[] plants = new Card[11];
+    // private Card[] plants = new Card[11];
+    private List<Card> plants;
 
     final Color interfaceColor = new Color(	0,128,0);
 
@@ -22,8 +25,9 @@ public class PlantInterface {
 
     public PlantInterface(GamePanel g){
         this.gamePanel = g;
-        //temp code until plant selection system is implemented
-        plants[0] = new Card("ps", 5, g);
+        plants = new ArrayList<>();
+    //temp code until plant selection system is implemented
+        /* plants[0] = new Card("ps", 5, g);
         plants[1] = new Card("wn", 15, g);
         plants[2] = new Card("ch", 15, g);
         plants[3] = new Card("sf", 5, g);
@@ -34,6 +38,7 @@ public class PlantInterface {
         plants[8] = new Card("kp", 5, g);
         plants[9] = new Card("tw", 5, g);
         plants[10] = new Card("pm", 50, g);
+         */
     }
 
     public void draw(Graphics g, SunSpawner ss){
@@ -43,11 +48,13 @@ public class PlantInterface {
         g.drawString(Integer.toString(ss.getSunCount()),
                 gamePanel.getScreenWidth()- gamePanel.getTileSize(), gamePanel.getTileSize()/2);
         //so far using this bc only 2 plants
-        for (int i = 0; i < 11; i++) {
-            g.drawImage(gamePanel.getImageLibrary().getImage(plants[i].getTag()),
-                    i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(plants[i].getTag()),
-                    gamePanel.getImageLibrary().getYFix(plants[i].getTag()), null);
-            plants[i].draw(g, i);
+        for (int i = 0; i < plants.size(); i++) {
+            String tag = plants.get(i).getTag();
+
+            g.drawImage(gamePanel.getImageLibrary().getImage(tag),
+                    i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(tag),
+                    gamePanel.getImageLibrary().getYFix(tag), null);
+            plants.get(i).draw(g, i);
             g.setColor(Color.white);
             g.drawRoundRect(i * gamePanel.getTileSize(), 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 5, 5);
         }
@@ -73,7 +80,7 @@ public class PlantInterface {
             return null;
         }
 
-        Card card = this.plants[this.selected];
+        Card card = this.plants.get(this.selected);
 
         if (!card.isCanPlant()) {
             return null;
@@ -118,4 +125,23 @@ public class PlantInterface {
     }
 
 
+    public void addSelected(Card card) {
+        if (!plants.contains(card)) {
+            plants.add(card);
+        }
+    }
+
+    public void removeSelected() {
+        plants.remove(selected);
+    }
+
+    public boolean hasCard(String s) {
+        for (Card c : plants) {
+            if (s.equals(c.getTag())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

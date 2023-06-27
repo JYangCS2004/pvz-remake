@@ -13,6 +13,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
+    private int gameState;
+    public static final int SELECTION_STATE = 0;
+    public static final int GAME_STATE = 1;
     private final int FPS = 60;
     private final int originalTileSize = 16;
     private final int scale = 3;
@@ -24,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final int screenWidth = screenColSize * tileSize;
 
     private Thread gameThread;
-
+    private SelectionScreen selectionScreen;
     private final PlantManager plantManager = new PlantManager(this);
     private final ZombieManager zombieSpawner = new ZombieManager(150,this);
     private final SunSpawner sunSpawner = new SunSpawner(100, this);
@@ -32,15 +35,18 @@ public class GamePanel extends JPanel implements Runnable {
     private final PultManager lobberManager = new PultManager(this);
     private final BeamManager AOEManager = new BeamManager(this);
     private final PlantInterface plantInterface = new PlantInterface(this);
-    final ImageLibrary imageLibrary = new ImageLibrary();
+    final ImageLibrary imageLibrary = new ImageLibrary(this);
 
     public GamePanel() {
+        gameState = SELECTION_STATE;
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         //lime green
         setBackground(new Color(50,205,50));
         setDoubleBuffered(true);
+        setFocusable(true);
 
-        addMouseListener(new MouseHandler(plantManager, sunSpawner, plantInterface));
+        selectionScreen = new SelectionScreen(this, imageLibrary, plantInterface);
+        addMouseListener(new MouseHandler(plantManager, sunSpawner, plantInterface, selectionScreen));
     }
 
     public void startGameThread() {
@@ -74,14 +80,18 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        zombieSpawner.updateEach();
-        plantManager.updateEach();
+        if (gameState == SELECTION_STATE) {
+            // keep this in case idk :D
+        } else {
+            zombieSpawner.updateEach();
+            plantManager.updateEach();
 
-        shooterManager.updateEach();
-        lobberManager.updateEach();
-        AOEManager.updateEach();
+            shooterManager.updateEach();
+            lobberManager.updateEach();
+            AOEManager.updateEach();
 
-        sunSpawner.updateEach();
+            sunSpawner.updateEach();
+        }
     }
 
     public void getMouseTracker(Graphics g) {
@@ -90,8 +100,15 @@ public class GamePanel extends JPanel implements Runnable {
         int closestEdgeX = p.x / tileSize;
         int closestEdgeY = p.y / tileSize;
 
-        g.drawRoundRect(closestEdgeX * tileSize,
-                closestEdgeY * tileSize, tileSize, tileSize, 10, 10);
+        if (gameState == SELECTION_STATE) {
+            if (closestEdgeX >= 1 && closestEdgeY >= 2 && closestEdgeY <= 4) {
+                g.drawRoundRect(closestEdgeX * tileSize,
+                        closestEdgeY * tileSize, tileSize, tileSize, 10, 10);
+            }
+        } else {
+            g.drawRoundRect(closestEdgeX * tileSize,
+                    closestEdgeY * tileSize, tileSize, tileSize, 10, 10);
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -100,18 +117,25 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+        g2.setStroke(new BasicStroke(2));
 
-        zombieSpawner.drawEach(g2);
-        plantManager.drawEach(g2);
+        if (gameState == SELECTION_STATE) {
+            g2.setColor(new Color(139,69,19));
+            selectionScreen.draw(g2);
+        } else {
+            zombieSpawner.drawEach(g2);
+            plantManager.drawEach(g2);
+
+            shooterManager.drawEach(g2);
+            lobberManager.drawEach(g2);
+            AOEManager.drawEach(g2);
+            sunSpawner.drawEach(g2);
+        }
+
         plantInterface.draw(g2, sunSpawner);
-
-        shooterManager.drawEach(g2);
-        lobberManager.drawEach(g2);
-        AOEManager.drawEach(g2);
-
         getMouseTracker(g2);
-        sunSpawner.drawEach(g2);
         g2.dispose();
+
     }
 
     public int getScreenRowSize() {
@@ -146,4 +170,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public ImageLibrary getImageLibrary(){return imageLibrary;}
+
+    public int getGameState() {
+        return gameState;
+    }
+    
+    public void startGame() {
+        gameState = GAME_STATE;
+    }
 }
