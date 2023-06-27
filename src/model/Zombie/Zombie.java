@@ -3,6 +3,7 @@ package model.Zombie;
 import model.EffectManager;
 import model.Entity;
 import model.Plant.Plant;
+import model.projectiles.Projectile;
 import ui.GamePanel;
 
 import java.awt.*;
@@ -18,7 +19,7 @@ public abstract class Zombie extends Entity {
     private final int damage;
     private int counter;
     private double buffer = 0;
-    private final EffectManager effectManager;
+    protected final EffectManager effectManager;
     private double multiplier = 1;
     protected int killBlock = 0;
 
@@ -71,7 +72,7 @@ public abstract class Zombie extends Entity {
         for (Entity entity : testable) {
             Plant p = (Plant) entity;
             if (p.getBounds().intersects(getBounds())) {
-                counter--;
+                updateCounter();
                 curSpeed = 0;
                 isCollided = true;
                 if (counter == 0) {
@@ -97,8 +98,14 @@ public abstract class Zombie extends Entity {
         }
     }
 
-    public void decreaseHealth(int damage) {
-        health -= damage;
+    public void decreaseHealth(Projectile p) {
+        health -= p.getDamage();
+    }
+
+    public void updateCounter(){
+        if(!effectManager.contains("STUN")){
+            counter--;
+        }
     }
 
     public int getHealth() {

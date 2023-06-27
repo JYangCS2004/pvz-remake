@@ -26,7 +26,7 @@ public class BulletManager extends ProjectileManager {
             Zombie e = (Zombie) possibleCollision;
 
             if (e.getBounds().intersects(p.getBounds())) {
-                e.decreaseHealth(p.getDamage());
+                e.decreaseHealth(p);
                 //only added status effect on bullet manager so far
                 for(String s: p.getOnHitEffects()){
                     e.getEffectManager().add(e.getEffectManager().select(e, s));
