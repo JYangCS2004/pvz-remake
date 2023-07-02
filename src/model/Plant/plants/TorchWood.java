@@ -9,7 +9,6 @@ import model.projectiles.Bullet.BulletProjectiles.IcePea;
 import model.projectiles.Bullet.BulletProjectiles.Pea;
 import ui.GamePanel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TorchWood extends Plant {
@@ -24,15 +23,14 @@ public class TorchWood extends Plant {
     @Override
     public void update() {
         List<Entity> testable = g.getShooterManager().getEntities();
-        List<Entity> newBullets = new ArrayList<>();
 
-        for (Entity e : testable) {
-            Bullet b = (Bullet) e;
+        for (int i = 0; i < testable.size(); i++) {
+            Bullet b = (Bullet) testable.get(i);
             if (b instanceof ChomperProjectile) {
                 continue;
             }
 
-            if (e.getBounds().intersects(getBounds())) {
+            if (b.getBounds().intersects(getBounds())) {
                 if (b.getHitting() == null || !b.getHitting().equals(this)) {
                     Bullet newOne;
                     if (b instanceof IcePea) {
@@ -44,13 +42,9 @@ public class TorchWood extends Plant {
                     }
 
                     g.getShooterManager().remove(b);
-                    newBullets.add(newOne);
+                    testable.add(newOne);
                 }
-
             }
         }
-
-        testable.addAll(newBullets);
-
     }
 }

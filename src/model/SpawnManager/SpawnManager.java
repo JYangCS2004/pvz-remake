@@ -5,20 +5,15 @@ import ui.GamePanel;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public abstract class SpawnManager {
     protected GamePanel gamePanel;
-
-    protected Map<Integer, List<Entity>> rowEntities;
 
     protected List<Entity> entities;
 
     public SpawnManager(GamePanel g) {
         this.gamePanel = g;
-        rowEntities = new HashMap<>();
         entities = new ArrayList<>();
     }
 
@@ -42,7 +37,8 @@ public abstract class SpawnManager {
     public List<Entity> getEntitiesByRow(int row) {
         List<Entity> rowEntities = new ArrayList<>();
 
-        for (Entity e : entities) {
+        for (int i = 0; i < entities.size(); i++) {
+            Entity e = entities.get(i);
             if (e.getRow() == row) {
                 rowEntities.add(e);
             }
@@ -59,14 +55,14 @@ public abstract class SpawnManager {
     } */
 
     public void updateEach() {
-        for (Entity e : entities) {
-            e.update();
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).update();
         }
     }
 
     public void drawEach(Graphics g) {
-        for (Entity e : entities) {
-            e.draw(g);
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).draw(g);
         }
     }
 

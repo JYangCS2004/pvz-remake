@@ -1,8 +1,8 @@
 package model;
 
 import model.Plant.Plant;
-import model.SpawnManager.SpawnManagers.PlantManager;
 import model.SpawnManager.RandSpawnManager.RandSpawners.SunSpawner;
+import model.SpawnManager.SpawnManagers.PlantManager;
 import ui.GamePanel;
 import ui.PlantInterface;
 import ui.SelectionScreen;
@@ -12,7 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Area;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MouseHandler extends MouseAdapter implements MouseMotionListener {
@@ -95,15 +95,17 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         int y = mouse.y;
 
         List<Entity> sunList = ss.getSuns();
-        Iterator<Entity> it = sunList.iterator();
 
-        while (it.hasNext()) {
-            Sun s = (Sun) it.next();
+        List<Sun> removeList = new ArrayList<>();
+        for (int i = 0; i < sunList.size(); i++) {
+            Sun s = (Sun) sunList.get(i);
             if (new Area(s.getBounds()).contains(x, y)) {
                 ss.incrementSun(SunSpawner.DEFAULT);
-                it.remove();
-                return;
+                removeList.add(s);
+                break;
             }
         }
+
+        sunList.removeAll(removeList);
     }
 }

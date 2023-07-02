@@ -24,7 +24,7 @@ public abstract class RandSpawnManager extends SpawnManager {
     }
 
     public void forceSpawn(Entity e){
-        super.spawn(e);
+        entities.add(e);
     }
 
 }

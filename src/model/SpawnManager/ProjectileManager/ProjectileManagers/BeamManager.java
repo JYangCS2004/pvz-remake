@@ -23,8 +23,8 @@ public class BeamManager extends ProjectileManager {
             return false;
         }
 
-        for (Entity possibleCollision : possibleCollisions) {
-            Zombie e = (Zombie) possibleCollision;
+        for (int i = 0; i < possibleCollisions.size(); i++) {
+            Zombie e = (Zombie) possibleCollisions.get(i);
 
             if (e.getBounds().intersects(p.getBounds())) {
                 e.decreaseHealth(p);

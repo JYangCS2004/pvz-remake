@@ -12,25 +12,22 @@ public abstract class ProjectileManager extends SpawnManager {
     public ProjectileManager(GamePanel g) {
         super(g);
     }
-
-    private List<Entity> removeList = new ArrayList<>();
-
     public void checkEach(){
-        for (Entity entity : entities) {
-            Projectile p = (Projectile) entity;
+        List<Entity> removeList = new ArrayList<>();
+
+        for (int i = 0; i < entities.size(); i++) {
+            Projectile p = (Projectile) entities.get(i);
             if (p.expired() || checkCollision(p)) {
                 // it.remove();
-                removeList.add(p);
+                entities.remove(p);
             }
         }
+
+        // entities.removeAll(removeList);
     }
 
     public void updateEach() {
         checkEach();
-
-        for (Entity e : removeList) {
-            entities.remove(e);
-        }
 
         super.updateEach();
     }
@@ -38,6 +35,6 @@ public abstract class ProjectileManager extends SpawnManager {
     public abstract boolean checkCollision(Projectile p);
 
     public void remove(Entity e) {
-        removeList.add(e);
+        entities.remove(e);
     }
 }
