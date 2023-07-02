@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlantInterface {
-
+    public static final int MAX_CARDS = 9;
     private GamePanel gamePanel;
 
     // private String[] plants = new String[9];
@@ -126,13 +126,17 @@ public class PlantInterface {
 
 
     public void addSelected(Card card) {
-        if (!plants.contains(card)) {
+        if (!plants.contains(card) && plants.size() < MAX_CARDS) {
             plants.add(card);
         }
     }
 
     public void removeSelected() {
-        plants.remove(selected);
+        try {
+            plants.remove(selected);
+        } catch (RuntimeException e) {
+            // do nothing
+        }
     }
 
     public boolean hasCard(String s) {
@@ -143,5 +147,9 @@ public class PlantInterface {
         }
 
         return false;
+    }
+
+    public boolean enoughCards() {
+        return plants.size() == MAX_CARDS;
     }
 }

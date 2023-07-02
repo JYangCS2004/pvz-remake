@@ -39,11 +39,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel() {
         gameState = SELECTION_STATE;
+        setLayout(null);
+
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         //lime green
         setBackground(new Color(50,205,50));
         setDoubleBuffered(true);
         setFocusable(true);
+        setVisible(true);
 
         selectionScreen = new SelectionScreen(this, imageLibrary, plantInterface);
         addMouseListener(new MouseHandler(plantManager, sunSpawner, plantInterface, selectionScreen));
@@ -61,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         while (gameThread != null) {
             update();
+            validate();
             repaint();
 
             try {
@@ -101,7 +105,7 @@ public class GamePanel extends JPanel implements Runnable {
         int closestEdgeY = p.y / tileSize;
 
         if (gameState == SELECTION_STATE) {
-            if (closestEdgeX >= 1 && closestEdgeY >= 2 && closestEdgeY <= 4) {
+            if (closestEdgeX >= 1 && closestEdgeY >= 2 && closestEdgeY <= 4 && closestEdgeX <= 9) {
                 g.drawRoundRect(closestEdgeX * tileSize,
                         closestEdgeY * tileSize, tileSize, tileSize, 10, 10);
             }
@@ -111,6 +115,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -120,7 +125,6 @@ public class GamePanel extends JPanel implements Runnable {
         g2.setStroke(new BasicStroke(2));
 
         if (gameState == SELECTION_STATE) {
-            g2.setColor(new Color(139,69,19));
             selectionScreen.draw(g2);
         } else {
             zombieSpawner.drawEach(g2);
@@ -132,16 +136,15 @@ public class GamePanel extends JPanel implements Runnable {
             sunSpawner.drawEach(g2);
         }
 
+
         plantInterface.draw(g2, sunSpawner);
         getMouseTracker(g2);
-        g2.dispose();
-
     }
 
     public int getScreenRowSize() {
         return screenRowSize;
     }
-    public int getScreenColSize() {return screenColSize; }
+    public int getScreenColSize() { return screenColSize; }
 
     public int getScreenWidth() {
         return screenWidth;
@@ -155,21 +158,31 @@ public class GamePanel extends JPanel implements Runnable {
         return zombieSpawner;
     }
 
-    public RandSpawnManager getSunSpawner(){return sunSpawner;}
+    public RandSpawnManager getSunSpawner(){
+        return sunSpawner;
+    }
 
-    public PlantManager getPlantManager() {return plantManager; }
+    public PlantManager getPlantManager() {
+        return plantManager;
+    }
 
     public PultManager getLobberManager() {
         return lobberManager;
     }
 
-    public BeamManager getAOEManager(){return AOEManager;}
+    public BeamManager getAOEManager(){
+        return AOEManager;
+    }
 
     public BulletManager getShooterManager() {
         return shooterManager;
     }
 
     public ImageLibrary getImageLibrary(){return imageLibrary;}
+
+    public PlantInterface getPlantInterface() {
+        return plantInterface;
+    }
 
     public int getGameState() {
         return gameState;

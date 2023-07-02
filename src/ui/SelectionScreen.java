@@ -3,8 +3,6 @@ package ui;
 import model.ImageLibrary;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class SelectionScreen {
     private int width = 14;
@@ -14,12 +12,15 @@ public class SelectionScreen {
     ImageLibrary ib;
     PlantInterface pi;
 
+    CustomButton button;
+
     private String[][] tags = new String[height][width];
 
     public SelectionScreen(GamePanel g, ImageLibrary ib, PlantInterface pi) {
         this.g = g;
         this.ib = ib;
         this.pi = pi;
+        button = new CustomButton(g);
 
         int i = 0;
         for (String s : ib.getTagToCard().keySet()) {
@@ -28,18 +29,13 @@ public class SelectionScreen {
             i++;
         }
 
-        g.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                int key = e.getKeyCode();
-                if (key == KeyEvent.VK_ENTER) {
-                    g.startGame();
-                };
-            }
-        });
+        int tile = g.getTileSize();
+        button.setBounds(4 * tile + tile / 2, 9 * tile + tile / 2, tile * 2, tile);
+        g.add(button);
     }
 
     public void draw(Graphics g) {
+        g.setColor(new Color(139,69,19));
         int tile = this.g.getTileSize();
         g.fillRoundRect(tile / 2, 2 * tile, 10 * tile, 9 * tile, 15, 15);
         g.setColor(new Color(222, 184, 135));
@@ -65,11 +61,9 @@ public class SelectionScreen {
 
             i++;
         }
-
     }
 
     public void assignCard(int x, int y) {
-        System.out.println("Row " + (y - 2) + " Column " + (x - 1) + ":" + tags[y - 2][x - 1]);
         pi.addSelected(ib.getCard(tags[y - 2][x - 1]));
     }
 }

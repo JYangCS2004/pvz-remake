@@ -44,7 +44,7 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         int nearEdgeY = y / tile;
 
         if (pm.getGamePanel().getGameState() == GamePanel.SELECTION_STATE) {
-            if (nearEdgeX >= 1 && nearEdgeY >= 2 && nearEdgeY <= 4) {
+            if (nearEdgeX >= 1 && nearEdgeY >= 2 && nearEdgeY <= 4 && nearEdgeX <= 9) {
                 screen.assignCard(nearEdgeX, nearEdgeY);
             }
 
@@ -52,7 +52,6 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
                 pi.selected = nearEdgeX;
                 pi.removeSelected();
             }
-
         } else {
             if (hasShovel) {
                 Plant p = null;
@@ -94,8 +93,6 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         Point mouse = e.getPoint();
         int x = mouse.x;
         int y = mouse.y;
-
-
 
         List<Entity> sunList = ss.getSuns();
         Iterator<Entity> it = sunList.iterator();

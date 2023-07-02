@@ -10,6 +10,7 @@ public class Main {
         window.setTitle("PVZ Clone");
 
         GamePanel gamePanel = new GamePanel();
+        // gamePanel.add(new JButton("Let's Rock"));
         window.add(gamePanel);
         window.pack();
 
@@ -17,6 +18,9 @@ public class Main {
         window.setVisible(true);
 
         gamePanel.startGameThread();
+
+
+
     }
 
     // NEED (Plans for now):
