@@ -11,6 +11,7 @@ import java.util.List;
 public class PultManager extends ProjectileManager {
     public PultManager(GamePanel g) {
         super(g);
+
     }
 
     public boolean checkCollision(Projectile p) {
