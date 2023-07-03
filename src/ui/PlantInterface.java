@@ -88,6 +88,10 @@ public class PlantInterface {
 
         String plantType = card.getTag();
         switch (plantType) {
+            case "gp":
+                return plantChecker(new GatlingPea(x, y, g), card);
+            case "rp":
+                return plantChecker(new Repeater(x, y, g), card);
             case "pm":
                 return plantChecker(new PotatoMine(x, y, g), card);
             case "tw":
@@ -114,8 +118,8 @@ public class PlantInterface {
     }
 
     private Plant plantChecker(Plant p, Card c) {
-        if (((SunSpawner) gamePanel.getSunSpawner()).getSunCount() >= p.getCost() && c.canPlant
-        && !gamePanel.getPlantManager().containsSquare(p)) {
+        if (((SunSpawner) gamePanel.getSunSpawner()).getSunCount() >= p.getCost() && c.canPlant &&
+        gamePanel.getPlantManager().canPlant(p)) {
             c.canPlant = false;
             c.resetHeight();
             return p;

@@ -72,5 +72,13 @@ public abstract class Plant extends Entity {
         return cost;
     }
 
+    public String getTag(){
+        return tag;
+    }
+    public String getPlantCondition(){
+        return "na";
+    }
+
     public void setTimer(){}
+
 }
