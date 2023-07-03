@@ -34,7 +34,6 @@ public class ScreenDoorZombie extends Zombie {
                 StatusEffect e = it.next();
                 if(e.getTag().equals("SHIELD")){
                     ((ShieldedEffect) e).update(p.getDamage());
-                    System.out.println(((ShieldedEffect) e).getLifetime());
                 }
             }
         }else{

@@ -1,13 +1,20 @@
 package model.SpawnManager.SpawnManagers;
 
 import model.Entity;
+import model.Plant.Plant;
 import model.SpawnManager.SpawnManager;
+import ui.Tile;
 import ui.GamePanel;
 
 public class PlantManager extends SpawnManager {
-    boolean[][] plantedSpots = new boolean[gamePanel.getScreenColSize()][gamePanel.getScreenRowSize()];
+    Tile[][] plantedSpots = new Tile[gamePanel.getScreenColSize()][gamePanel.getScreenRowSize()];
     public PlantManager(GamePanel g) {
         super(g);
+        for(int i = 0; i < gamePanel.getScreenColSize(); i++){
+            for(int u = 0; u < gamePanel.getScreenRowSize(); u++){
+                plantedSpots[i][u] = new Tile();
+            }
+        }
         /* g.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -24,23 +31,37 @@ public class PlantManager extends SpawnManager {
 
     public void remove(Entity e) {
         entities.remove(e);
-        freeSquare(e.getX() / gamePanel.getTileSize(), e.getY() / gamePanel.getTileSize());
+        plantedSpots[e.getX() / gamePanel.getTileSize()][e.getY() / gamePanel.getTileSize()].resetTile();
     }
 
-    public boolean containsSquare(Entity e) {
-        return plantedSpots[e.getX() / gamePanel.getTileSize()][e.getY() / gamePanel.getTileSize()];
+    public boolean canPlant(Plant e) {
+        int row = e.getX() / gamePanel.getTileSize();
+        int col = e.getY() / gamePanel.getTileSize();
+        return e.getPlantCondition().equals(plantedSpots[row][col].getTag());
     }
 
     public void spawn(Entity e) {
+        int row = e.getX() / gamePanel.getTileSize();
+        int col = e.getY() / gamePanel.getTileSize();
+        removeByRowCol(row, col);
         super.spawn(e);
-        plantedSpots[e.getX() / gamePanel.getTileSize()][e.getY() / gamePanel.getTileSize()] = true;
+        plantedSpots[row][col].plantTile((Plant)e);
+    }
+
+    public void removeByRowCol(int row, int col){
+        for(Entity e: entities){
+            if((e.getX() / gamePanel.getTileSize()) == row
+            && (e.getY() / gamePanel.getTileSize()) == col){
+                entities.remove(e);
+                break;
+            }
+        }
     }
 
     public GamePanel getGamePanel() {
         return gamePanel;
+
     }
 
-    private void freeSquare(int row, int col) {
-        plantedSpots[row][col] = false;
-    }
+
 }

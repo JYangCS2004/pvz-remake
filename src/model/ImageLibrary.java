@@ -118,6 +118,22 @@ public class ImageLibrary {
         textXFix.put("pm", 15);
         textYFix.put("pm", 35);
         tagToCard.put("pm", new Card("pm", 50, g));
+
+        // repeater
+        imageList.put("rp", getImage("src/Graphics/Repeater.png", 38, 38));
+        xFix.put("rp",5);
+        yFix.put("rp", 5);
+        textXFix.put("rp", 15);
+        textYFix.put("rp", 35);
+        tagToCard.put("rp", new Card("rp", 10, g));
+
+        //gatlingpea
+        imageList.put("gp", getImage("src/Graphics/GatlingPea.png", 48, 39));
+        xFix.put("gp",0);
+        yFix.put("gp", 5);
+        textXFix.put("gp", 15);
+        textYFix.put("gp", 35);
+        tagToCard.put("gp", new Card("gp", 10, g));
     }
 
     public static Image getImage(String path, int xScale, int yScale){
