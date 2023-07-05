@@ -134,6 +134,14 @@ public class ImageLibrary {
         textXFix.put("gp", 15);
         textYFix.put("gp", 35);
         tagToCard.put("gp", new Card("gp", 10, g));
+
+        // cattail
+        imageList.put("ct", getImage("src/Graphics/cattail.png", 48, 48));
+        xFix.put("ct",0);
+        yFix.put("ct", 5);
+        textXFix.put("ct", 15);
+        textYFix.put("ct", 35);
+        tagToCard.put("ct", new Card("ct", 10, g));
     }
 
     public static Image getImage(String path, int xScale, int yScale){

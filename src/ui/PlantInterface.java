@@ -112,6 +112,8 @@ public class PlantInterface {
                 return plantChecker(new Chomper(x, y, g), card);
             case "fs":
                 return plantChecker(new FumeShroom(x, y, g), card);
+            case "ct":
+                return plantChecker(new Cattail(x, y, g), card);
             default:
                 return plantChecker(new Peashooter(x, y, g), card);
         }

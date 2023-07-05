@@ -36,13 +36,17 @@ public class TorchWood extends Plant {
                     if (b instanceof IcePea) {
                         newOne = new Pea(b.getX(), b.getY(), this, g);
                         newOne.setHitting(this);
-                    } else {
+
+                        g.getShooterManager().remove(b);
+                        testable.add(newOne);
+
+                    } else if (b instanceof Pea) {
                         newOne = new FirePea(b.getX(), b.getY(), this, g);
                         newOne.setHitting(this);
-                    }
 
-                    g.getShooterManager().remove(b);
-                    testable.add(newOne);
+                        g.getShooterManager().remove(b);
+                        testable.add(newOne);
+                    }
                 }
             }
         }

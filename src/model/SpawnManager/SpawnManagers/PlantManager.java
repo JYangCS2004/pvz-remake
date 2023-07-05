@@ -49,7 +49,8 @@ public class PlantManager extends SpawnManager {
     }
 
     public void removeByRowCol(int row, int col){
-        for(Entity e: entities){
+        for(int i = 0; i < entities.size(); i++){
+            Entity e = entities.get(i);
             if((e.getX() / gamePanel.getTileSize()) == row
             && (e.getY() / gamePanel.getTileSize()) == col){
                 entities.remove(e);
@@ -60,7 +61,6 @@ public class PlantManager extends SpawnManager {
 
     public GamePanel getGamePanel() {
         return gamePanel;
-
     }
 
 
