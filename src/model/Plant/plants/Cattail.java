@@ -2,7 +2,7 @@ package model.Plant.plants;
 
 import model.Plant.Plant;
 import model.SpawnManager.ProjectileManager.ProjectileManager;
-import model.projectiles.CattailSpike;
+import model.projectiles.Bullet.BulletProjectiles.CattailSpike;
 import ui.GamePanel;
 
 public class Cattail extends Plant {
