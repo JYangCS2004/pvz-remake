@@ -1,13 +1,14 @@
-package model.projectiles;
+package model.projectiles.Bullet.BulletProjectiles;
 
 import model.Entity;
+import model.Zombie.Zombie;
+import model.projectiles.Bullet.Bullet;
 import ui.GamePanel;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CattailSpike extends Projectile {
+public class CattailSpike extends Bullet {
     private static final int LIFETIME = 10000;
     private static final int WIDTH = 16;
     private static final int HEIGHT = 16;
@@ -23,7 +24,7 @@ public class CattailSpike extends Projectile {
     private double angle = 150;
 
     public CattailSpike(int x, int y, Entity owner, GamePanel g) {
-        super(x, y, WIDTH, HEIGHT, 5, DAMAGE, LIFETIME, owner, new ArrayList<>(), g);
+        super(x, y, WIDTH, HEIGHT, 5, DAMAGE, LIFETIME, owner,  g);
         this.x = x;
         this.y = y;
 
@@ -48,7 +49,7 @@ public class CattailSpike extends Projectile {
 
         double random = angle * Math.PI / 180.0;
 
-        if (target != null) {
+        if (((Zombie) target).getHealth() > 0) {
 
             if (super.y < target.getY()) {
                 this.x += -Math.cos(random) * 2;
@@ -62,6 +63,9 @@ public class CattailSpike extends Projectile {
             double distance = (new Point((int)this.x, (int)this.y).distance(target.getX(), target.getY()));
             velocityX = (target.getX() - x) / (distance);
             velocityY = (target.getY() - y) / (distance);
+        }
+        else{
+            lifetime = 50;
         }
 
         x += 1;

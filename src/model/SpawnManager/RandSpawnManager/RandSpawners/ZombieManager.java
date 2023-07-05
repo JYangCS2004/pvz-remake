@@ -16,7 +16,7 @@ public class ZombieManager extends RandSpawnManager {
     @Override
     public void updateEach() {
         Random rand = new Random();
-        spawn(new DefaultZombie(gamePanel.getScreenWidth(), 48 * rand.nextInt(gamePanel.getScreenRowSize()), gamePanel));
+        spawn(new DefaultZombie(gamePanel.getScreenWidth(), 48 + 48 * rand.nextInt(gamePanel.getScreenRowSize()-1), gamePanel));
 
         super.updateEach();
     }
