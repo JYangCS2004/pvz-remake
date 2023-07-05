@@ -58,6 +58,7 @@ public class CattailSpike extends Projectile {
                 this.y += Math.sin(random) * 2;
             }
 
+
             double distance = (new Point((int)this.x, (int)this.y).distance(target.getX(), target.getY()));
             velocityX = (target.getX() - x) / (distance);
             velocityY = (target.getY() - y) / (distance);
