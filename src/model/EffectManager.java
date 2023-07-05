@@ -68,6 +68,10 @@ public class EffectManager {
 
     public StatusEffect select(Zombie z, String tag){
         switch (tag){
+            case "IS_CHILL":
+                return new ChillEffect(z, 700);
+            case "FREEZE":
+                return new FreezeEffect(z);
             case "PIERCING":
                 return new NothingEffect(z);
             case "KILL":

@@ -45,6 +45,9 @@ public abstract class Zombie extends Entity {
         if(effectManager.contains("STUN")){
             g.setColor(Color.yellow);
         }
+        else if(effectManager.contains("FREEZE")){
+            g.setColor(Color.CYAN);
+        }
         else if(effectManager.contains("CHILL")){
             g.setColor(Color.blue);
         }
@@ -120,6 +123,8 @@ public abstract class Zombie extends Entity {
     public void editSpeed(double percentage){
         multiplier = Math.min(percentage, multiplier);
     }
+
+    public void resetMultiplier(){multiplier = 1;}
 
     public EffectManager getEffectManager(){
         return effectManager;

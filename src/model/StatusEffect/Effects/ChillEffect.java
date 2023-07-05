@@ -11,11 +11,10 @@ public class ChillEffect extends StatusEffect {
         super(host, LIFE_TIME, TAG);
     }
 
+    public ChillEffect(Zombie host, int life_time){super(host, life_time, TAG);}
+
     public void update(){
         ((Zombie) host).editSpeed(0.5);
-        if(this.lifetime == 1){
-            ((Zombie) host).editSpeed(1);
-        }
         lifetime--;
     }
 

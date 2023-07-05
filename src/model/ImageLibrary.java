@@ -135,13 +135,23 @@ public class ImageLibrary {
         textYFix.put("gp", 35);
         tagToCard.put("gp", new Card("gp", 10, g));
 
-        // cattail
-        imageList.put("ct", getImage("src/Graphics/cattail.png", 48, 48));
-        xFix.put("ct",0);
-        yFix.put("ct", 5);
-        textXFix.put("ct", 15);
-        textYFix.put("ct", 35);
-        tagToCard.put("ct", new Card("ct", 10, g));
+        //Cherry Bomb
+        imageList.put("cb", getImage("src/Graphics/CherryBomb.png", 57, 44));
+        xFix.put("cb", -5);
+        yFix.put("cb", 5);
+        textXFix.put("cb", 15);
+        textYFix.put("cb", 35);
+        tagToCard.put("cb", new Card("cb", 30, g));
+
+        //Ice Shroom
+        imageList.put("is", getImage("src/Graphics/IceShroom.png", 50, 44));
+        xFix.put("is", 0);
+        yFix.put("is", 5);
+        textXFix.put("is", 15);
+        textYFix.put("is", 35);
+        tagToCard.put("is", new Card("is", 0, g));
+
+
     }
 
     public static Image getImage(String path, int xScale, int yScale){
