@@ -151,6 +151,13 @@ public class ImageLibrary {
         textYFix.put("is", 35);
         tagToCard.put("is", new Card("is", 0, g));
 
+        //Cat tail
+        imageList.put("ct", getImage("src/Graphics/cattail.png", 45, 45));
+        xFix.put("ct", 0);
+        yFix.put("ct", 5);
+        textXFix.put("ct", 15);
+        textYFix.put("ct", 35);
+        tagToCard.put("ct", new Card("ct", 0, g));
 
     }
 
