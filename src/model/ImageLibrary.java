@@ -22,6 +22,7 @@ public class ImageLibrary {
 
     //some static images
     public static Image cabbage = getImage("src/Graphics/CabbageProjectile.png", 16, 16);
+    public static Image spike = getImage("src/Graphics/spike.png", 16, 16);
 
     public ImageLibrary(GamePanel g){
         //peashooter
