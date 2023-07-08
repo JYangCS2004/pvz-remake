@@ -1,12 +1,14 @@
 package model.projectiles.Bullet.BulletProjectiles;
 
 import model.Entity;
+import model.physics.Vector;
 import model.projectiles.Bullet.Bullet;
 import ui.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,19 +23,29 @@ public class CattailSpike extends Bullet {
 
     private double x;
     private double y;
-    private double velocityX;
-    private double velocityY;
+    private Vector velocity;
+    private Vector acceleration;
+    private double maxSpeed;
+    private double maxForce;
     private int followDelay = 50;
     private Entity target;
     private double radius;
-    private double angle = 180;
+    private double angle = 100;
     private double imageAngle = 120;
-    private boolean turning = false;
+    private double quadrant = 0;
+
+    private int a, b;
 
     public CattailSpike(int x, int y, Entity owner, GamePanel g) {
         super(x, y, WIDTH, HEIGHT, 5, DAMAGE, LIFETIME, owner,  g);
         this.x = x;
         this.y = y;
+
+        maxSpeed = 2;
+        velocity = new Vector(1, 0);
+        velocity.mult(maxSpeed);
+
+        acceleration = new Vector(0, 0);
 
         double closest = 100000.0;
         List<Entity> zm = g.getZombieSpawner().getEntities();
@@ -53,56 +65,71 @@ public class CattailSpike extends Bullet {
 
     @Override
     public void update() {
-
-        double random = angle * Math.PI / 180.0;
+        double random = Math.toRadians(angle);
         List<Entity> testable = g.getZombieSpawner().getEntities();
+        double distance = (new Point2D.Double(x, y)).distance(target.getX(), target.getY());
+        double nextX = 0, nextY = 0;
 
-        if (super.y < target.getY()) {
-            this.x += -Math.cos(random) * 2;
-            this.y += -Math.sin(random) * 2;
+        /*if (super.y < target.getY()) {
+            //this.x -= Math.cos(random);
+            //this.y -= Math.sin(random);
             imageAngle++;
+
+            nextX = x - distance * Math.cos(random);
+            nextY = y - distance * Math.sin(random);
         } else if (super.y == target.getY()) {
             this.x += 1;
         } else {
-            this.x += -Math.cos(random) * 2;
-            this.y += Math.sin(random) * 2;
-            imageAngle--;
-        }
+            //this.x -= Math.cos(random);
+            //this.y += Math.sin(random);
+            nextX = x + distance * Math.cos(random);
+            nextY = y - distance * Math.sin(random);
 
-        if (testable.contains(target)) {
+            imageAngle = Math.toDegrees(Math.atan((nextY - y) / (nextX - x))) + 150;
+        } */
 
-            double distance = (new Point((int)this.x, (int)this.y).distance(target.getX(), target.getY()));
-            velocityX = (target.getX() - x) / (distance);
-            velocityY = (target.getY() - y) / (distance);
+        double normalize = (new Point2D.Double(x, y)).distance(nextX, nextY);
 
-
-            x += 1;
-            x += velocityX * 2;
-            y += velocityY * 2;
+        // velocityX = (target.getX() - x) / (distance);
+        /// velocityY = (target.getY() - y) / (distance);
 
 
-            if (followDelay <= 0) {
+        //x += 1;
+
+
+            /* if (followDelay <= 0) {
+                x += velocityX * 2;
+                y += velocityY * 2;
                 angle++;
             } else {
                 followDelay--;
-            }
-
-            /*if (turning) {
-                imageAngle++;
-            } else {
-                if (imageAngle <= 0) {
-                    turning = true;
-                } else {
-                    imageAngle--;
-                }
+                //x+=2;
             } */
 
-
-
-        }
-        else{
+        if (!testable.contains(target)) {
             lifetime = 50;
+        } else {
+            seek();
+            velocity.add(acceleration);
+            velocity.limit(maxSpeed);
         }
+
+        x = x + velocity.x;
+        y = y + velocity.y;
+
+        acceleration.mult(0);
+    }
+
+
+    public void seek() {
+        Vector desired = Vector.sub(new Vector(target.getX(), target.getY()), new Vector(x, y));
+        desired.normalize();
+        desired.mult(maxSpeed);
+
+        Vector steer = Vector.sub(desired, velocity);
+        steer.limit(0.02);
+
+        acceleration.add(steer);
     }
 
     @Override
@@ -112,7 +139,7 @@ public class CattailSpike extends Bullet {
 
         BufferedImage spike;
         try {
-            spike = ImageIO.read(new File("src/Graphics/spike_new.png"));
+            spike = ImageIO.read(new File("src/Graphics/spike3.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -123,7 +150,11 @@ public class CattailSpike extends Bullet {
         //g2.drawImage(spike, (int)x, (int)y, null);
         //g2.setTransform(backup);
 
-        AffineTransform tx = AffineTransform.getRotateInstance(Math.toRadians(imageAngle), spike.getWidth() / 2, spike.getHeight() / 2);
+        double angle = velocity.heading();
+
+        // double angle = Math.toDegrees(velocity.heading());
+
+        AffineTransform tx = AffineTransform.getRotateInstance(angle, spike.getWidth() / 2, spike.getHeight() / 2);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 
 // Drawing the rotated image at the required drawing locations
@@ -142,6 +173,10 @@ public class CattailSpike extends Bullet {
         g2.rotate(Math.toRadians(angle - 150), 0, 0);
         g2.drawImage(img, null, 0, 0);
         return newImage;
+    }
+
+    public Entity getTarget() {
+        return target;
     }
 
     @Override

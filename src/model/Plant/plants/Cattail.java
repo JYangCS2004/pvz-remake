@@ -22,7 +22,7 @@ public class Cattail extends Plant {
         if (counter <= 0) {
             if (g.getZombieSpawner().getEntities().size() != 0) {
                 projectileManager.spawn(new CattailSpike(x, y, this, g));
-                counter = 20;
+                counter = 30;
             }
         } else {
             counter--;

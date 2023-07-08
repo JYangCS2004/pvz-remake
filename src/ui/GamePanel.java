@@ -139,6 +139,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         plantInterface.draw(g2, sunSpawner);
         getMouseTracker(g2);
+
+        if (gameState == GAME_STATE) {
+            g2.dispose();
+        }
     }
 
     public int getScreenRowSize() {
