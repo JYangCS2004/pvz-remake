@@ -160,6 +160,14 @@ public class ImageLibrary {
         textYFix.put("ct", 35);
         tagToCard.put("ct", new Card("ct", 0, g));
 
+        //gloomshroom
+        imageList.put("gs", getImage("src/Graphics/GatlingPea.png", 48, 39));
+        xFix.put("gs",0);
+        yFix.put("gs", 5);
+        textXFix.put("gs", 15);
+        textYFix.put("gs", 35);
+        tagToCard.put("gs", new Card("gs", 10, g));
+
     }
 
     public static Image getImage(String path, int xScale, int yScale){
