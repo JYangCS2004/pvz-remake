@@ -15,6 +15,13 @@ public class BulletManager extends ProjectileManager {
         super(g);
     }
 
+    private void applyDamage(Zombie e, Projectile p) {
+        e.decreaseHealth(p);
+        if (e.getHealth() <= 0) {
+            gamePanel.getZombieSpawner().removeZombie(e);
+        }
+    }
+
     public boolean checkCollision(Projectile p) {
 
         List<Entity> possibleCollisions = gamePanel.getZombieSpawner().getEntities();
@@ -27,18 +34,6 @@ public class BulletManager extends ProjectileManager {
             Zombie e = (Zombie) possibleCollisions.get(i);
 
             if (e.getBounds().intersects(p.getBounds())) {
-                if (p instanceof CattailSpike) {
-                    if (e == ((CattailSpike) p).getTarget()) {
-
-                        e.decreaseHealth(p);
-                        if (e.getHealth() <= 0) {
-                            gamePanel.getZombieSpawner().removeZombie(e);
-                        }
-                        return true;
-                    }
-                }
-
-                e.decreaseHealth(p);
                 //only added status effect on bullet manager so far
                 for(String s: p.getOnHitEffects()){
                     e.getEffectManager().add(e.getEffectManager().select(e, s));
@@ -46,11 +41,15 @@ public class BulletManager extends ProjectileManager {
 
                 // currently assumes all projectiles are from plant
                 ((Plant) p.getOwner()).setTimer();
-                if (e.getHealth() <= 0) {
-                    gamePanel.getZombieSpawner().removeZombie(e);
+                if (p instanceof CattailSpike) {
+                    if (e == ((CattailSpike) p).getTarget()) {
+                        applyDamage(e, p);
+                        return true;
+                    }
+                } else {
+                    applyDamage(e, p);
+                    return true;
                 }
-
-                return true;
             }
         }
         return false;
