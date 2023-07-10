@@ -168,6 +168,15 @@ public class ImageLibrary {
         textYFix.put("cc", 35);
         tagToCard.put("cc", new Card("cc", 0, g));
 
+        //gloom shroom
+        imageList.put("gs", getImage("src/Graphics/GloomShroom.png", 48, 48));
+        xFix.put("gs",0);
+        yFix.put("gs", 0);
+        textXFix.put("gs", 15);
+        textYFix.put("gs", 35);
+        tagToCard.put("gs", new Card("gs", 10, g));
+
+
     }
 
     public static Image getImage(String path, int xScale, int yScale){

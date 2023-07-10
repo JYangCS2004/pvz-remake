@@ -15,12 +15,12 @@ public class GloomShroom extends Plant {
     private int burstFire = 4;
     private final int BURST_TIME = 5;
     private final ProjectileManager projectileManager;
-    private static final int HEALTH = 10;
+    private static final int HEALTH = 30;
     private static final int COST = 150;
     private static final String TAG = "gs";
     public GloomShroom(int x, int y, GamePanel g){
         super(x,y, HEALTH, TAG, g, COST);
-        this.projectileManager = g.getShooterManager();
+        this.projectileManager = g.getAOEManager();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class GloomShroom extends Plant {
             if (counter == 0 && burstFire >= 1) {
                 counter = BURST_TIME;
                 burstFire--;
-                projectileManager.spawn(new GloomShroomSpore(x+20, y +15, this, g));
+                projectileManager.spawn(new GloomShroomSpore(x, y, this, g));
             }
             else if(burstFire == 0){
                 counter = SPAWN_TIME;
@@ -46,7 +46,7 @@ public class GloomShroom extends Plant {
     private boolean canShoot(){
         int t = g.getTileSize();
         for(Entity e: g.getZombieSpawner().getEntities()){
-            if(e.getBounds().intersects(new Rectangle(x-t-1, y-t-1, 3*t+2, 3*t+2))){
+            if(e.getBounds().intersects(new Rectangle(x-t-1, y-t, 3*t+2, 3*t))){
                 return true;
             }
         }
