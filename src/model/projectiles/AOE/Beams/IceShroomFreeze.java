@@ -20,7 +20,7 @@ public class IceShroomFreeze extends Beam {
     public void draw(Graphics g){
         g.setColor(Color.blue);
         System.out.println(x + " " + y);
-        g.fillRect(x, y, super.g.getTileSize()*3, super.g.getTileSize()*3);
+        // g.fillRect(x, y, super.g.getTileSize()*3, super.g.getTileSize()*3);
         g.setColor(Color.white);
     }
 }

@@ -160,13 +160,13 @@ public class ImageLibrary {
         textYFix.put("ct", 35);
         tagToCard.put("ct", new Card("ct", 0, g));
 
-        //gloomshroom
-        imageList.put("gs", getImage("src/Graphics/GatlingPea.png", 48, 39));
-        xFix.put("gs",0);
-        yFix.put("gs", 5);
-        textXFix.put("gs", 15);
-        textYFix.put("gs", 35);
-        tagToCard.put("gs", new Card("gs", 10, g));
+        // Cob Cannon
+        imageList.put("cc", getImage("src/Graphics/cobcannon.png", 45, 45 * 538 / 349));
+        xFix.put("cc", 0);
+        yFix.put("cc", 5);
+        textXFix.put("cc", 15);
+        textYFix.put("cc", 35);
+        tagToCard.put("cc", new Card("cc", 0, g));
 
     }
 
