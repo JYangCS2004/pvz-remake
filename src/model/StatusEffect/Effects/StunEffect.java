@@ -16,7 +16,7 @@ public class StunEffect extends StatusEffect {
     public void update() {
         ((Zombie) host).editSpeed(0);
         if(this.lifetime == 1){
-            ((Zombie) host).editSpeed(1);
+            ((Zombie) host).resetMultiplier();
         }
         lifetime--;
     }
