@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class CattailSpike extends Bullet {
-    private static final int LIFETIME = 10000;
+    private static final int LIFETIME = 1;
     private static final int WIDTH = 16;
     private static final int HEIGHT = 16;
     private static final int DAMAGE = 2;
@@ -107,7 +107,9 @@ public class CattailSpike extends Bullet {
             } */
 
         if (!testable.contains(target)) {
-            lifetime = 50;
+            if (x > g.getScreenWidth() || x < 0 || y < 0 || y > g.getScreenHeight()) {
+                lifetime--;
+            }
         } else {
             seek();
             velocity.add(acceleration);

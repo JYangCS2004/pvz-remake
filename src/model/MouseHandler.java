@@ -12,11 +12,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Area;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MouseHandler extends MouseAdapter implements MouseMotionListener {
     private boolean hasShovel;
+    private boolean engageCob;
     PlantManager pm;
     SunSpawner ss;
 
@@ -95,17 +95,17 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         int y = mouse.y;
 
         List<Entity> sunList = ss.getSuns();
-
-        List<Sun> removeList = new ArrayList<>();
         for (int i = 0; i < sunList.size(); i++) {
             Sun s = (Sun) sunList.get(i);
             if (new Area(s.getBounds()).contains(x, y)) {
                 ss.incrementSun(SunSpawner.DEFAULT);
-                removeList.add(s);
+                sunList.remove(s);
                 break;
             }
         }
+    }
 
-        sunList.removeAll(removeList);
+    public void engageCobCannon() {
+        engageCob = true;
     }
 }

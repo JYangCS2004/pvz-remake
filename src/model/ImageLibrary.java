@@ -160,6 +160,14 @@ public class ImageLibrary {
         textYFix.put("ct", 35);
         tagToCard.put("ct", new Card("ct", 0, g));
 
+        // Cob Cannon
+        imageList.put("cc", getImage("src/Graphics/cobcannon.png", 45, 45 * 538 / 349));
+        xFix.put("cc", 0);
+        yFix.put("cc", 5);
+        textXFix.put("cc", 15);
+        textYFix.put("cc", 35);
+        tagToCard.put("cc", new Card("cc", 0, g));
+
     }
 
     public static Image getImage(String path, int xScale, int yScale){
