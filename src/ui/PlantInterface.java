@@ -88,6 +88,8 @@ public class PlantInterface {
 
         String plantType = card.getTag();
         switch (plantType) {
+            case "ss":
+                return plantChecker(new ScaredyShroom(x,y,g), card);
             case "gs":
                 return plantChecker(new GloomShroom(x,y,g), card);
             case "is":
