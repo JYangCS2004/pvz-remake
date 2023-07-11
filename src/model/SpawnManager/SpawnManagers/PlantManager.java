@@ -65,6 +65,7 @@ public class PlantManager extends SpawnManager {
                 ((CobCannon) e).removeButton();
                 return false;
             }
+
         }
         System.out.println(e.getPlantCondition());
         System.out.println(plantedSpots[row][col].getTag());
