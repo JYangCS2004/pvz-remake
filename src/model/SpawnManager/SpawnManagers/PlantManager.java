@@ -66,6 +66,7 @@ public class PlantManager extends SpawnManager {
                 return false;
             }
 
+
         }
         System.out.println(e.getPlantCondition());
         System.out.println(plantedSpots[row][col].getTag());
