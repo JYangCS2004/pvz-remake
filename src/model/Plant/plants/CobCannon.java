@@ -77,6 +77,7 @@ public class CobCannon extends Plant {
         counter = spawnTime;
     }
 
+
     @Override
     public String getPlantCondition() {
         return "kp";
