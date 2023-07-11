@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class CobDetonate extends Beam {
     public CobDetonate(int x, int y, Entity owner, GamePanel g) {
-        super(x - g.getTileSize() / 2, y - g.getTileSize() / 2 , g.getTileSize()*3, g.getTileSize()*3, 0, owner, false, g);
+        super(x - 3 * g.getTileSize() / 2, y - 3 * g.getTileSize() / 2 , g.getTileSize()*3, g.getTileSize()*3, 0, owner, false, g);
         this.onHitEffects.add("KILL");
     }
 

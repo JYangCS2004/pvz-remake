@@ -34,6 +34,9 @@ public class PlantManager extends SpawnManager {
         int row = e.getX() / gamePanel.getTileSize();
         int col = e.getY() / gamePanel.getTileSize();
 
+        if (e instanceof CobCannon) {
+            ((CobCannon) e).removeButton();
+        }
 
         if (((Plant) e).getTag().equals("cc")) {
             System.out.println(plantedSpots[row + 1][col].getTag());
