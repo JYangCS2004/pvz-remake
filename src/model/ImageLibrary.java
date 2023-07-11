@@ -161,7 +161,7 @@ public class ImageLibrary {
         tagToCard.put("ct", new Card("ct", 0, g));
 
         // Cob Cannon
-        imageList.put("cc", getImage("src/Graphics/cobcannon.png", 45, 45 * 538 / 349));
+        imageList.put("cc", getImage("src/Graphics/cobcannon.png", 30 * 538 / 349, 30));
         xFix.put("cc", 0);
         yFix.put("cc", 5);
         textXFix.put("cc", 15);

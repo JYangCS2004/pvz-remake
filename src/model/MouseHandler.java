@@ -1,6 +1,7 @@
 package model;
 
 import model.Plant.Plant;
+import model.Plant.plants.CobCannon;
 import model.SpawnManager.RandSpawnManager.RandSpawners.SunSpawner;
 import model.SpawnManager.SpawnManagers.PlantManager;
 import ui.GamePanel;
@@ -17,6 +18,7 @@ import java.util.List;
 public class MouseHandler extends MouseAdapter implements MouseMotionListener {
     private boolean hasShovel;
     private boolean engageCob;
+    private CobCannon engagingCannon;
     PlantManager pm;
     SunSpawner ss;
 
@@ -73,6 +75,13 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
             if (nearEdgeY == 0) {
                 hasShovel = (nearEdgeX == 13);
                 pi.selected = nearEdgeX;
+            } else if (engageCob) {
+                System.out.println(engageCob);
+                engagingCannon.launch(x, y);
+
+                // reset mouse
+                engageCob = false;
+                pm.getGamePanel().mouseState = 0;
             }
 
             //spawn plant if not at interface
@@ -105,7 +114,8 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         }
     }
 
-    public void engageCobCannon() {
+    public void engageCobCannon(CobCannon cobCannon) {
         engageCob = true;
+        engagingCannon = cobCannon;
     }
 }

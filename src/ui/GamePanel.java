@@ -14,6 +14,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     private int gameState;
+    public int mouseState;
     public static final int SELECTION_STATE = 0;
     public static final int GAME_STATE = 1;
     private final int FPS = 60;
@@ -98,7 +99,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void getMouseTracker(Graphics g) {
+    private void getMouseTracker(Graphics g) {
         Point p = MouseInfo.getPointerInfo().getLocation();
         SwingUtilities.convertPointFromScreen(p, this);
         int closestEdgeX = p.x / tileSize;
@@ -110,8 +111,12 @@ public class GamePanel extends JPanel implements Runnable {
                         closestEdgeY * tileSize, tileSize, tileSize, 10, 10);
             }
         } else {
+            if (mouseState == 1) {
+                g.setColor(Color.red);
+            }
             g.drawRoundRect(closestEdgeX * tileSize,
                     closestEdgeY * tileSize, tileSize, tileSize, 10, 10);
+            g.setColor(Color.white);
         }
     }
 
