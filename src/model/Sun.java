@@ -3,11 +3,22 @@ package model;
 import java.awt.*;
 
 public class Sun extends Entity {
+
+    private final int value;
     public Sun(int x, int y, int speed) {
         super(x, y);
         super.speed = speed;
         width = 30;
         height = 30;
+        value = 50;
+    }
+
+    public Sun(int x, int y, int speed, int value){
+        super(x, y);
+        super.speed = speed;
+        width = 30;
+        height = 30;
+        this.value = value;
     }
 
     @Override
@@ -28,4 +39,6 @@ public class Sun extends Entity {
     public void update() {
         y += speed;
     }
+
+    public int getValue(){return value;}
 }

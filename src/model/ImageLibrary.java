@@ -176,8 +176,22 @@ public class ImageLibrary {
         textYFix.put("gs", 35);
         tagToCard.put("gs", new Card("gs", 10, g));
 
+        //scaredy shroom
         put("src/Graphics/ScaredyShroom.png", 33, 45, 5, 0, 10, "ss", g);
         putWithoutCard("src/Graphics/ScaredyShroomScared.png", 48, 45, 0, 5, "sss", g);
+
+        //puff shroom
+        put("src/Graphics/PuffShroom.png", 30, 30, 9, 12, 15, "psh", g);
+
+        //sun shroom
+        put("src/Graphics/SunShroom.png", 24, 26, 13, 20, 20, "sh", g);
+        putWithoutCard("src/Graphics/SunShroom.png", 36, 39, 0, 5, "bsh", g);
+
+        //doom shroom
+        put("src/Graphics/DoomShroom.png", 40, 40, 4, 6, 40, "ds", g);
+        putWithoutCard("src/Graphics/DoomShroomExplosion.png", 240, 260, -2*48, (int)-4.4*48, "dse", g);
+        putWithoutCard("src/Graphics/DoomShroomHole.png", 50, 36, 4, 6, "dsh", g);
+
     }
 
     private void putWithoutCard(String path, int xScale, int yScale, int xFix, int yFix,

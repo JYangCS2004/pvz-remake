@@ -66,10 +66,13 @@ public class PlantManager extends SpawnManager {
                 return false;
             }
         }
+        System.out.println(e.getPlantCondition());
+        System.out.println(plantedSpots[row][col].getTag());
 
         return e.getPlantCondition().equals(plantedSpots[row][col].getTag());
     }
 
+    @Override
     public void spawn(Entity e) {
         int row = e.getX() / gamePanel.getTileSize();
         int col = e.getY() / gamePanel.getTileSize();

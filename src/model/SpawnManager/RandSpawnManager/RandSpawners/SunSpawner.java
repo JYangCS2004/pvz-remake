@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class SunSpawner extends RandSpawnManager {
-    private int totalSunCount;
+    private int totalSunCount = 10000;
     public static final int DEFAULT = 50;
 
     public SunSpawner(int spawnTime, GamePanel g) {
@@ -35,7 +35,7 @@ public class SunSpawner extends RandSpawnManager {
     public void incrementSun(int amount) {
         //totalSunCount += amount;
         //for testing
-        totalSunCount += 500;
+        totalSunCount += amount;
     }
 
     public int getSunCount(){
