@@ -1,6 +1,8 @@
 package model.Plant.plants;
 
 import model.Plant.Plant;
+import model.SpawnManager.ProjectileManager.ProjectileManagers.BeamManager;
+import model.projectiles.AOE.Beams.DoomShroomExplosion;
 import ui.GamePanel;
 
 import java.awt.*;
@@ -10,13 +12,19 @@ public class DoomShroomHole extends Plant {
     final static String TAG = "dsh";
     private int counter = 120;
 
+    private final BeamManager projectileManager;
+
 
     public DoomShroomHole(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, 0);
+        this.projectileManager = g.getAOEManager();
     }
 
     @Override
     public void update() {
+        if(counter == 120){
+            projectileManager.spawn(new DoomShroomExplosion(this, g));
+        }
         counter--;
         health--;
         if(health == 0){
