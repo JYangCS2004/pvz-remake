@@ -150,7 +150,7 @@ public class ImageLibrary {
         yFix.put("is", 5);
         textXFix.put("is", 15);
         textYFix.put("is", 35);
-        tagToCard.put("is", new Card("is", 0, g));
+        tagToCard.put("is", new Card("is", 30, g));
 
         //Cat tail
         imageList.put("ct", getImage("src/Graphics/cattail.png", 45, 45));
@@ -176,6 +176,46 @@ public class ImageLibrary {
         textYFix.put("gs", 35);
         tagToCard.put("gs", new Card("gs", 10, g));
 
+        put("src/Graphics/ScaredyShroom.png", 33, 45, 5, 0, 10, "ss", g);
+        putWithoutCard("src/Graphics/ScaredyShroomScared.png", 48, 45, 0, 5, "sss", g);
+    }
+
+    private void putWithoutCard(String path, int xScale, int yScale, int xFix, int yFix,
+                                int textXFix, int textYFix, String tag, GamePanel g){
+        imageList.put(tag, getImage(path, xScale, yScale));
+        this.xFix.put(tag,xFix);
+        this.yFix.put(tag, yFix);
+        this.textXFix.put(tag, textXFix);
+        this.textYFix.put(tag, textYFix);
+    }
+
+    private void putWithoutCard(String path, int xScale, int yScale, int xFix, int yFix,
+                                String tag, GamePanel g){
+        imageList.put(tag, getImage(path, xScale, yScale));
+        this.xFix.put(tag,xFix);
+        this.yFix.put(tag,yFix);
+        this.textXFix.put(tag, 15);
+        this.textYFix.put(tag, 35);
+    }
+
+    private void put(String path, int xScale, int yScale, int xFix, int yFix,
+                     int textXFix, int textYFix, int cooldown, String tag, GamePanel g){
+        imageList.put(tag, getImage(path, xScale, yScale));
+        this.xFix.put(tag,xFix);
+        this.yFix.put(tag, yFix);
+        this.textXFix.put(tag, textXFix);
+        this.textYFix.put(tag, textYFix);
+        tagToCard.put(tag, new Card(tag, cooldown, g));
+
+    }
+    private void put(String path, int xScale, int yScale, int xFix, int yFix,
+                     int cooldown, String tag, GamePanel g){
+        imageList.put(tag, getImage(path, xScale, yScale));
+        this.xFix.put(tag,xFix);
+        this.yFix.put(tag, yFix);
+        this.textXFix.put(tag, 15);
+        this.textYFix.put(tag, 35);
+        tagToCard.put(tag, new Card(tag, cooldown, g));
 
     }
 
