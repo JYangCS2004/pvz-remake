@@ -21,7 +21,7 @@ public class Sunflower extends Plant {
     @Override
     public void update() {
         if(counter <= 0){
-            g.getSunSpawner().forceSpawn(new Sun(x+10 , y+20, 0));
+            g.getSunSpawner().forceSpawn(new Sun(x+10 , y+20, 0, 25));
             counter = COOL_DOWN;
         }
         else{

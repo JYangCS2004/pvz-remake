@@ -78,6 +78,9 @@ public abstract class Plant extends Entity {
     public String getPlantCondition(){
         return "na";
     }
+    public boolean canBeEaten(){
+        return true;
+    }
 
     public void setTimer(){}
 

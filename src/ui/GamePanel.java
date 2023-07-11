@@ -132,8 +132,8 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == SELECTION_STATE) {
             selectionScreen.draw(g2);
         } else {
-            zombieSpawner.drawEach(g2);
             plantManager.drawEach(g2);
+            zombieSpawner.drawEach(g2);
 
             shooterManager.drawEach(g2);
             lobberManager.drawEach(g2);

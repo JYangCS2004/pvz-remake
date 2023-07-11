@@ -74,7 +74,7 @@ public abstract class Zombie extends Entity {
 
         for (int i = 0 ; i < testable.size(); i++) {
             Plant p = (Plant) testable.get(i);
-            if (p.getBounds().intersects(getBounds())) {
+            if (p.getBounds().intersects(getBounds()) && p.canBeEaten()) {
                 updateCounter();
                 curSpeed = 0;
                 isCollided = true;

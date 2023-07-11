@@ -15,10 +15,9 @@ public class SporeBullet extends Bullet {
     static final int height = 16;
     static final int speed = 5;
     static final int damage = 10;
-    static final int lifetime = 320;
     private final BufferedImage spore;
 
-    public SporeBullet(int x, int y, Entity owner, GamePanel g){
+    public SporeBullet(int x, int y,int lifetime, Entity owner, GamePanel g){
         super(x, y, width, height, speed, damage, lifetime, owner, g);
         try {
             spore = ImageIO.read(new File("src/Graphics/Spore.png"));
@@ -26,6 +25,8 @@ public class SporeBullet extends Bullet {
             throw new RuntimeException(e);
         }
     }
+
+
 
     @Override
     public void draw(Graphics g){
