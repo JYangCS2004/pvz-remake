@@ -16,7 +16,7 @@ import java.awt.geom.Area;
 import java.util.List;
 
 public class MouseHandler extends MouseAdapter implements MouseMotionListener {
-    private boolean hasShovel;
+    public boolean hasShovel;
     private boolean engageCob;
     private CobCannon engagingCannon;
     PlantManager pm;
@@ -58,7 +58,7 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
             if (hasShovel) {
                 Plant p = null;
                 for (Entity entity : pm.getEntities()) {
-                    if (nearEdgeX * tile == entity.getX() && nearEdgeY * tile == entity.getY()) {
+                    if (((Plant) entity).mouseOver(x, y)) {
                         p = (Plant) entity;
                     }
                 }
@@ -75,13 +75,14 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
             if (nearEdgeY == 0) {
                 hasShovel = (nearEdgeX == 13);
                 pi.selected = nearEdgeX;
+
+                resetMouse();
             } else if (engageCob) {
                 System.out.println(engageCob);
                 engagingCannon.launch(x, y);
 
                 // reset mouse
-                engageCob = false;
-                pm.getGamePanel().mouseState = 0;
+                resetMouse();
             }
 
             //spawn plant if not at interface
@@ -94,6 +95,12 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
                 }
             }
         }
+    }
+
+
+    private void resetMouse() {
+        engageCob = false;
+        pm.getGamePanel().mouseState = 0;
     }
 
 

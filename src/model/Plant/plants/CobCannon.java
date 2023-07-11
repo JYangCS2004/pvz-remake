@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class CobCannon extends Plant {
     private int spawnTime = 1000;
@@ -42,9 +41,9 @@ public class CobCannon extends Plant {
             movedAlready = true;
         }
 
-
-        counter--;
-
+        if (counter > 0) {
+            counter--;
+        }
     }
 
     public void launch(int x, int y) {
@@ -54,6 +53,7 @@ public class CobCannon extends Plant {
 
         counter = spawnTime;
     }
+
 
     @Override
     public void draw(Graphics g) {
@@ -78,7 +78,6 @@ public class CobCannon extends Plant {
         counter = spawnTime;
     }
 
-
     @Override
     public String getPlantCondition() {
         return "kp";
@@ -93,6 +92,7 @@ public class CobCannon extends Plant {
     }
 
     private class CobEngage extends JButton {
+        MouseHandler ml;
         boolean over;
         CobEngage(int x, int y) {
             int baseSize = g.getTileSize();
@@ -100,6 +100,8 @@ public class CobCannon extends Plant {
             setContentAreaFilled(false);
             setBounds(x, y, baseSize * 2, baseSize);
             g.add(this);
+
+            ml = (MouseHandler) g.getMouseListeners()[0];
 
             addMouseListener(new MouseAdapter() {
                 @Override
@@ -116,7 +118,9 @@ public class CobCannon extends Plant {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (counter <= 0) {
+                    if (ml.hasShovel) {
+                        g.getPlantManager().remove(CobCannon.this);
+                    } else if (counter <= 0) {
                         g.mouseState = 1;
                         notifyMouseListener();
                     }
@@ -130,9 +134,7 @@ public class CobCannon extends Plant {
         }
 
         private void notifyMouseListener() {
-            for (MouseListener ml : g.getMouseListeners()) {
-                ((MouseHandler) ml).engageCobCannon(CobCannon.this);
-            }
+            ml.engageCobCannon(CobCannon.this);
         }
     }
 }

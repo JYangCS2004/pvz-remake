@@ -2,7 +2,9 @@ package model.Plant;
 
 import model.Entity;
 import ui.GamePanel;
+
 import java.awt.*;
+import java.awt.geom.Area;
 
 public abstract class Plant extends Entity {
 
@@ -21,6 +23,10 @@ public abstract class Plant extends Entity {
         this.cost = cost;
 
         super.row = y / g.getTileSize();
+    }
+
+    public boolean mouseOver(int x, int y) {
+        return new Area(getBounds()).contains(x, y);
     }
 
     public void draw(Graphics g){

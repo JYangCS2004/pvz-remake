@@ -31,6 +31,18 @@ public class PlantManager extends SpawnManager {
     }
 
     public void remove(Entity e) {
+        int row = e.getX() / gamePanel.getTileSize();
+        int col = e.getY() / gamePanel.getTileSize();
+
+
+        if (((Plant) e).getTag().equals("cc")) {
+            System.out.println(plantedSpots[row + 1][col].getTag());
+            if (("cc").equals(plantedSpots[row + 1][col].getTag())) {
+                plantedSpots[row + 1][col].resetTile();
+            } else {
+                plantedSpots[row - 1][col].resetTile();
+            }
+        }
         entities.remove(e);
         plantedSpots[e.getX() / gamePanel.getTileSize()][e.getY() / gamePanel.getTileSize()].resetTile();
     }
