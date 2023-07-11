@@ -16,6 +16,7 @@ public class CobCannon extends Plant {
     private int spawnTime = 1000;
     private int counter;
 
+
     private static final String TAG = "cc";
     private static final int HEALTH = 80;
     private static final int COST = 500;
