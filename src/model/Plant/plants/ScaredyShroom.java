@@ -52,6 +52,7 @@ public class ScaredyShroom extends Plant {
 
     private boolean checkInRange(List<Entity> test) {
         if(test.isEmpty()){
+            scared = false;
             return false;
         }
         for (Entity e : test) {

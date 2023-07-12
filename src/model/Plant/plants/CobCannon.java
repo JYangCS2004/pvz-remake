@@ -47,7 +47,7 @@ public class CobCannon extends Plant {
     }
 
     public void launch(int x, int y) {
-        CornCob fired = new CornCob(this.x, this.y, this, g);
+        CornCob fired = new CornCob(this.x, this.y - g.getTileSize() * 2, this, g);
         g.getShooterManager().spawn(fired);
         fired.setDestination(x, y);
 
