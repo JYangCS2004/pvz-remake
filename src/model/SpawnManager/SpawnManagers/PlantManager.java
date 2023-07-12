@@ -97,6 +97,10 @@ public class PlantManager extends SpawnManager {
         super.spawn(e);
     }
 
+    public void spawnWithoutRegister(Entity e){
+        super.spawn(e);
+    }
+
     public void removeByRowCol(int row, int col){
         for(int i = 0; i < entities.size(); i++){
             Entity e = entities.get(i);

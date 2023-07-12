@@ -192,6 +192,8 @@ public class ImageLibrary {
         putWithoutCard("src/Graphics/DoomShroomExplosion.png", 240, 260, -2*48, (int)-4.4*48, "dse", g);
         putWithoutCard("src/Graphics/DoomShroomHole.png", 50, 36, 4, 6, "dsh", g);
 
+        //Hypno Shroom
+        put("src/Graphics/HypnoShroom.png", 30, 40, 9, 5, 0, "hs", g);
     }
 
     private void putWithoutCard(String path, int xScale, int yScale, int xFix, int yFix,

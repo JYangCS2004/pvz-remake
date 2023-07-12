@@ -105,6 +105,10 @@ public abstract class Zombie extends Entity {
         health -= p.getDamage();
     }
 
+    public void decreaseHealth(int damage){
+        health -= damage;
+    }
+
     public void updateCounter(){
         if(!effectManager.contains("STUN")){
             counter--;
@@ -119,6 +123,10 @@ public abstract class Zombie extends Entity {
     public double getSpeed(){
         return curSpeed;
     }
+
+    public double getDefaultSpeed(){return defaultSpeed;}
+    public int getEatTime(){return eatTime;}
+    public int getDamage(){return damage;}
 
     public void editSpeed(double percentage){
         multiplier = Math.min(percentage, multiplier);
