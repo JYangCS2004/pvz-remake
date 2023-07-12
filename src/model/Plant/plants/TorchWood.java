@@ -22,6 +22,7 @@ public class TorchWood extends Plant {
 
     @Override
     public void update() {
+        super.update();
         List<Entity> testable = g.getShooterManager().getEntities();
 
         for (int i = 0; i < testable.size(); i++) {

@@ -19,6 +19,7 @@ public class Cattail extends Plant {
 
     @Override
     public void update() {
+        super.update();
         if (counter <= 0) {
             if (g.getZombieSpawner().getEntities().size() != 0) {
                 projectileManager.spawn(new CattailSpike(x, y, this, g));

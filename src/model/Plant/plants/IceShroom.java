@@ -21,6 +21,7 @@ public class IceShroom extends Plant {
 
     @Override
     public void update() {
+        super.update();
         if (counter == 0){
             projectileManager.spawn(new IceShroomFreeze(this, g));
         }

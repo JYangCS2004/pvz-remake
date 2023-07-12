@@ -22,11 +22,12 @@ public class GatlingPea extends Plant {
         super(x,y, HEALTH, TAG, g, COST);
         this.projectileManager = g.getShooterManager();
         row = y / g.getTileSize();
+        upgradable = true;
     }
 
     @Override
     public void update() {
-
+        super.update();
         if (canShoot()) {
             counter--;
             if (counter == 0 && burstFire >= 1) {

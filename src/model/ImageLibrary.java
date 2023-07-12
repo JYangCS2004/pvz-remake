@@ -192,6 +192,12 @@ public class ImageLibrary {
         putWithoutCard("src/Graphics/DoomShroomExplosion.png", 240, 260, -2*48, (int)-4.4*48, "dse", g);
         putWithoutCard("src/Graphics/DoomShroomHole.png", 50, 36, 4, 6, "dsh", g);
 
+        // pumpkin
+        put("src/Graphics/pumpkin.png", 80, 80 * 162 / 209, -17, -5,
+                g.getTileSize() / 2, g.getTileSize() / 2, 0, "pk", g);
+        putWithoutCard("src/Graphics/pumpkin_notempty.png", g.getTileSize(), g.getTileSize() * 76 / 115, 0, 20,
+                g.getTileSize() / 2, g.getTileSize() / 2 + 10, "fpk", g);
+
     }
 
     private void putWithoutCard(String path, int xScale, int yScale, int xFix, int yFix,

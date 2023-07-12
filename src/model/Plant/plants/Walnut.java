@@ -12,7 +12,4 @@ public class Walnut extends Plant {
     public Walnut(int x, int y, GamePanel g){
         super(x,y, HEALTH, TAG, g, COST);
     }
-
-    @Override
-    public void update() {}
 }

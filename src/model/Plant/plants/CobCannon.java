@@ -91,6 +91,19 @@ public class CobCannon extends Plant {
         g.remove(button);
     }
 
+
+    public static boolean checkPlantable(Plant p1, Plant p2) {
+        if (p1 == null || p2 == null) {
+            return false;
+        }
+
+        if (p1.hasShield() || p2.hasShield()) {
+            return false;
+        }
+
+        return p1.getTag().equals("kp") && p2.getTag().equals("kp");
+    }
+
     private class CobEngage extends JButton {
         MouseHandler ml;
         boolean over;

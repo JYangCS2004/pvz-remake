@@ -3,6 +3,7 @@ package model.SpawnManager.SpawnManagers;
 import model.Entity;
 import model.Plant.Plant;
 import model.Plant.plants.CobCannon;
+import model.Plant.plants.Pumpkin;
 import model.SpawnManager.SpawnManager;
 import ui.GamePanel;
 import ui.Tile;
@@ -46,8 +47,12 @@ public class PlantManager extends SpawnManager {
                 plantedSpots[row - 1][col].resetTile();
             }
         }
+
         entities.remove(e);
         plantedSpots[e.getX() / gamePanel.getTileSize()][e.getY() / gamePanel.getTileSize()].resetTile();
+        if (((Plant) e).hasShield() && !((Plant) e).getTag().equals("ds")) {
+            spawn(((Plant) e).getShield());
+        }
     }
 
     public boolean canPlant(Plant e) {
@@ -57,22 +62,36 @@ public class PlantManager extends SpawnManager {
         if (e.getTag().equals("cc")) {
             if (row + 1 < gamePanel.getScreenColSize() && ("kp").equals(plantedSpots[row + 1][col].getTag())) {
 
-                return ("kp").equals(plantedSpots[row][col].getTag());
+                return CobCannon.checkPlantable(plantedSpots[row + 1][col].getPlant(), plantedSpots[row][col].getPlant());
+
             } else if (row - 1 >= 0 && ("kp").equals(plantedSpots[row - 1][col].getTag())) {
-                boolean spot = ("kp").equals(plantedSpots[row][col].getTag());
+                boolean spot = CobCannon.checkPlantable(plantedSpots[row - 1][col].getPlant(), plantedSpots[row][col].getPlant());
+                System.out.println(spot);
                 if (spot) {
                     ((CobCannon) e).displace();
                     return true;
+                } else {
+                    return false;
                 }
             } else {
                 ((CobCannon) e).removeButton();
                 return false;
             }
-
-
         }
-        System.out.println(e.getPlantCondition());
-        System.out.println(plantedSpots[row][col].getTag());
+
+        if (e.getTag().equals("pk")) {
+            Plant temp = plantedSpots[row][col].getPlant();
+
+            if (temp != null) {
+                return !temp.hasShield() && !temp.getTag().equals("cc");
+            }
+
+            return true;
+        }
+
+        if (("pk").equals(plantedSpots[row][col].getTag())) {
+            return true;
+        }
 
         return e.getPlantCondition().equals(plantedSpots[row][col].getTag());
     }
@@ -82,30 +101,71 @@ public class PlantManager extends SpawnManager {
         int row = e.getX() / gamePanel.getTileSize();
         int col = e.getY() / gamePanel.getTileSize();
 
-        //System.out.println(plantedSpots[row + 1][col].getTag());
-        //System.out.println(plantedSpots[row - 1][col].getTag());
+        if (((Plant) e).getTag().equals("pk")) {
+            if (((Plant)e).getPlantCondition().equals(plantedSpots[row][col].getTag())) {
+                plantedSpots[row][col].plantTile((Plant) e);
+                super.spawn(e);
+                return;
+            }
+
+            stackPumpkin(row, col, (Pumpkin) e);
+            return;
+        }
 
         if (((Plant) e).getTag().equals("cc")) {
             if (row + 1 < gamePanel.getScreenColSize() && ("kp").equals(plantedSpots[row + 1][col].getTag())) {
-                removeByRowCol(row + 1, col);
+                refill(row + 1, col, e);
                 plantedSpots[row + 1][col].plantTile((Plant)e);
             } else {
-                removeByRowCol(row - 1, col);
+                refill(row - 1, col, e);
                 plantedSpots[row - 1][col].plantTile((Plant)e);
             }
         }
 
-        removeByRowCol(row, col);
+        refill(row, col, e);
         plantedSpots[row][col].plantTile((Plant)e);
         super.spawn(e);
     }
 
-    public void removeByRowCol(int row, int col){
-        for(int i = 0; i < entities.size(); i++){
+    public void refill(int row, int col, Entity p){
+        Plant temp = plantedSpots[row][col].getPlant();
+
+        if (temp != null) {
+            if (temp instanceof Pumpkin) {
+                System.out.println("stack");
+                ((Plant) p).transferPumpkinStatus((Pumpkin) temp);
+            }
+
+            if (((Plant) p).isUpgradable()) {
+                ((Plant) p).transfer(temp);
+            }
+
+            entities.remove(temp);
+        /*for(int i = 0; i < entities.size(); i++){
             Entity e = entities.get(i);
             if((e.getX() / gamePanel.getTileSize()) == row
             && (e.getY() / gamePanel.getTileSize()) == col){
+                if (e instanceof Pumpkin) {
+                    ((Plant) p).transferPumpkinStatus((Pumpkin) e);
+                }
+
+                if (((Plant) p).isUpgradable()) {
+                    ((Plant) p).transfer((Plant) e);
+                }
+
                 entities.remove(e);
+                break;
+            } */
+        }
+    }
+
+    private void stackPumpkin(int row, int col, Pumpkin p) {
+        for(int i = 0; i < entities.size(); i++){
+            Entity e = entities.get(i);
+            if((e.getX() / gamePanel.getTileSize()) == row
+                    && (e.getY() / gamePanel.getTileSize()) == col){
+
+                ((Plant) e).transferPumpkinStatus(p);
                 break;
             }
         }

@@ -6,9 +6,10 @@ import model.Zombie.Zombie;
 import ui.GamePanel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class EffectManager {
+public class EffectManager implements Iterable<StatusEffect> {
 
     protected GamePanel g;
     protected List<StatusEffect> effects;
@@ -66,6 +67,15 @@ public class EffectManager {
         return false;
     }
 
+    public StatusEffect getByTag(String tag) {
+        for(StatusEffect e: effects){
+            if(e.getTag().equals(tag)){
+                return e;
+            }
+        }
+        return null;
+    }
+
     public StatusEffect select(Zombie z, String tag){
         switch (tag){
             case "IS_CHILL":
@@ -93,5 +103,10 @@ public class EffectManager {
 
     public List<StatusEffect> getEffects(){
         return effects;
+    }
+
+    @Override
+    public Iterator<StatusEffect> iterator() {
+        return effects.iterator();
     }
 }

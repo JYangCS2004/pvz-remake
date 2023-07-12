@@ -26,6 +26,7 @@ public class ScaredyShroom extends Plant {
 
     @Override
     public void update() {
+        super.update();
         List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
 
         if (checkInRange(testable)) {

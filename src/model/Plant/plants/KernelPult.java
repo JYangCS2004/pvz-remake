@@ -27,6 +27,7 @@ public class KernelPult extends Plant {
 
     @Override
     public void update() {
+        super.update();
         ButterBlock p = new ButterBlock(x, y+20, this, g, y / g.getTileSize());
 
         counter--;

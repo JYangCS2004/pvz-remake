@@ -21,6 +21,7 @@ public class CherryBomb extends Plant {
 
     @Override
     public void update() {
+        super.update();
         if (counter == 0){
             projectileManager.spawn(new CherryBombExplosion(x, y, this, g));
         }

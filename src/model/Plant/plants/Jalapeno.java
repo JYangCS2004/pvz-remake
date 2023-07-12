@@ -21,6 +21,7 @@ public class Jalapeno extends Plant {
 
     @Override
     public void update() {
+        super.update();
         if (counter == 0){
             projectileManager.spawn(new PepperFire(y, this, g));
         }

@@ -25,6 +25,7 @@ public class CabbagePult extends Plant {
 
     @Override
     public void update() {
+        super.update();
         CabbageProjectile p = new CabbageProjectile(x, y+20, this, g, y / g.getTileSize());
 
         counter--;

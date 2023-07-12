@@ -22,6 +22,7 @@ public class SunShroom extends Plant {
 
     @Override
     public void update() {
+        super.update();
         if(counter <= 0){
             if(countDown == 0){
                 g.getSunSpawner().forceSpawn(new Sun(x+10 , y+20, 0, 25));

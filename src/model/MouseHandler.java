@@ -57,9 +57,17 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         } else {
             if (hasShovel) {
                 Plant p = null;
-                for (Entity entity : pm.getEntities()) {
-                    if (((Plant) entity).mouseOver(x, y)) {
-                        p = (Plant) entity;
+                List<Entity> entities = pm.getEntities();
+
+                for (int i = 0; i < entities.size(); i++) {
+                    Plant entity = (Plant) entities.get(i);
+                    if (entity.mouseOver(x, y)) {
+                        if (e.getButton() == MouseEvent.BUTTON3) {
+                            entity.removeShield();
+                            ss.incrementSun(125 / 2);
+                        } else {
+                            p = entity;
+                        }
                     }
                 }
 

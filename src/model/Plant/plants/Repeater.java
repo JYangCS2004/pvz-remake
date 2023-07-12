@@ -26,7 +26,7 @@ public class Repeater extends Plant {
 
     @Override
     public void update() {
-
+        super.update();
         if (canShoot()) {
             counter--;
             if (counter == 0 && burstFire >= 1) {

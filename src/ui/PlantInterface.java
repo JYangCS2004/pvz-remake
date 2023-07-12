@@ -130,6 +130,8 @@ public class PlantInterface {
                 return plantChecker(new Cattail(x, y, g), card);
             case "cc":
                 return plantChecker(new CobCannon(x, y, g), card);
+            case "pk":
+                return plantChecker(new Pumpkin(x, y, g), card);
             default:
                 return plantChecker(new Peashooter(x, y, g), card);
         }
@@ -141,6 +143,10 @@ public class PlantInterface {
             c.canPlant = false;
             c.resetHeight();
             return p;
+        }
+
+        if (p instanceof CobCannon) {
+            ((CobCannon) p).removeButton();
         }
 
         return null;

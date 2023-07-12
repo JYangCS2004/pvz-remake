@@ -22,6 +22,7 @@ public class PotatoMine extends Plant {
 
     @Override
     public void update() {
+        super.update();
         if (counter == 0){
             java.util.List<Entity> testable = g.getZombieSpawner().getEntities();
 

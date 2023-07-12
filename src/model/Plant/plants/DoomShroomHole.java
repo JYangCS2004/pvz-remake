@@ -41,7 +41,6 @@ public class DoomShroomHole extends Plant {
         g.setColor(Color.red);
         g.drawString(Integer.toString(health), x + this.g.getImageLibrary().getTextXFix(tag), y + 20);
         g.setColor(Color.white);
-
     }
 
     @Override

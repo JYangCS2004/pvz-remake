@@ -25,6 +25,7 @@ public class Chomper extends Plant {
 
     @Override
     public void update() {
+        super.update();
         if (eat_counter <= 0 && spawn_counter <= 0) {
             projectileManager.spawn(new ChomperProjectile(x, y + 15, this, g));
             spawn_counter = SPAWN_TIME;
