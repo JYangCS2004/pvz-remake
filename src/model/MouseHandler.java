@@ -79,8 +79,6 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
                     ss.incrementSun(p.getCost() / 2);
                     pm.remove(p);
                 }
-
-                // hasShovel = false;
             }
 
             //check if mouse is at shop interface

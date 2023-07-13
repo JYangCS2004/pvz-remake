@@ -1,5 +1,7 @@
 package model.physics;
 
+import java.awt.geom.Line2D;
+
 public class Vector {
     public double x;
     public double y;
@@ -7,6 +9,12 @@ public class Vector {
     public Vector(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+
+
+    // EFFECTS: constructs a vector given endpoints of a line in 2D
+    public Vector(Line2D.Double line) {
+        this(line.getX2() - line.getX1(), line.getY2() - line.getY1());
     }
 
     public void add(Vector v) {

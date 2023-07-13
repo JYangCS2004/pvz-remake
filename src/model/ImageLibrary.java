@@ -197,7 +197,14 @@ public class ImageLibrary {
                 g.getTileSize() / 2, g.getTileSize() / 2, 0, "pk", g);
         putWithoutCard("src/Graphics/pumpkin_notempty.png", g.getTileSize(), g.getTileSize() * 76 / 115, 0, 20,
                 g.getTileSize() / 2, g.getTileSize() / 2 + 10, "fpk", g);
+
+        // hypnoshroom
         put("src/Graphics/HypnoShroom.png", 30, 40, 9, 5, 0, "hs", g);
+
+        // starfruit
+        put("src/Graphics/starfruit.png", 40, 40 * 346/414, 4, 10, 10, 10, 0, "stf", g);
+
+
 
     }
 

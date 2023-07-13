@@ -110,7 +110,7 @@ public class PlantManager extends SpawnManager {
                 return;
             }
 
-            stackPumpkin(row, col, (Pumpkin) e);
+            Pumpkin.stack(plantedSpots[row][col].getPlant(), (Pumpkin) e);
             return;
         }
 

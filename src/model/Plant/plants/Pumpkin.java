@@ -30,4 +30,8 @@ public class Pumpkin extends Plant {
         int tile = g.getTileSize();
         return new Rectangle(x, y + tile / 2, width, height / 2);
     }
+
+    public static void stack(Plant other, Pumpkin p) {
+        other.transferPumpkinStatus(p);
+    }
 }
