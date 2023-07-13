@@ -47,4 +47,9 @@ public class DoomShroomHole extends Plant {
     public boolean canBeEaten(){
         return false;
     }
+
+    @Override
+    public String getPlantCondition() {
+        return "anti-plant";
+    }
 }

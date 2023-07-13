@@ -93,6 +93,8 @@ public class PlantManager extends SpawnManager {
             return true;
         }
 
+
+        System.out.println(e.getPlantCondition().equals(plantedSpots[row][col].getTag()));
         return e.getPlantCondition().equals(plantedSpots[row][col].getTag());
     }
 
@@ -173,5 +175,13 @@ public class PlantManager extends SpawnManager {
 
     public GamePanel getGamePanel() {
         return gamePanel;
+    }
+
+    public void spawnWithoutRegister(Entity e) {
+        super.spawn(e);
+    }
+
+    public void directRemove(Entity e) {
+        entities.remove(e);
     }
 }

@@ -19,10 +19,10 @@ public class DoomShroom extends Plant {
     public void update() {
         super.update();
         if (counter == 0){
+            g.getPlantManager().remove(this);
             g.getPlantManager().spawn(new DoomShroomHole(x, y, g));
             // projectileManager.spawn(new DoomShroomExplosion(this, g));
             // g.getPlantManager().spawn(new DoomShroomHole(x, y, g));
-            g.getPlantManager().remove(this);
         }
         else{
             counter--;

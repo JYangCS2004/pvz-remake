@@ -13,7 +13,7 @@ public class Pumpkin extends Plant {
 
     public Pumpkin(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, COST);
-        width += 2;
+        width += 1;
     }
 
     @Override
@@ -28,6 +28,6 @@ public class Pumpkin extends Plant {
     @Override
     public Rectangle getBounds() {
         int tile = g.getTileSize();
-        return new Rectangle(x + tile / 2 + 10, y, width, height / 2);
+        return new Rectangle(x, y + tile / 2, width, height / 2);
     }
 }

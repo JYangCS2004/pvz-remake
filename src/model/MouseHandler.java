@@ -61,6 +61,10 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
 
                 for (int i = 0; i < entities.size(); i++) {
                     Plant entity = (Plant) entities.get(i);
+                    if (entity.getTag().equals("dsh")) {
+                        continue;
+                    }
+
                     if (entity.mouseOver(x, y)) {
                         if (e.getButton() == MouseEvent.BUTTON3) {
                             entity.removeShield();
