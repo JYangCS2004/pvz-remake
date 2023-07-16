@@ -16,7 +16,7 @@ public abstract class Plant extends Entity {
     private final int cost;
     protected String tag;
     protected boolean upgradable;
-    private EffectManager stackedManager;
+    protected EffectManager stackedManager;
 
     public Plant(int x, int y, int health, String tag, GamePanel g, int cost) {
         super(x, y);
@@ -35,9 +35,7 @@ public abstract class Plant extends Entity {
     public boolean mouseOver(int x, int y) {
         if (hasShield()) {
             Area pumpkin = new Area(new Rectangle(x + g.getTileSize() / 2, y, width, height / 2));
-            if (pumpkin.contains(x, y)) {
-
-            }
+            pumpkin.contains(x, y);
         }
         return new Area(getBounds()).contains(x, y);
     }

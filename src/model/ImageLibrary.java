@@ -204,7 +204,8 @@ public class ImageLibrary {
         // starfruit
         put("src/Graphics/starfruit.png", 40, 40 * 346/414, 4, 10, 10, 10, 0, "stf", g);
 
-
+        // garlic
+        put("src/Graphics/garlic.png", 40, 40 * 128/120, 4, 5, 10, 10, 0, "gl", g);
 
     }
 

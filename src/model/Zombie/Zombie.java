@@ -3,6 +3,7 @@ package model.Zombie;
 import model.EffectManager;
 import model.Entity;
 import model.Plant.Plant;
+import model.Plant.plants.Garlic;
 import model.projectiles.Projectile;
 import ui.GamePanel;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public abstract class Zombie extends Entity {
     protected double curSpeed;
     private final double defaultSpeed;
+    private boolean yeet = false;
     private int health;
 
     private final int eatTime;
@@ -79,8 +81,18 @@ public abstract class Zombie extends Entity {
                 curSpeed = 0;
                 isCollided = true;
                 if (counter == 0) {
-                    p.decreaseHealth(damage);
                     counter = eatTime;
+
+                    if ((p instanceof Garlic) && !p.hasShield()) {
+                        if (y % g.getTileSize() == 0) {
+                            p.decreaseHealth(damage);
+                        }
+
+                        yeet = true;
+                    } else {
+                        p.decreaseHealth(damage);
+                        yeet = false;
+                    }
                 }
 
                 if (p.getHealth() <= 0) {
@@ -90,13 +102,31 @@ public abstract class Zombie extends Entity {
             }
         }
 
+        if (yeet) {
+            curSpeed = defaultSpeed * multiplier;
+        }
+
         if (!isCollided) {
             curSpeed = (defaultSpeed*multiplier);
             // System.out.println("resume");
         }
+
         buffer += curSpeed;
         if(Math.abs(buffer) >= 1){
-            x += buffer;
+            if (yeet) {
+                if (row == 1) {
+                    y -= buffer;
+                } else {
+                    y += buffer;
+                }
+
+                if (y % g.getTileSize() == 0) {
+                    row = y / g.getTileSize();
+                    yeet = false;
+                }
+            } else {
+                x += buffer;
+            }
             buffer = 0;
         }
     }

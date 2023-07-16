@@ -24,6 +24,7 @@ public class EffectManager implements Iterable<StatusEffect> {
 
         if (e.getTag().equals("UNCHILL")) {
             removeByTag("CHILL");
+            removeByTag("FREEZE");
         }
 
         removeByTag(e.getTag());

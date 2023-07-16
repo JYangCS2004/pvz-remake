@@ -55,6 +55,13 @@ public class PlantInterface {
                     i*gamePanel.getTileSize() + gamePanel.getImageLibrary().getXFix(tag),
                     gamePanel.getImageLibrary().getYFix(tag), null);
             plants.get(i).draw(g, i);
+
+            g.setColor(new Color(0, 0, 0, 124));
+            // g.fillRoundRect(i * gamePanel.getTileSize(), 3 * 48 / 4, 48, 48 / 4, 5, 5);
+            g.setColor(Color.white);
+            //g.drawString("10", i * gamePanel.getTileSize() + 24, 3 * 48 / 4 + 5);
+
+
             g.setColor(Color.white);
             g.drawRoundRect(i * gamePanel.getTileSize(), 0, gamePanel.getTileSize(), gamePanel.getTileSize(), 5, 5);
         }
@@ -88,6 +95,8 @@ public class PlantInterface {
 
         String plantType = card.getTag();
         switch (plantType) {
+            case "gl":
+                return plantChecker(new Garlic(x,y,g), card);
             case "stf":
                 return plantChecker(new Starfruit(x,y,g), card);
             case "hs":
