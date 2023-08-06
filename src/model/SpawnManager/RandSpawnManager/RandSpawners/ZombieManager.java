@@ -2,7 +2,7 @@ package model.SpawnManager.RandSpawnManager.RandSpawners;
 
 import model.SpawnManager.RandSpawnManager.RandSpawnManager;
 import model.Zombie.Zombie;
-import model.Zombie.zombies.DefaultZombie;
+import model.Zombie.zombies.PogoZombie;
 import ui.GamePanel;
 
 import java.util.Random;
@@ -16,7 +16,7 @@ public class ZombieManager extends RandSpawnManager {
     @Override
     public void updateEach() {
         Random rand = new Random();
-        spawn(new DefaultZombie(gamePanel.getScreenWidth(), 48 + 48 * rand.nextInt(gamePanel.getScreenRowSize()-1), gamePanel));
+        spawn(new PogoZombie(gamePanel.getScreenWidth(), 48 + 48 * rand.nextInt(gamePanel.getScreenRowSize()-1), gamePanel));
 
         super.updateEach();
     }

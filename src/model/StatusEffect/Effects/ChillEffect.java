@@ -13,6 +13,7 @@ public class ChillEffect extends StatusEffect {
 
     public ChillEffect(Zombie host, int life_time){super(host, life_time, TAG);}
 
+    @Override
     public void update(){
         ((Zombie) host).editSpeed(0.5);
         lifetime--;

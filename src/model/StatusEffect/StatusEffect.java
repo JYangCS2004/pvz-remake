@@ -19,7 +19,10 @@ public abstract class StatusEffect {
         return tag;
     }
     public boolean expired(){
-        return lifetime == 0;
+        return lifetime <= 0;
     }
 
+    public int getLifetime() {
+        return lifetime;
+    }
 }

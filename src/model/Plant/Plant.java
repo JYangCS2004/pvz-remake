@@ -98,7 +98,7 @@ public abstract class Plant extends Entity {
         }
 
         if (stackedManager.numOfEffects() == 0) {
-            this.health--;
+            this.health -= damage;
         }
     }
 

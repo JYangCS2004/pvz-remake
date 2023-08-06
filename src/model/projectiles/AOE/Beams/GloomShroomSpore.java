@@ -32,6 +32,8 @@ public class GloomShroomSpore extends Beam {
             throw new RuntimeException(e);
         }
 
+        onHitEffects.add("PIERCING");
+
         // northeast rotation
         AffineTransform tx_ne = AffineTransform.getRotateInstance(45, spore.getWidth() / 2, spore.getHeight() / 2);
         op_ne = new AffineTransformOp(tx_ne, AffineTransformOp.TYPE_BILINEAR);

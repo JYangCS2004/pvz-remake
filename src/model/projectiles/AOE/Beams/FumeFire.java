@@ -21,6 +21,8 @@ public class FumeFire extends Beam {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        onHitEffects.add("PIERCING");
     }
 
     @Override

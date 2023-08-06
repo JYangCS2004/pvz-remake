@@ -17,9 +17,4 @@ public class ShieldedEffect extends StatusEffect {
     public void update(int damage){
         lifetime -= damage;
     }
-
-    public int getLifetime(){
-        return lifetime;
-    }
-
 }

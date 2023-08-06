@@ -9,21 +9,23 @@ import ui.GamePanel;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
 
 public abstract class Zombie extends Entity {
     protected double curSpeed;
-    private final double defaultSpeed;
+    protected double defaultSpeed;
     private boolean yeet = false;
     private int health;
 
     private final int eatTime;
 
-    private final int damage;
+    protected int damage;
     private int counter;
     private double buffer = 0;
     protected final EffectManager effectManager;
-    private double multiplier = 1;
+    protected double multiplier = 1;
     protected int killBlock = 0;
+    private int direction;
 
 
     public Zombie(int x, int y, double speed, int damage, int health, int eatTime,
@@ -40,6 +42,7 @@ public abstract class Zombie extends Entity {
         super.height = height;
         super.row = y / g.getTileSize();
         this.effectManager = new EffectManager(g);
+        direction = new Random().nextInt(2);
     }
 
     @Override
@@ -70,6 +73,7 @@ public abstract class Zombie extends Entity {
             g.getZombieSpawner().removeZombie(this);
             return;
         }
+
         List<Entity> testable = g.getPlantManager().getEntitiesByRow(row);
 
         boolean isCollided = false;
@@ -81,12 +85,14 @@ public abstract class Zombie extends Entity {
                 curSpeed = 0;
                 isCollided = true;
                 if (counter == 0) {
-                    counter = eatTime;
+                    counter = (int) ((2 - multiplier) * eatTime);
 
-                    if ((p instanceof Garlic) && !p.hasShield()) {
+                    if (!effectManager.contains("JUMP") && (p instanceof Garlic) && !p.hasShield()) {
                         if (y % g.getTileSize() == 0) {
                             p.decreaseHealth(damage);
                         }
+
+                        System.out.println(y);
 
                         yeet = true;
                     } else {
@@ -102,13 +108,13 @@ public abstract class Zombie extends Entity {
             }
         }
 
+
         if (yeet) {
-            curSpeed = defaultSpeed * multiplier;
+            curSpeed = defaultSpeed;
         }
 
         if (!isCollided) {
-            curSpeed = (defaultSpeed*multiplier);
-            // System.out.println("resume");
+            curSpeed = defaultSpeed*multiplier;
         }
 
         buffer += curSpeed;
@@ -116,12 +122,19 @@ public abstract class Zombie extends Entity {
             if (yeet) {
                 if (row == 1) {
                     y -= buffer;
-                } else {
+                } else if (row == g.getScreenRowSize()) {
                     y += buffer;
+                } else {
+                    if (direction == 1) {
+                        y -= buffer;
+                    } else {
+                        y += buffer;
+                    }
                 }
 
                 if (y % g.getTileSize() == 0) {
                     row = y / g.getTileSize();
+                    direction = new Random().nextInt(2);
                     yeet = false;
                 }
             } else {

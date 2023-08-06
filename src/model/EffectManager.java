@@ -84,7 +84,7 @@ public class EffectManager implements Iterable<StatusEffect> {
             case "FREEZE":
                 return new FreezeEffect(z);
             case "PIERCING":
-                return new NothingEffect(z);
+                return new PierceEffect(z);
             case "KILL":
                 return new KillEffect(z);
             case "FIRE":

@@ -41,7 +41,7 @@ public class CattailSpike extends Bullet {
         this.x = x;
         this.y = y;
 
-        maxSpeed = 2;
+        maxSpeed = 2.5;
         velocity = new Vector(1, 0);
         velocity.mult(maxSpeed);
 
@@ -124,12 +124,12 @@ public class CattailSpike extends Bullet {
 
 
     public void seek() {
-        Vector desired = Vector.sub(new Vector(target.getX(), target.getY()), new Vector(x, y));
+        Vector desired = Vector.sub(new Vector(target.getX() + 24, target.getY() + 24), new Vector(x, y));
         desired.normalize();
         desired.mult(maxSpeed);
 
         Vector steer = Vector.sub(desired, velocity);
-        steer.limit(0.02);
+        steer.limit(0.04);
 
         acceleration.add(steer);
     }

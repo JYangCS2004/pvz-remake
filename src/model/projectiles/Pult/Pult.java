@@ -28,6 +28,7 @@ public abstract class Pult extends Projectile {
 
         this.x =  x;
         this.y =  y;
+        onHitEffects.add("PIERCING");
 
         List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
 

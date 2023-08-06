@@ -2,6 +2,8 @@ package model.SpawnManager.ProjectileManager.ProjectileManagers;
 
 import model.Entity;
 import model.SpawnManager.ProjectileManager.ProjectileManager;
+import model.StatusEffect.Effects.PierceEffect;
+import model.StatusEffect.StatusEffect;
 import model.projectiles.Projectile;
 import model.Zombie.Zombie;
 import ui.GamePanel;
@@ -27,7 +29,12 @@ public class PultManager extends ProjectileManager {
                 e.decreaseHealth(p);
 
                 for(String s: p.getOnHitEffects()){
-                    e.getEffectManager().add(e.getEffectManager().select(e, s));
+                    StatusEffect eff = e.getEffectManager().select(e, s);
+                    if (s.equals("PIERCING")) {
+                        ((PierceEffect) eff).setDamage(p.getDamage());
+                    }
+
+                    e.getEffectManager().add(eff);
                 }
 
                 if (e.getHealth() <= 0) {

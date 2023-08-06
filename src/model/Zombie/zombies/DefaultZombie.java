@@ -6,7 +6,7 @@ import ui.GamePanel;
 public class DefaultZombie extends Zombie {
 
     static final double SPEED = -0.5;
-    static final int DAMAGE = 2;
+    static final int DAMAGE = 1;
     static final int HEALTH = 100;
     static final int EAT_TIME = 30;
     static final int HEIGHT = 48;
