@@ -131,8 +131,10 @@ public class PogoZombie extends Zombie {
     @Override
     public void editSpeed(double percentage) {
         if (isJumping()) {
-            multiplier = Math.min(multiplier, percentage);
-            physics.reduceGravity(0.8);
+            if (Math.ceil(percentage) != 0) {
+                multiplier = Math.min(multiplier, percentage);
+                physics.reduceGravity(0.8);
+            }
         } else {
             super.editSpeed(percentage);
         }

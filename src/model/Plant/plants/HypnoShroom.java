@@ -4,7 +4,6 @@ import model.Entity;
 import model.Plant.Plant;
 import model.SpawnManager.ProjectileManager.ProjectileManager;
 import model.Zombie.Zombie;
-import model.projectiles.Bullet.BulletProjectiles.ChomperProjectile;
 import ui.GamePanel;
 
 import java.util.List;
@@ -26,18 +25,21 @@ public class HypnoShroom extends Plant {
         super.update();
         List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(y / g.getTileSize());
         Zombie z = checkInRange(testable);
-        if(health == 1 && z != null){
+
+
+/*        if(health <= 1 && z != null){
             System.out.println("ran");
-            projectileManager.spawn(new ChomperProjectile(x, y, this, g));
+
             g.getPlantManager().spawnWithoutRegister(
                     new PlantZombie(z.getX(), z.getY(), z.getHealth(), -z.getDefaultSpeed(), z.getDamage(), z.getEatTime(), g));
             g.getPlantManager().remove(this);
-        }
+            g.getZombieSpawner().removeZombie(z);
+        }*/
     }
 
     private Zombie checkInRange(List<Entity> test) {
         for (Entity e : test) {
-            if (e.getX() <= x + g.getTileSize() * 1.5) {
+            if (e.getBounds().intersects(getBounds())) {
                 return (Zombie) e;
             }
         }

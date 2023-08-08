@@ -26,9 +26,6 @@ public class ScreenDoorZombie extends Zombie {
     @Override
     public void decreaseHealth(Projectile p){
         if(effectManager.contains("SHIELD")){
-            if(p.getOnHitEffects().contains("PIERCING")){
-                super.decreaseHealth(p);
-            }
             ListIterator<StatusEffect> it = effectManager.getEffects().listIterator();
             while(it.hasNext()){
                 StatusEffect e = it.next();

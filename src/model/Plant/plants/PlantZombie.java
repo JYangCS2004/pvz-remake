@@ -39,11 +39,12 @@ public class PlantZombie extends Plant {
                 speed = 0;
                 isCollided = true;
                 if (counter <= 0) {
-                    z.decreaseHealth(damage/2);
+                    z.decreaseHealth(damage);
                     counter = eatTime;
                 }
 
                 if (z.getHealth() <= 0) {
+                    z.kill();
                     speed = defaultSpeed;
                 }
             }
@@ -60,7 +61,7 @@ public class PlantZombie extends Plant {
         }
         counter--;
 
-        if(x >= g.getScreenWidth()){
+        if (health <= 0 || x >= g.getScreenWidth()){
             g.getPlantManager().directRemove(this);
         }
     }

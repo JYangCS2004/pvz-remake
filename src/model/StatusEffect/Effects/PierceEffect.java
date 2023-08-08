@@ -16,7 +16,13 @@ public class PierceEffect extends StatusEffect {
 
     @Override
     public void update() {
-        ((Zombie) host).decreaseHealth(damage);
+        Zombie e = (Zombie) host;
+        e.decreaseHealth(damage);
+
+        if (e.getHealth() <= 0) {
+            e.kill();
+        }
+
         lifetime--;
     }
 

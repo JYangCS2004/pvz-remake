@@ -16,5 +16,4 @@ public class DefaultZombie extends Zombie {
     public DefaultZombie(int x, int y, GamePanel g){
         super(x, y, SPEED, DAMAGE, HEALTH, EAT_TIME, WIDTH, HEIGHT, g);
     }
-
 }

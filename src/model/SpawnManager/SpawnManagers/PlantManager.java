@@ -3,6 +3,7 @@ package model.SpawnManager.SpawnManagers;
 import model.Entity;
 import model.Plant.Plant;
 import model.Plant.plants.CobCannon;
+import model.Plant.plants.PlantZombie;
 import model.Plant.plants.Pumpkin;
 import model.SpawnManager.SpawnManager;
 import ui.GamePanel;
@@ -32,6 +33,11 @@ public class PlantManager extends SpawnManager {
     }
 
     public void remove(Entity e) {
+        if (e instanceof PlantZombie) {
+            directRemove(e);
+            return;
+        }
+
         int row = e.getX() / gamePanel.getTileSize();
         int col = e.getY() / gamePanel.getTileSize();
 

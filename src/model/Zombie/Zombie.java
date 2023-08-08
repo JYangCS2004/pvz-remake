@@ -4,14 +4,17 @@ import model.EffectManager;
 import model.Entity;
 import model.Plant.Plant;
 import model.Plant.plants.Garlic;
+import model.Plant.plants.HypnoShroom;
+import model.Plant.plants.PlantZombie;
 import model.projectiles.Projectile;
 import ui.GamePanel;
 
 import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 public abstract class Zombie extends Entity {
+    private Plant eating;
     protected double curSpeed;
     protected double defaultSpeed;
     private boolean yeet = false;
@@ -56,6 +59,8 @@ public abstract class Zombie extends Entity {
         else if(effectManager.contains("CHILL")){
             g.setColor(Color.blue);
         }
+
+        g.setColor(new Color(255, 255, 255, 125));
         g.fillRoundRect(x, y, 48, 48, 25, 25);
         g.setColor(Color.black);
         g.drawString(Integer.toString(health), x + 10, y + 24);
@@ -63,6 +68,12 @@ public abstract class Zombie extends Entity {
     }
 
     public void update() {
+        if (eating != null) {
+            if (eating.getHealth() <= 0) {
+                eating = null;
+            }
+        }
+
         if (effectManager.numOfEffects() == 0) {
             multiplier = 1;
         } else {
@@ -75,15 +86,25 @@ public abstract class Zombie extends Entity {
         }
 
         List<Entity> testable = g.getPlantManager().getEntitiesByRow(row);
+        Queue<Entity> queuedEntities = new PriorityQueue<>(new EntityComparator());
+
+        queuedEntities.addAll(testable);
 
         boolean isCollided = false;
 
-        for (int i = 0 ; i < testable.size(); i++) {
-            Plant p = (Plant) testable.get(i);
-            if (p.getBounds().intersects(getBounds()) && p.canBeEaten()) {
+        for (Entity entity : queuedEntities) {
+            Plant p = (Plant) entity;
+
+            boolean eatingCondition = eating == null || p == eating;
+
+            if (eatingCondition && p.getBounds().intersects(getBounds()) && p.canBeEaten()) {
                 updateCounter();
                 curSpeed = 0;
                 isCollided = true;
+                if (eating == null) {
+                    eating = p;
+                }
+
                 if (counter == 0) {
                     counter = (int) ((2 - multiplier) * eatTime);
 
@@ -92,22 +113,27 @@ public abstract class Zombie extends Entity {
                             p.decreaseHealth(damage);
                         }
 
-                        System.out.println(y);
-
                         yeet = true;
                     } else {
                         p.decreaseHealth(damage);
+                        if (p instanceof HypnoShroom && p.getHealth() <= 0) {
+                            g.getPlantManager().spawnWithoutRegister(new PlantZombie(getX(), getY(), getHealth(), -getDefaultSpeed(), getDamage(), getEatTime(), g));
+                            kill();
+                        }
+
                         yeet = false;
                     }
                 }
 
                 if (p.getHealth() <= 0) {
+                    // eating = null;
                     g.getPlantManager().remove(p);
                     curSpeed = getSpeed();
                 }
+
+                break;
             }
         }
-
 
         if (yeet) {
             curSpeed = defaultSpeed;
@@ -188,5 +214,13 @@ public abstract class Zombie extends Entity {
         }
         killBlock--;
         this.health -= 1800;
+    }
+
+     private class EntityComparator implements Comparator<Entity> {
+
+        @Override
+        public int compare(Entity o1, Entity o2) {
+            return Integer.compare(o2.getX(), o1.getX());
+        }
     }
 }
