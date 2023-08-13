@@ -213,6 +213,8 @@ public class ImageLibrary {
         // winter melon
         put("src/Graphics/WinterMelonPult.png", 50, 46, -4, 5, 10, 10, 0, "wmp", g);
 
+        // squash
+        put("src/Graphics/squash.png", 45 * 521 / 600, 45, 5, 3, 10, 10, 0, "sq", g);
     }
 
     private void putWithoutCard(String path, int xScale, int yScale, int xFix, int yFix,

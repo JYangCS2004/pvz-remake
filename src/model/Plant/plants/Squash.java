@@ -33,13 +33,17 @@ public class Squash extends Plant {
             initializeJump();
         }
 
-        if (physics.isGrounded()) {
+        if (jumped && physics.isGrounded()) {
             groundCount++;
         }
 
         if (groundCount == 2) {
             g.getAOEManager().spawn(new PotatoMineExplosion((int) physics.getX(), (int) physics.getY(), this, g));
         }
+
+        x = (int) physics.getX();
+        y = (int) physics.getY();
+        physics.update();
     }
 
     @Override
@@ -56,9 +60,14 @@ public class Squash extends Plant {
         entityQueue.addAll(g.getZombieSpawner().getEntitiesByRow(row));
 
         for (Entity e : entityQueue) {
-            if ((e.getX() >= x - 0.5 * g.getTileSize() && e.getX() <= x) ||
-                    (e.getX() <= x + 1.5 * g.getTileSize() && e.getX() >= x)) {
-                physics.applyForce(new Vector(e.getX() - x, 3));
+            int pos = (int) (e.getX() + 0.5 * g.getTileSize());
+            if ((pos >= x - 0.5 * g.getTileSize() && pos <= x) ||
+                    (pos <= x + 1.5 * g.getTileSize() && pos >= x)) {
+                Vector force = new Vector(e.getX() - x, -2000);
+                force.normalize();
+                force.mult(6);
+
+                physics.applyForce(force);
                 jumped = true;
                 break;
             }
