@@ -115,9 +115,7 @@ public class PogoZombie extends Zombie {
         }
     }
 
-    private boolean isJumping() {
-        return effectManager.contains("JUMP");
-    }
+
 
     @Override
     public double getSpeed() {

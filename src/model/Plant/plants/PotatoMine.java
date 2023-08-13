@@ -3,10 +3,15 @@ package model.Plant.plants;
 import model.Entity;
 import model.Plant.Plant;
 import model.SpawnManager.ProjectileManager.ProjectileManagers.BeamManager;
+import model.Zombie.Zombie;
 import model.projectiles.AOE.Beams.PotatoMineExplosion;
 import ui.GamePanel;
 
 import java.awt.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class PotatoMine extends Plant {
     final static int HEALTH = 10;
@@ -24,10 +29,12 @@ public class PotatoMine extends Plant {
     public void update() {
         super.update();
         if (counter == 0){
-            java.util.List<Entity> testable = g.getZombieSpawner().getEntities();
+            List<Entity> testable = g.getZombieSpawner().getEntitiesByRow(row);
+            Queue<Entity> entityQueue = new PriorityQueue<>(Comparator.comparingInt(Entity::getX));
+            entityQueue.addAll(testable);
 
-            for (Entity e : testable) {
-                if(getBounds().intersects(e.getBounds())){
+            for (Entity e : entityQueue) {
+                if(!((Zombie) e).isJumping() && getBounds().intersects(e.getBounds())){
                     projectileManager.spawn(new PotatoMineExplosion(x, y, this, g));
                 }
             }

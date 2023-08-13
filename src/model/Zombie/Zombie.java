@@ -95,6 +95,10 @@ public abstract class Zombie extends Entity {
         for (Entity entity : queuedEntities) {
             Plant p = (Plant) entity;
 
+            if (isJumping()) {
+                continue;
+            }
+
             boolean eatingCondition = eating == null || p == eating;
 
             if (eatingCondition && p.getBounds().intersects(getBounds()) && p.canBeEaten()) {
@@ -108,7 +112,7 @@ public abstract class Zombie extends Entity {
                 if (counter == 0) {
                     counter = (int) ((2 - multiplier) * eatTime);
 
-                    if (!effectManager.contains("JUMP") && (p instanceof Garlic) && !p.hasShield()) {
+                    if (!isJumping() && (p instanceof Garlic) && !p.hasShield()) {
                         if (y % g.getTileSize() == 0) {
                             p.decreaseHealth(damage);
                         }
@@ -214,6 +218,10 @@ public abstract class Zombie extends Entity {
         }
         killBlock--;
         this.health -= 1800;
+    }
+
+    public boolean isJumping() {
+        return effectManager.contains("JUMP");
     }
 
      private class EntityComparator implements Comparator<Entity> {

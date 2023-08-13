@@ -12,9 +12,7 @@ public class CabbagePult extends Plant {
     private static int COST = 100;
     private static String TAG = "cp";
     private static int HEALTH = 10;
-
     private PultManager spawnManager;
-
     private static int SPAWN_TIME = 120;
     private int counter = 0;
 
@@ -42,6 +40,4 @@ public class CabbagePult extends Plant {
         testable.removeIf(e -> e.getX() < x);
         return testable.size() != 0;
     }
-
-
 }
