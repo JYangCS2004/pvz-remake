@@ -95,6 +95,10 @@ public class PlantInterface {
 
         String plantType = card.getTag();
         switch (plantType) {
+            case "wmp":
+                return plantChecker(new WinterMelonPult(x, y, g), card);
+            case "mp":
+                return plantChecker(new MelonPult(x, y, g), card);
             case "gl":
                 return plantChecker(new Garlic(x,y,g), card);
             case "stf":

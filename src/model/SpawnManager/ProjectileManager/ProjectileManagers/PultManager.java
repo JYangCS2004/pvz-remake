@@ -30,7 +30,7 @@ public class PultManager extends ProjectileManager {
 
                 for(String s: p.getOnHitEffects()){
                     StatusEffect eff = e.getEffectManager().select(e, s);
-                    if (s.equals("PIERCING")) {
+                    if (s.equals("PIERCING") && e.getEffectManager().contains("SHIELD")) {
                         ((PierceEffect) eff).setDamage(p.getDamage());
                     }
 

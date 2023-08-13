@@ -79,6 +79,10 @@ public class EffectManager implements Iterable<StatusEffect> {
 
     public StatusEffect select(Zombie z, String tag){
         switch (tag){
+            case "WMELON":
+                return new WinterMelonSplashEffect(z);
+            case "MELON":
+                return new MelonSplashEffect(z);
             case "IS_CHILL":
                 return new ChillEffect(z, 700);
             case "FREEZE":

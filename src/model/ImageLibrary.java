@@ -207,6 +207,12 @@ public class ImageLibrary {
         // garlic
         put("src/Graphics/garlic.png", 40, 40 * 128/120, 4, 5, 10, 10, 0, "gl", g);
 
+        // melon
+        put("src/Graphics/MelonPult.png", 56, 40, -8, 5, 10, 10, 0, "mp", g);
+
+        // winter melon
+        put("src/Graphics/WinterMelonPult.png", 50, 46, -4, 5, 10, 10, 0, "wmp", g);
+
     }
 
     private void putWithoutCard(String path, int xScale, int yScale, int xFix, int yFix,
