@@ -4,7 +4,7 @@ import model.StatusEffect.StatusEffect;
 import model.Zombie.Zombie;
 
 public class ChillEffect extends StatusEffect {
-    static final int LIFE_TIME = 100;
+    static final int LIFE_TIME = 120;
     static final String TAG = "CHILL";
     static final double PERCENT = 0.5;
 
