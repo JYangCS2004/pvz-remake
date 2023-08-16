@@ -188,4 +188,8 @@ public class PlantManager extends SpawnManager {
     public void directRemove(Entity e) {
         entities.remove(e);
     }
+
+    public boolean isInactive(Entity e) {
+        return !entities.contains(e);
+    }
 }

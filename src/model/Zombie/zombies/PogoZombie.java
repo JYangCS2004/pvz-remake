@@ -27,7 +27,7 @@ public class PogoZombie extends Zombie {
     private LocalPhysics physics;
     private Vector movingForce = new Vector(-1, -3);
     private Vector jumpForce = new Vector(0, -4);
-    private Vector normalJump = new Vector(-0.7, -4);
+    private Vector normalJump = new Vector(-1, -4);
     private boolean escape;
 
     private double defaultLinear = -0.7;
@@ -115,7 +115,15 @@ public class PogoZombie extends Zombie {
         }
     }
 
-
+    @Override
+    public void decreaseHealth(int damage) {
+        if (isJumping()) {
+            StatusEffect se = effectManager.getByTag("JUMP");
+            ((JumpEffect) se).update(damage);
+        } else {
+            super.decreaseHealth(damage);
+        }
+    }
 
     @Override
     public double getSpeed() {

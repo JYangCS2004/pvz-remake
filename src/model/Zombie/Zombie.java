@@ -60,7 +60,7 @@ public abstract class Zombie extends Entity {
             g.setColor(Color.blue);
         }
 
-        g.setColor(new Color(255, 255, 255, 125));
+        //g.setColor(new Color(255, 255, 255, 125));
         g.fillRoundRect(x, y, 48, 48, 25, 25);
         g.setColor(Color.black);
         g.drawString(Integer.toString(health), x + 10, y + 24);
@@ -69,7 +69,7 @@ public abstract class Zombie extends Entity {
 
     public void update() {
         if (eating != null) {
-            if (eating.getHealth() <= 0) {
+            if (eating.getHealth() <= 0 || g.getPlantManager().isInactive(eating)) {
                 eating = null;
             }
         }
@@ -224,7 +224,7 @@ public abstract class Zombie extends Entity {
         return effectManager.contains("JUMP");
     }
 
-     private class EntityComparator implements Comparator<Entity> {
+    private static class EntityComparator implements Comparator<Entity> {
 
         @Override
         public int compare(Entity o1, Entity o2) {

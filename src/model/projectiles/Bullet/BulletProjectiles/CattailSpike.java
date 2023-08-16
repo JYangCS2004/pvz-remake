@@ -110,6 +110,9 @@ public class CattailSpike extends Bullet {
             if (x > g.getScreenWidth() || x < 0 || y < 0 || y > g.getScreenHeight()) {
                 lifetime--;
             }
+
+            velocity.normalize();
+            velocity.mult(maxSpeed);
         } else {
             seek();
             velocity.add(acceleration);

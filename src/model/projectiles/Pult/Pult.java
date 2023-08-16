@@ -14,7 +14,7 @@ public abstract class Pult extends Projectile {
     private static final int SPEED = 20;
 
     //private double acceleration = 1;
-    static final double ACCELERATION = 0.12;
+    public static final double ACCELERATION = 0.12;
     //private double velocityY;
     private double velocityY = 6;
     final double velocityX;
@@ -37,7 +37,6 @@ public abstract class Pult extends Projectile {
         //velocityY = speed * Math.sin(Math.PI / 2 - initialAngle);
         //velocityX = speed * Math.cos(initialAngle);
         velocityX = dist/(double)100;
-        onHitEffects.add("PIERCING");
     }
 
 

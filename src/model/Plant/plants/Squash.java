@@ -63,7 +63,7 @@ public class Squash extends Plant {
             int pos = (int) (e.getX() + 0.5 * g.getTileSize());
             if ((pos >= x - 0.5 * g.getTileSize() && pos <= x) ||
                     (pos <= x + 1.5 * g.getTileSize() && pos >= x)) {
-                Vector force = new Vector(e.getX() - x, -2000);
+                Vector force = new Vector(pos - x, -2000);
                 force.normalize();
                 force.mult(6);
 

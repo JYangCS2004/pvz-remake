@@ -22,6 +22,7 @@ public class WinterMelonPult extends Plant {
     public WinterMelonPult(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, COST);
         spawnManager = g.getLobberManager();
+        upgradable = true;
     }
 
     @Override
