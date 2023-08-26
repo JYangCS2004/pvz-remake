@@ -69,6 +69,7 @@ public class Squash extends Plant {
 
                 physics.applyForce(force);
                 jumped = true;
+                canBeEaten = false;
                 break;
             }
         }

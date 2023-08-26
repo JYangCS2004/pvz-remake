@@ -106,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
         int closestEdgeY = p.y / tileSize;
 
         if (gameState == SELECTION_STATE) {
-            if (closestEdgeX >= 1 && closestEdgeY >= 2 && closestEdgeY <= 4 && closestEdgeX <= 9) {
+            if (closestEdgeX >= 1 && closestEdgeY >= 2 && closestEdgeY <= 5 && closestEdgeX <= 9) {
                 g.drawRoundRect(closestEdgeX * tileSize,
                         closestEdgeY * tileSize, tileSize, tileSize, 10, 10);
             }

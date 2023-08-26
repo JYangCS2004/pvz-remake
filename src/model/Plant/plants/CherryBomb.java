@@ -17,6 +17,7 @@ public class CherryBomb extends Plant {
     public CherryBomb(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, COST);
         this.projectileManager = g.getAOEManager();
+        canBeEaten = false;
     }
 
     @Override

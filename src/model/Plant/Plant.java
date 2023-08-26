@@ -16,6 +16,8 @@ public abstract class Plant extends Entity {
     private final int cost;
     protected String tag;
     protected boolean upgradable;
+    protected boolean disabled;
+    protected boolean canBeEaten;
     protected EffectManager stackedManager;
 
     public Plant(int x, int y, int health, String tag, GamePanel g, int cost) {
@@ -30,6 +32,7 @@ public abstract class Plant extends Entity {
 
         super.row = y / g.getTileSize();
         stackedManager = new EffectManager(g);
+        canBeEaten = true;
     }
 
     public boolean mouseOver(int x, int y) {
@@ -117,9 +120,12 @@ public abstract class Plant extends Entity {
         return "na";
     }
     public boolean canBeEaten(){
-        return true;
+        return canBeEaten;
     }
 
+    public boolean isDisabled() {
+        return disabled;
+    }
 
     public void transferPumpkinStatus(Pumpkin p) {
         AddedHealthEffect eff = new AddedHealthEffect(this, p);
@@ -144,10 +150,13 @@ public abstract class Plant extends Entity {
 
     public Pumpkin getShield() {
         return ((AddedHealthEffect) stackedManager.getByTag("AHP")).getSource();
-
     }
 
     public void removeShield() {
         stackedManager.removeByTag("AHP");
+    }
+
+    public void kill() {
+        g.getPlantManager().remove(this);
     }
 }

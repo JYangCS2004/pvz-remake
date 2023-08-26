@@ -114,6 +114,11 @@ public class PlantManager extends SpawnManager {
                 return;
             }
 
+            Plant prev = plantedSpots[row][col].getPlant();
+            if (prev.isDisabled()) {
+                return;
+            }
+
             Pumpkin.stack(plantedSpots[row][col].getPlant(), (Pumpkin) e);
             return;
         }

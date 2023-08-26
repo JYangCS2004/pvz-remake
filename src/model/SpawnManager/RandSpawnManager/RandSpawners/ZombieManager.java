@@ -4,6 +4,7 @@ import model.SpawnManager.RandSpawnManager.RandSpawnManager;
 import model.Zombie.Zombie;
 import model.Zombie.zombies.DefaultZombie;
 import model.Zombie.zombies.PogoZombie;
+import model.Zombie.zombies.Zomboni;
 import ui.GamePanel;
 
 import java.awt.event.KeyAdapter;
@@ -25,10 +26,14 @@ public class ZombieManager extends RandSpawnManager {
         Random rand = new Random();
 
         Zombie spawn;
+        int y = 48 + 48 * rand.nextInt(gamePanel.getScreenRowSize() - 1);
+
         if (keyBind == 0) {
-            spawn = new DefaultZombie(gamePanel.getScreenWidth(), 48 + 48 * rand.nextInt(gamePanel.getScreenRowSize()-1), gamePanel);
+            spawn = new DefaultZombie(gamePanel.getScreenWidth(), y, gamePanel);
+        } else if (keyBind == 3) {
+            spawn = new PogoZombie(gamePanel.getScreenWidth(), y, gamePanel);
         } else {
-            spawn = new PogoZombie(gamePanel.getScreenWidth(), 48 + 48 * rand.nextInt(gamePanel.getScreenRowSize()-1), gamePanel);
+            spawn = new Zomboni(gamePanel.getScreenWidth(), y, gamePanel);
         }
 
         spawn(spawn);
@@ -36,8 +41,11 @@ public class ZombieManager extends RandSpawnManager {
         gamePanel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_1) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_1) {
                     keyBind = 1;
+                } else if (keyCode == KeyEvent.VK_3) {
+                    keyBind = 3;
                 } else {
                     keyBind = 0;
                 }

@@ -18,12 +18,12 @@ public abstract class Zombie extends Entity {
     protected double curSpeed;
     protected double defaultSpeed;
     private boolean yeet = false;
-    private int health;
+    protected int health;
 
-    private final int eatTime;
+    protected final int eatTime;
 
     protected int damage;
-    private int counter;
+    protected int counter;
     private double buffer = 0;
     protected final EffectManager effectManager;
     protected double multiplier = 1;

@@ -18,6 +18,8 @@ public class DoomShroomHole extends Plant {
     public DoomShroomHole(int x, int y, GamePanel g) {
         super(x, y, HEALTH, TAG, g, 0);
         this.projectileManager = g.getAOEManager();
+        canBeEaten = false;
+        disabled = true;
     }
 
     @Override
@@ -41,11 +43,6 @@ public class DoomShroomHole extends Plant {
         g.setColor(Color.red);
         g.drawString(Integer.toString(health), x + this.g.getImageLibrary().getTextXFix(tag), y + 20);
         g.setColor(Color.white);
-    }
-
-    @Override
-    public boolean canBeEaten(){
-        return false;
     }
 
     @Override

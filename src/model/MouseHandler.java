@@ -46,7 +46,7 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
         int nearEdgeY = y / tile;
 
         if (pm.getGamePanel().getGameState() == GamePanel.SELECTION_STATE) {
-            if (nearEdgeX >= 1 && nearEdgeY >= 2 && nearEdgeY <= 4 && nearEdgeX <= 9) {
+            if (nearEdgeX >= 1 && nearEdgeY >= 2 && nearEdgeY <= 5 && nearEdgeX <= 9) {
                 screen.assignCard(nearEdgeX, nearEdgeY);
             }
 
@@ -61,7 +61,7 @@ public class MouseHandler extends MouseAdapter implements MouseMotionListener {
 
                 for (int i = 0; i < entities.size(); i++) {
                     Plant entity = (Plant) entities.get(i);
-                    if (entity.getTag().equals("dsh")) {
+                    if (entity.isDisabled()) {
                         continue;
                     }
 

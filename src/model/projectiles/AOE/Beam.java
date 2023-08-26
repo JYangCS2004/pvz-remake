@@ -10,7 +10,7 @@ public abstract class Beam extends Projectile {
 
     private final boolean boom;
     public Beam(int x, int y, int width, int height, int damage, Entity owner, boolean boom, GamePanel g){
-        super(x,y,width,height, 0,damage, 1, owner, new ArrayList(), g);
+        super(x,y,width,height, 0,damage, 1, owner, new ArrayList<>(), g);
         this.boom = boom;
         onHitEffects.add("PIERCING");
     }
