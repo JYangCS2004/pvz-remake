@@ -20,6 +20,7 @@ public class BeamManager extends ProjectileManager {
     public boolean checkCollision(Projectile p) {
 
         List<Entity> possibleCollisions = gamePanel.getZombieSpawner().getEntities();
+        boolean isCollided = false;
 
         if (possibleCollisions.isEmpty()) {
             return false;
@@ -27,8 +28,11 @@ public class BeamManager extends ProjectileManager {
 
         for (int i = 0; i < possibleCollisions.size(); i++) {
             Zombie e = (Zombie) possibleCollisions.get(i);
+            System.out.println("Spawned");
 
-            if (e.getBounds().intersects(p.getBounds())) {
+            if (p.getBounds().intersects(e.getBounds()) || e.getBounds().intersects(p.getBounds())) {
+                isCollided = true;
+                System.out.println("HIT");
                 e.decreaseHealth(p);
                 for(String s: p.getOnHitEffects()){
                     StatusEffect eff = e.getEffectManager().select(e, s);
@@ -45,10 +49,11 @@ public class BeamManager extends ProjectileManager {
                 }
             }
         }
+
         if(((Beam) p).getBoom()){
             Entity owner = p.getOwner();
             gamePanel.getPlantManager().remove(owner);
         }
-        return false;
+        return isCollided;
     }
 }

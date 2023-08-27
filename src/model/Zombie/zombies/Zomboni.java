@@ -11,8 +11,9 @@ import java.awt.*;
 import java.util.List;
 
 public class Zomboni extends Zombie {
-    private final static double SPEED = -0.2;
+    private final static double SPEED = -0.001;
     private final static int HEALTH = 300;
+    private int advanceCount = 2;
 
     private Image image;
     private int iceTilePos;
@@ -32,16 +33,25 @@ public class Zomboni extends Zombie {
     public void draw(Graphics g) {
         g.drawString(Integer.toString(health), x + 40, y);
         g.drawImage(image, x, y, null);
+        //g.setColor(new Color(255, 255, 0, 125));
+        //g.fillRoundRect(x, y, width, height, 10, 10);
+        //g.setColor(Color.white);
     }
 
     @Override
     public void update() {
+        advanceCount--;
+        System.out.println(getSpeed());
         effectManager.updateAll();
         if (x < g.getScreenWidth() - g.getTileSize()) {
             g.getPlantManager().spawn(new IceTile((x / g.getTileSize() + 1) * g.getTileSize(), iceTilePos, g));
         }
 
-        x += defaultSpeed;
+        if (advanceCount == 0) {
+            x += -1;
+            advanceCount = 2;
+        }
+
         if(x <= 0){
             g.getZombieSpawner().removeZombie(this);
             return;

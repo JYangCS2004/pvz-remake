@@ -38,7 +38,7 @@ public class IceTile extends Plant {
     }
 
     @Override
-    public String getPlantCondition() {
-        return "anti-plant";
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, -1, -1);
     }
 }

@@ -101,7 +101,7 @@ public abstract class Zombie extends Entity {
 
             boolean eatingCondition = eating == null || p == eating;
 
-            if (eatingCondition && p.getBounds().intersects(getBounds()) && p.canBeEaten()) {
+            if (eatingCondition && getBounds().intersects(p.getBounds()) && p.canBeEaten()) {
                 updateCounter();
                 curSpeed = 0;
                 isCollided = true;
