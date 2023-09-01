@@ -65,6 +65,11 @@ public class PlantManager extends SpawnManager {
         int row = e.getX() / gamePanel.getTileSize();
         int col = e.getY() / gamePanel.getTileSize();
 
+        Plant prev = plantedSpots[row][col].getPlant();
+        if (prev != null && prev.isDisabled()) {
+            return false;
+        }
+
         if (e.getTag().equals("cc")) {
             if (row + 1 < gamePanel.getScreenColSize() && ("kp").equals(plantedSpots[row + 1][col].getTag())) {
 
@@ -111,11 +116,6 @@ public class PlantManager extends SpawnManager {
             if (((Plant)e).getPlantCondition().equals(plantedSpots[row][col].getTag())) {
                 plantedSpots[row][col].plantTile((Plant) e);
                 super.spawn(e);
-                return;
-            }
-
-            Plant prev = plantedSpots[row][col].getPlant();
-            if (prev.isDisabled()) {
                 return;
             }
 

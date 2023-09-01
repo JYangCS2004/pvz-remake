@@ -2,8 +2,10 @@ package model.SpawnManager.ProjectileManager.ProjectileManagers;
 
 import model.Entity;
 import model.Plant.Plant;
+import model.Plant.plants.Chomper;
 import model.SpawnManager.ProjectileManager.ProjectileManager;
 import model.Zombie.Zombie;
+import model.Zombie.zombies.Gargantuar;
 import model.projectiles.Bullet.BulletProjectiles.CattailSpike;
 import model.projectiles.Projectile;
 import ui.GamePanel;
@@ -36,11 +38,21 @@ public class BulletManager extends ProjectileManager {
             if (e.getBounds().intersects(p.getBounds())) {
                 //only added status effect on bullet manager so far
                 for(String s: p.getOnHitEffects()){
-                    e.getEffectManager().add(e.getEffectManager().select(e, s));
+                    if (!(e instanceof Gargantuar)) {
+                        e.getEffectManager().add(e.getEffectManager().select(e, s));
+                    }
                 }
 
                 // currently assumes all projectiles are from plant
-                ((Plant) p.getOwner()).setTimer();
+                Plant pt = (Plant) p.getOwner();
+                if (e instanceof Gargantuar) {
+                    if (pt.getTag().equals("ch")) {
+                        ((Chomper) pt).setAttackState();
+                    }
+                } else {
+                    pt.setTimer();
+                }
+
                 if (p instanceof CattailSpike) {
                     if (e == ((CattailSpike) p).getTarget()) {
                         applyDamage(e, p);

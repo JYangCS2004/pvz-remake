@@ -10,7 +10,7 @@ public class ChomperProjectile extends Bullet {
     static final int width = 16;
     static final int height = 16;
     static final int speed = 85/3;
-    static final int damage = 0;
+    static final int damage = 20;
     static final int lifetime = 4;
 
     public ChomperProjectile(int x, int y, Entity owner, GamePanel g){

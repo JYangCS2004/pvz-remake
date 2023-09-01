@@ -28,11 +28,9 @@ public class BeamManager extends ProjectileManager {
 
         for (int i = 0; i < possibleCollisions.size(); i++) {
             Zombie e = (Zombie) possibleCollisions.get(i);
-            System.out.println("Spawned");
 
             if (p.getBounds().intersects(e.getBounds()) || e.getBounds().intersects(p.getBounds())) {
                 isCollided = true;
-                System.out.println("HIT");
                 e.decreaseHealth(p);
                 for(String s: p.getOnHitEffects()){
                     StatusEffect eff = e.getEffectManager().select(e, s);

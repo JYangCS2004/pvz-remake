@@ -41,7 +41,7 @@ public class Zomboni extends Zombie {
     @Override
     public void update() {
         advanceCount--;
-        System.out.println(getSpeed());
+        //System.out.println(getSpeed());
         effectManager.updateAll();
         if (x < g.getScreenWidth() - g.getTileSize()) {
             g.getPlantManager().spawn(new IceTile((x / g.getTileSize() + 1) * g.getTileSize(), iceTilePos, g));
@@ -52,7 +52,7 @@ public class Zomboni extends Zombie {
             advanceCount = 2;
         }
 
-        if(x <= 0){
+        if(x <= -g.getTileSize()){
             g.getZombieSpawner().removeZombie(this);
             return;
         }
@@ -63,7 +63,7 @@ public class Zomboni extends Zombie {
                 updateCounter();
                 Plant p = (Plant) e;
                 if (counter == 0 && p.canBeEaten()) {
-                    p.kill();
+                    //p.kill();
                 }
             }
         }

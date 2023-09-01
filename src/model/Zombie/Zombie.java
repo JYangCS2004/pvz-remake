@@ -24,7 +24,7 @@ public abstract class Zombie extends Entity {
 
     protected int damage;
     protected int counter;
-    private double buffer = 0;
+    protected double buffer = 0;
     protected final EffectManager effectManager;
     protected double multiplier = 1;
     protected int killBlock = 0;
@@ -61,13 +61,14 @@ public abstract class Zombie extends Entity {
         }
 
         //g.setColor(new Color(255, 255, 255, 125));
-        g.fillRoundRect(x, y, 48, 48, 25, 25);
+        g.fillRoundRect(x, y, width, height, 25, 25);
         g.setColor(Color.black);
         g.drawString(Integer.toString(health), x + 10, y + 24);
         g.setColor(Color.white);
     }
 
     public void update() {
+        //System.out.println("ran");
         if (eating != null) {
             if (eating.getHealth() <= 0 || g.getPlantManager().isInactive(eating)) {
                 eating = null;

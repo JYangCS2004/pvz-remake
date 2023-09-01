@@ -10,6 +10,7 @@ import java.awt.*;
 public class Chomper extends Plant {
     static final int EATING_TIME = 500;
     final static int SPAWN_TIME = 5;
+    final static int ATTACK_TIME = 35;
     final static int HEALTH = 20;
     final static int COST = 150;
     final static String TAG = "ch";
@@ -57,10 +58,15 @@ public class Chomper extends Plant {
          */
     }
 
+    public void setAttackState() {
+        eat_counter = 0;
+        spawn_counter = ATTACK_TIME;
+    }
+
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        if (eat_counter >= 0) {
+        if (eat_counter > 0) {
             g.setColor(Color.red);
             g.drawString(Integer.toString(eat_counter), x + this.g.getImageLibrary().getTextXFix(tag), y + 20);
             g.setColor(Color.white);

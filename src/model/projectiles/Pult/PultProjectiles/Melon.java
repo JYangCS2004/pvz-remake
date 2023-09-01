@@ -24,7 +24,7 @@ public class  Melon extends Pult {
     double angle = 0;
     double angularAcceleration = 0;
     private int initialX;
-    private int moi = 150;
+    private int moi = 300;
 
     public Melon(int x, int y, Entity owner, GamePanel g, int row) {
         super(x, y, WIDTH, HEIGHT, DAMAGE, row, owner, g);

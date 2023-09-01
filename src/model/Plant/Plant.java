@@ -157,6 +157,7 @@ public abstract class Plant extends Entity {
     }
 
     public void kill() {
+        removeShield();
         g.getPlantManager().remove(this);
     }
 }
