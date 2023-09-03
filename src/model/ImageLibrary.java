@@ -215,6 +215,9 @@ public class ImageLibrary {
 
         // squash
         put("src/Graphics/squash.png", 45 * 521 / 600, 45, 5, 3, 10, 10, 0, "sq", g);
+
+        // screen door zombie
+
     }
 
     private void putWithoutCard(String path, int xScale, int yScale, int xFix, int yFix,
@@ -245,6 +248,7 @@ public class ImageLibrary {
         tagToCard.put(tag, new Card(tag, cooldown, g));
 
     }
+
     private void put(String path, int xScale, int yScale, int xFix, int yFix,
                      int cooldown, String tag, GamePanel g){
         imageList.put(tag, getImage(path, xScale, yScale));

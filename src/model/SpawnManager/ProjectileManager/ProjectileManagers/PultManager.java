@@ -23,12 +23,12 @@ public class PultManager extends ProjectileManager {
             return false;
         }
 
-        for (int i = 0; i < possibleCollisions.size(); i++) {
-            Zombie e = (Zombie) possibleCollisions.get(i);
+        for (Entity possibleCollision : possibleCollisions) {
+            Zombie e = (Zombie) possibleCollision;
             if (e.getBounds().intersects(p.getBounds())) {
                 e.decreaseHealth(p);
 
-                for(String s: p.getOnHitEffects()){
+                for (String s : p.getOnHitEffects()) {
                     StatusEffect eff = e.getEffectManager().select(e, s);
                     if (s.equals("PIERCING") && e.getEffectManager().contains("SHIELD")) {
                         ((PierceEffect) eff).setDamage(p.getDamage());

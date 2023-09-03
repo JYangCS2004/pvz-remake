@@ -36,6 +36,11 @@ public class BulletManager extends ProjectileManager {
             Zombie e = (Zombie) possibleCollisions.get(i);
 
             if (e.getBounds().intersects(p.getBounds())) {
+                if (!(p instanceof CattailSpike)) {
+                    if (e.getRow() != p.getRow()) {
+                        continue;
+                    }
+                }
                 //only added status effect on bullet manager so far
                 for(String s: p.getOnHitEffects()){
                     if (!(e instanceof Gargantuar)) {

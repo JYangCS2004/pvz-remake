@@ -40,6 +40,15 @@ public class ScreenDoorZombie extends Zombie {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(this.g.getImageLibrary().getImage("sdz"), x, y, null);
+        super.draw(g);
+        if (effectManager.contains("SHIELD")) {
+            g.setColor(Color.red);
+            g.drawString(Integer.toString(effectManager.getByTag("SHIELD").getLifetime()), x + 20, y - 5);
+        }
+
+        g.setColor(Color.white);
+
+
+        //g.drawImage(this.g.getImageLibrary().getImage("sdz"), x, y, null);
     }
 }
