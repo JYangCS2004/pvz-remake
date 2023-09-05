@@ -22,9 +22,8 @@ public abstract class Pult extends Projectile {
     protected double x;
     protected double y;
 
-    public Pult(int x, int y, int width, int height, int damage, int row, Entity owner, GamePanel g){
+    public Pult(int x, int y, int width, int height, int damage, Entity owner, GamePanel g){
         super(x,y,width,height,SPEED,damage, LIFETIME, owner, new ArrayList<>(),g);
-        super.row = row;
 
         this.x =  x;
         this.y =  y;

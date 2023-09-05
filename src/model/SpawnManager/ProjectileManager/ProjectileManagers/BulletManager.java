@@ -7,6 +7,8 @@ import model.SpawnManager.ProjectileManager.ProjectileManager;
 import model.Zombie.Zombie;
 import model.Zombie.zombies.Gargantuar;
 import model.projectiles.Bullet.BulletProjectiles.CattailSpike;
+import model.projectiles.Bullet.BulletProjectiles.ChomperProjectile;
+import model.projectiles.Bullet.BulletProjectiles.Star;
 import model.projectiles.Projectile;
 import ui.GamePanel;
 
@@ -36,16 +38,19 @@ public class BulletManager extends ProjectileManager {
             Zombie e = (Zombie) possibleCollisions.get(i);
 
             if (e.getBounds().intersects(p.getBounds())) {
-                if (!(p instanceof CattailSpike)) {
+                System.out.println("hit");
+                if (!(p instanceof CattailSpike) && !(p instanceof Star)) {
                     if (e.getRow() != p.getRow()) {
                         continue;
                     }
                 }
+
                 //only added status effect on bullet manager so far
-                for(String s: p.getOnHitEffects()){
-                    if (!(e instanceof Gargantuar)) {
-                        e.getEffectManager().add(e.getEffectManager().select(e, s));
+                for(String s: p.getOnHitEffects()) {
+                    if ((e instanceof Gargantuar) && (p instanceof ChomperProjectile)) {
+                        continue;
                     }
+                    e.getEffectManager().add(e.getEffectManager().select(e, s));
                 }
 
                 // currently assumes all projectiles are from plant

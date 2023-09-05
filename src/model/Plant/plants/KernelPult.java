@@ -28,7 +28,7 @@ public class KernelPult extends Plant {
     @Override
     public void update() {
         super.update();
-        ButterBlock p = new ButterBlock(x, y+20, this, g, y / g.getTileSize());
+        ButterBlock p = new ButterBlock(x, y+20, this, g);
 
         counter--;
         if (canShoot()) {
@@ -37,7 +37,7 @@ public class KernelPult extends Plant {
                 if (rand.nextInt(3) == 1) {
                     spawnManager.spawn(p);
                 } else {
-                    spawnManager.spawn(new CornProjectile(x, y + 20, this, g, y / g.getTileSize()));
+                    spawnManager.spawn(new CornProjectile(x, y + 20, this, g));
                 }
 
                 counter = SPAWN_TIME;

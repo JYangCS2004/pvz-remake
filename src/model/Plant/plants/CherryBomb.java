@@ -35,7 +35,7 @@ public class CherryBomb extends Plant {
     public void draw(Graphics g) {
         super.drawWithoutText(g);
         g.setColor(Color.red);
-        g.drawString(Integer.toString(counter), x + this.g.getImageLibrary().getTextXFix(tag), y + 20);
+        //g.drawString(Integer.toString(counter), x + this.g.getImageLibrary().getTextXFix(tag), y + 20);
         g.setColor(Color.white);
     }
 }

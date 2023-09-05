@@ -29,10 +29,12 @@ public class GloomShroomSpore extends Beam {
         try {
             spore = ImageIO.read(new File("src/Graphics/Spore.png"));
         } catch (IOException e) {
+            System.out.println("not found");
             throw new RuntimeException(e);
         }
 
         onHitEffects.add("PIERCING");
+        lifetime = 2;
 
         // northeast rotation
         AffineTransform tx_ne = AffineTransform.getRotateInstance(45, spore.getWidth() / 2, spore.getHeight() / 2);
@@ -81,7 +83,14 @@ public class GloomShroomSpore extends Beam {
         g2.drawImage(op_w.filter(spore, null), x + 5, y+t +5, null);
         g2.drawImage(op_nw.filter(spore, null), x + 5, y+5, null);
         g2.drawImage(op_ne.filter(spore, null), x + t+ 5, y+5, null);
+    }
 
+    @Override
+    public Rectangle getBounds() {
+        if (lifetime <= 1) {
+            return new Rectangle(x, y, -1, -1);
+        }
 
+        return super.getBounds();
     }
 }

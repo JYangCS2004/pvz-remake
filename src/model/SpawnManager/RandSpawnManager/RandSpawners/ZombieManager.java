@@ -36,7 +36,7 @@ public class ZombieManager extends RandSpawnManager {
     public void updateEach() {
         Random rand = new Random();
         int random = new Random().nextInt(5);
-        System.out.println(random);
+        //System.out.println(random);
 
         Zombie spawn;
         int y = 48 + 48 * rand.nextInt(gamePanel.getScreenRowSize() - 1);

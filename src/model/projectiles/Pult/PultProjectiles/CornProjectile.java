@@ -11,8 +11,8 @@ public class CornProjectile extends Pult {
     final static int HEIGHT = 16;
     final static int DAMAGE = 10;
 
-    public CornProjectile(int x, int y, Entity owner, GamePanel g, int row) {
-        super(x, y, WIDTH, HEIGHT, DAMAGE, row, owner, g);
+    public CornProjectile(int x, int y, Entity owner, GamePanel g) {
+        super(x, y, WIDTH, HEIGHT, DAMAGE, owner, g);
     }
 
     @Override

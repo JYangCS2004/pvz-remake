@@ -29,8 +29,7 @@ public abstract class Plant extends Entity {
         width = g.getTileSize();
         height = g.getTileSize();
         this.cost = cost;
-
-        super.row = y / g.getTileSize();
+        row = y / g.getTileSize();
         stackedManager = new EffectManager(g);
         canBeEaten = true;
     }

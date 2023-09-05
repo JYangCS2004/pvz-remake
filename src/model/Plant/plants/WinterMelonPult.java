@@ -28,7 +28,7 @@ public class WinterMelonPult extends Plant {
     @Override
     public void update() {
         super.update();
-        Melon p = new WinterMelon(x, y+20, this, g, y / g.getTileSize());
+        Melon p = new WinterMelon(x, y+20, this, g);
 
         counter--;
         if (canShoot()) {

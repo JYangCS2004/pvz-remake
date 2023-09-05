@@ -26,6 +26,7 @@ public abstract class Projectile extends Entity {
         this.lifetime = lifetime;
         this.owner = owner;
         this.onHitEffects = onHitEffects;
+        row = owner.getRow();
     }
 
 
@@ -41,6 +42,7 @@ public abstract class Projectile extends Entity {
         super.update();
         lifetime--;
     }
+
     public Entity getOwner(){
         return owner;
     }

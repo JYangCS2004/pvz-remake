@@ -29,5 +29,4 @@ public class FirePea extends Bullet {
         g.setColor(Color.white);
         g.drawImage(firePea, x, y, null);
     }
-
 }

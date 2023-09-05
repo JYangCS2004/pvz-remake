@@ -11,8 +11,8 @@ public class ButterBlock extends Pult {
     final static int HEIGHT = 20;
     final static int DAMAGE = 20;
 
-    public ButterBlock(int x, int y, Entity owner, GamePanel g, int row) {
-        super(x, y, WIDTH, HEIGHT, DAMAGE, row, owner, g);
+    public ButterBlock(int x, int y, Entity owner, GamePanel g) {
+        super(x, y, WIDTH, HEIGHT, DAMAGE, owner, g);
         onHitEffects.add("STUN");
     }
 

@@ -19,6 +19,7 @@ public class MelonSplash extends Beam {
 
     @Override
     public void draw(Graphics g) {
+        System.out.println("called");
         g.drawImage(melonSplash, x+super.g.getTileSize(), y+super.g.getTileSize(), null);
     }
 }

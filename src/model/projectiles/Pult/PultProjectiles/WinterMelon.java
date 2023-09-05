@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class WinterMelon extends Melon {
-    public WinterMelon(int x, int y, Entity owner, GamePanel g, int row) {
-        super(x, y, owner, g, row);
+    public WinterMelon(int x, int y, Entity owner, GamePanel g) {
+        super(x, y, owner, g);
         onHitEffects.remove("MELON");
         onHitEffects.add("WMELON");
         //winterMelon = ImageLibrary.getImage("src/Graphics/WinterMelon.png", 33, 28);

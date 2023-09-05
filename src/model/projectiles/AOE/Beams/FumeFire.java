@@ -22,14 +22,15 @@ public class FumeFire extends Beam {
             throw new RuntimeException(e);
         }
 
+        lifetime = 1;
+
         onHitEffects.add("PIERCING");
     }
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
         for(int i = 0; i < 4; i++){
-            g2.drawImage(spore, x+spore.getWidth()*i-15 + 10*i, y+5, null);
+            g.drawImage(spore, spore.getWidth()*i-15 + 10*i, y+5, null);
         }
     }
 }

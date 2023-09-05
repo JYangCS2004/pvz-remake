@@ -10,7 +10,6 @@ import java.util.List;
 public class Gargantuar extends Zombie {
     private static double SPEED = -0.5;
     private static int HEALTH = 2000;
-    private int initialPos;
     private boolean kids;
 
     private int walkDelay = 2;
@@ -20,7 +19,6 @@ public class Gargantuar extends Zombie {
         super(x, y, SPEED, 0, HEALTH, 150, 0, 0, g);
         width = (int) (1.5 * g.getTileSize());
         height = width;
-        initialPos = y;
 
         int temp = this.y + g.getTileSize();
         this.y = temp - height;
@@ -33,14 +31,14 @@ public class Gargantuar extends Zombie {
         walkDelay--;
         effectManager.updateAll();
 
-        if(x <= -g.getTileSize()){
+        if(x <= 0){
             g.getZombieSpawner().removeZombie(this);
             return;
         }
 
         if (!kids && health < HEALTH / 2) {
             if (kidDelay == 0) {
-                g.getZombieSpawner().forceSpawn(new ImpZombie(x, y, g, initialPos));
+                g.getZombieSpawner().forceSpawn(new ImpZombie(x, y, g, row * g.getTileSize()));
                 kids = true;
             } else {
                 kidDelay--;

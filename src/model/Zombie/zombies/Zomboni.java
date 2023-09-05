@@ -16,7 +16,6 @@ public class Zomboni extends Zombie {
     private int advanceCount = 2;
 
     private Image image;
-    private int iceTilePos;
 
     public Zomboni(int x, int y, GamePanel g) {
         super(x, y, SPEED, 0, HEALTH, 100, 0, 0, g);
@@ -24,7 +23,6 @@ public class Zomboni extends Zombie {
         height = (int) (968.0 / 1200 * width);
         image = ImageLibrary.getImage("src/Graphics/zomboni.png", width, height);
 
-        iceTilePos = y;
         int temp = y + g.getTileSize();
         super.y = temp - image.getHeight(null);
     }
@@ -44,7 +42,7 @@ public class Zomboni extends Zombie {
         //System.out.println(getSpeed());
         effectManager.updateAll();
         if (x < g.getScreenWidth() - g.getTileSize()) {
-            g.getPlantManager().spawn(new IceTile((x / g.getTileSize() + 1) * g.getTileSize(), iceTilePos, g));
+            g.getPlantManager().spawn(new IceTile((x / g.getTileSize() + 1) * g.getTileSize(), row * g.getTileSize(), g));
         }
 
         if (advanceCount == 0) {

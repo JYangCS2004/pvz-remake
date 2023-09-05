@@ -60,12 +60,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        double drawInterval = 1000000000 / FPS;
+        double drawInterval = 1000000000.0 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while (gameThread != null) {
             update();
-            validate();
             repaint();
 
             try {
@@ -138,6 +137,7 @@ public class GamePanel extends JPanel implements Runnable {
             shooterManager.drawEach(g2);
             lobberManager.drawEach(g2);
             AOEManager.drawEach(g2);
+
             sunSpawner.drawEach(g2);
         }
 

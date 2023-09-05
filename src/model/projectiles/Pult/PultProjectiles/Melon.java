@@ -26,8 +26,8 @@ public class  Melon extends Pult {
     private int initialX;
     private int moi = 300;
 
-    public Melon(int x, int y, Entity owner, GamePanel g, int row) {
-        super(x, y, WIDTH, HEIGHT, DAMAGE, row, owner, g);
+    public Melon(int x, int y, Entity owner, GamePanel g) {
+        super(x, y, WIDTH, HEIGHT, DAMAGE, owner, g);
         initialX = x;
         onHitEffects.add("MELON");
         try {

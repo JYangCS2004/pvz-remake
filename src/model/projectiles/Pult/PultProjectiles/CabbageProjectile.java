@@ -15,8 +15,8 @@ public class CabbageProjectile extends Pult {
 
 
 
-    public CabbageProjectile(int x, int y, Entity owner, GamePanel g, int row) {
-        super(x, y, WIDTH, HEIGHT, DAMAGE, row, owner, g);
+    public CabbageProjectile(int x, int y, Entity owner, GamePanel g) {
+        super(x, y, WIDTH, HEIGHT, DAMAGE, owner, g);
     }
 
     @Override

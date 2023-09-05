@@ -7,6 +7,7 @@ import model.StatusEffect.Effects.PierceEffect;
 import model.StatusEffect.StatusEffect;
 import model.Zombie.Zombie;
 import model.projectiles.AOE.Beam;
+import model.projectiles.AOE.Beams.PepperFire;
 import model.projectiles.Projectile;
 import ui.GamePanel;
 
@@ -17,7 +18,25 @@ public class BeamManager extends ProjectileManager {
         super(g);
     }
 
+
+    @Override
+    public void updateEach() {
+        for (int i = 0; i < entities.size(); i++) {
+            Projectile p = (Projectile) entities.get(i);
+            checkCollision(p);
+            if (p.expired()) {
+                entities.remove(p);
+            }
+        }
+
+        update();
+    }
+
     public boolean checkCollision(Projectile p) {
+        if(((Beam) p).getBoom()){
+            Entity owner = p.getOwner();
+            gamePanel.getPlantManager().remove(owner);
+        }
 
         List<Entity> possibleCollisions = gamePanel.getZombieSpawner().getEntities();
         boolean isCollided = false;
@@ -29,7 +48,13 @@ public class BeamManager extends ProjectileManager {
         for (int i = 0; i < possibleCollisions.size(); i++) {
             Zombie e = (Zombie) possibleCollisions.get(i);
 
-            if (p.getBounds().intersects(e.getBounds()) || e.getBounds().intersects(p.getBounds())) {
+            if (e.getRow() != p.getRow()) {
+                if (p instanceof PepperFire) {
+                    continue;
+                }
+            }
+
+            if (e.getBounds().intersects(p.getBounds())) {
                 isCollided = true;
                 e.decreaseHealth(p);
                 for(String s: p.getOnHitEffects()){
@@ -48,10 +73,6 @@ public class BeamManager extends ProjectileManager {
             }
         }
 
-        if(((Beam) p).getBoom()){
-            Entity owner = p.getOwner();
-            gamePanel.getPlantManager().remove(owner);
-        }
         return isCollided;
     }
 }

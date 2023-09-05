@@ -43,7 +43,7 @@ public abstract class Zombie extends Entity {
         this.counter = 5;
         super.width = width;
         super.height = height;
-        super.row = y / g.getTileSize();
+        row = y / g.getTileSize();
         this.effectManager = new EffectManager(g);
         direction = new Random().nextInt(2);
     }
